@@ -1,0 +1,115 @@
+@import "values";
+@import "flexbox";
+@import "fonts";
+@import "sfchronicle";
+@import "footer";
+@import "project";
+
+.mapboxgl-ctrl-compass {
+  display: none !important;
+}
+
+.mapboxgl-canvas {
+  z-index: 0 !important;
+}
+
+body {
+  pointer-events: all;
+}
+
+#map-leaflet {
+  svg {
+    pointer-events: all;
+  }
+}
+circle {
+  cursor: pointer;
+}
+
+.map {
+  position: relative;
+}
+
+.tooltip-map {
+  // width: 300px;
+  position: absolute;
+  font-family: @med-graphics;
+  font-size: 14px;
+  background: white;
+  padding: 20px;
+  border: @light-gray 1px solid;
+  visibility: hidden;
+  z-index: 999;
+  line-height: 1.2;
+  // @media @mobile {
+  //   display: none;
+  // }
+  .bold {
+    padding-bottom: 2px;
+    font-family: @block-graphics;
+  }
+  .address {
+    font-style: italic;
+    padding-bottom: 2px;
+  }
+}
+
+.map-container {
+  // position: absolute;
+  .hed-container {
+    position: relative;
+    max-width: 400px;
+    padding: 30px;
+    top: 200px;
+    left: 20px;
+    // padding: 30px;
+    text-align: center;
+    line-height: 1.2;
+    .hed {
+      padding-bottom: 10px;
+    }
+    .deck {
+      font-family: @med-graphics;
+      padding-bottom: 10px;
+      text-align: center;
+      font-size: 18px;
+    }
+    .instructions {
+      font-size: 14px;
+      padding-top: 10px;
+      font-family: @med-graphics;
+    }
+    margin-bottom: 500px;
+    background: rgba(255,255,255,0.8);
+  }
+  .panel-container {
+    position: relative;
+    margin-left: 30px;
+    pointer-events: none;
+  }
+  .panel {
+    // margin-top: 500px;
+    // background: rgba(255,255,255,0.8);
+    max-width: 400px;
+    padding: 30px;
+    margin-bottom: 500px;
+    line-height: 1.2;
+    font-family: @med-graphics;
+    font-size: 14px;
+    background: rgba(255,255,255,0.8);
+  }
+}
+
+#map-leaflet {
+ height: 100vh;
+ width: 100%;
+ position: relative;
+ margin: auto;
+ z-index: 0;
+ position: relative;
+ overflow: hidden;
+ position: fixed;
+ left: 0;
+ top: 0;
+
+}

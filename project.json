@@ -1,0 +1,37 @@
+{
+  "year":"2017",
+  "author":"",
+  "hearst_category":"",
+  "sheets": ["1VFUBfKag7rCEJVddsACyF7R14uZlIO6xZTl_O63rklA"],
+  "docsID":["1CegiuEdGzizL14c2WLxI3kVXTfLnzkamQLAHQqsW4es"],
+  "production": false,
+  "embedded": false,
+
+  "slug_landing": "chinese-regional-cuisine/",
+  "image_landing": "assets/photos/social.jpg",
+  "date_landing":"2017-11-10",
+  "twitter_text_landing":"Twitter.",
+  "url_landing": "http://projects.sfchronicle.com/2017/",
+  "title_landing": "Title",
+  "description_landing": "Description",
+  "seo_title_landing": "How the Transbay Transit Center is reshaping San Francisco",
+
+  "slug_map": "map/",
+  "image_map": "assets/photos/part1/social.jpg",
+  "date_map":"2017-09-15",
+  "twitter_map":"Twitter",
+  "url_map": "http://projects.sfchronicle.com/2017/",
+  "title_map": "Title map",
+  "description_map": "Description map",
+  "seo_title_map": "Title map",
+
+  "slug_part1": "map/",
+  "image_part1": "assets/photos/part1/social.jpg",
+  "date_part1":"2017-09-15",
+  "twitter_text_part1":"Twitter",
+  "url_part1": "http://projects.sfchronicle.com/2017/",
+  "title_part1": "Title part 1",
+  "description_part1": "Description part 1.",
+  "seo_title_part1": "Title part 1"
+
+}

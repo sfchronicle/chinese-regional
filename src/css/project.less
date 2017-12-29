@@ -1,0 +1,42 @@
+
+@highlight: #ec1c24;//#0D3B66;
+
+.logo-link {
+  padding-top: 7px;
+}
+
+.section-links {
+  display: inline-block;
+}
+
+.divider {
+  border-bottom: 1px solid @light-gray;
+  max-width: 80%;
+  margin: 70px auto 50px auto;
+  @media @mobile {
+    margin: 40px auto 30px auto;
+  }
+}
+
+.activesection {
+  font-weight: 700;
+}
+
+.part1_link, .part2_link, .part3_link {
+  @media @tablet-nav {
+    display: none;
+  }
+}
+
+.land_link {
+  color: darken(@dark-gray,5%);
+  font-family: @banner;
+  @media @mobile {
+    font-size: 14px;
+    padding-left: 0;
+  }
+  // cursor: default !important;
+  &:hover {
+    color: @dark-gray;
+  }
+}

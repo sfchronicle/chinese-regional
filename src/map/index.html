@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title><%= json.project.seo_title_map %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="__sync_contentCategory" content="meterA">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../map_style.css">
+
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+
+    <!-- Mapbox GL -->
+    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.css" rel='stylesheet' />
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.js"></script>
+
+    <%= !json.project.embedded ? t.include("partials/_paywall.html") : t.include("partials/_embedframe.html") %>
+
+    <%= t.include("partials/_head_map.html") %>
+
+  </head>
+
+  <%= !json.project.embedded ? "<body>" : "<body is='responsive-body'>" %>
+
+    <%= t.include("partials/_nav_map.html") %>
+
+    <div class="map">
+      <div id="map-leaflet"></div>
+      <div class="tooltip-map"></div>
+    </div>
+
+    <div class="map-container">
+
+      <div class="hed-container">
+        <div class="hed">Take a tour of Chinese regional cuisines by visiting Bay Area restaurants</div>
+        <div class="deck">This is a deck about how to use our cool map.</div>
+        <div class="instructions">Scroll down to see the restaurants.
+          <div class="arrow"><i class="fa fa-angle-double-down" aria-hidden="true"></i></div>
+        </div>
+      </div>
+
+      <div id="bottom-of-top"></div>
+
+      <div class="panel-container">
+      <% json.chinese_regional_capsules_west_taiwan.regions.forEach(function(d,dIDX){ %>
+        <div class="region-panel" id="mapevent<%=dIDX%>"><%=d.Region%>
+          <% d.restaurants.forEach(function(k,dIDX){ %>
+            <div class="panel">
+              <div class="restaurant"><%=k.Restaurant%></div>
+              <div class="capsule"><%=k.Capsule%></div>
+            </div>
+          <% }); %>
+        </div>
+      <% }); %>
+      </div>
+
+    </div>
+
+    <div id="top-of-bottom"></div>
+
+    <%= t.include("partials/_footer.html") %>
+
+    <script>
+      var restaurant_info= <%= JSON.stringify(json.ListForMap) %>
+    </script>
+
+    <script src="../map_app.js" async></script>
+    <%= t.include("partials/_helloSFC.html") %>
+
+  </body>
+</html>
