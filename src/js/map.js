@@ -4,7 +4,7 @@ var d3 = require("d3");
 
 console.log(d3);
 
-var timeTimeout = 100;
+var timeTimeout = 10;
 
 // setting parameters for the center of the map and initial zoom level
 // if (screen.width <= 480) {
@@ -42,7 +42,7 @@ var timeTimeout = 100;
   var max_zoom_deg = 16;
   var min_zoom_deg = 4;
 
-  var offset_top = 900;
+  var offset_top = 300;
   var bottomOffset = 200;
 // }
 
@@ -173,18 +173,15 @@ restaurant_info.forEach(function(d,idx) {
   }
 });
 
-console.log(restaurant_info);
-
 var svg = d3.select("#map-leaflet").select("svg"),
 g = svg.append("g");
 
 // show tooltip
 var tooltip = d3.select("div.tooltip-map");
 
-console.log(tooltip);
-
 // draw map with dots on it
-var drawMap = function() {
+var drawMap = function(currentrestaurant,data) {
+  console.log(data);
 
   console.log("re-drawing the map");
 
@@ -206,11 +203,15 @@ var drawMap = function() {
       return "dot";
     })
     .style("opacity", function(d) {
-      // if ((d.Count == current_event) || (current_event == 100)) {
+      if (currentrestaurant){
+        if (d.Restaurant.toLowerCase().replace(/ /g,'') == currentrestaurant){
+          return 1;
+        } else {
+          return 0.3;
+        }
+      } else {
         return 0.9;
-      // } else {
-      //   return 0.4;
-      // }
+      }
     })
     .style("fill", function(d) {
       return color_function(d.ChineseRegion);
@@ -266,37 +267,30 @@ var drawMap = function() {
     )
   }
 
-  // if (current_event != 101){
-  //   if (screen.width >= 480) {
-  //     map.panTo(new L.LatLng(dayData[dayData.length-1]["Lat"], dayData[dayData.length-1]["Lon"]-0.3));
-  //   } else {
-  //     map.panTo(new L.LatLng(dayData[dayData.length-1]["Lat"]-0.3, dayData[dayData.length-1]["Lon"]));
-  //   }
-  // } else {
-  //   map.panTo(new L.LatLng(sf_lat, sf_long));
-  //   // map.setView(new L.LatLng(sf_lat, sf_long), map.getZoom(), {"animation": true});
-  // }
+  if (currentrestaurant){
+    console.log("pan");
+    if (screen.width <= 480){
+      map.panTo(data.LatLng);
+    } else {
+      map.panTo(new L.LatLng(data.Lat-0.3, data.Lng));
+    }
+  } else {
+    map.panTo(new L.LatLng(sf_lat, sf_long));
+    // map.setView(new L.LatLng(sf_lat, sf_long), map.getZoom(), {"animation": true});
+  }
 
 }
 
 drawMap();
 
-// // initialize map with all dots, faded out
-// var dayData = protestData.filter(function(d) {
-//     return d.Day <= 101
-// });
-// drawMap(dayData,101);
-//
-// // initial variable, which indicates that map is on landing on load
-// var prevmapIDX = -1;
-
 // set up scrolling timeout
 var scrollTimer = null;
 $(window).scroll(function () {
-    if (scrollTimer) {
-        clearTimeout(scrollTimer);   // clear any previous pending timer
-    }
-    scrollTimer = setTimeout(handleScroll, timeTimeout);   // set new timer
+  // handleScroll();
+  if (scrollTimer) {
+      clearTimeout(scrollTimer);   // clear any previous pending timer
+  }
+  scrollTimer = setTimeout(handleScroll, timeTimeout);   // set new timer
 });
 
 // function for updating with scroll
@@ -305,38 +299,36 @@ function handleScroll() {
     scrollTimer = null;
 
     // figure out where the top of the page is, and also the top and beginning of the map content
-    var pos = $(this).scrollTop();
+    var pos = document.body.scrollTop || document.documentElement.scrollTop;
     var pos_map_top = $('#bottom-of-top').offset().top;
     var pos_map_bottom = $('#top-of-bottom').offset().top-bottomOffset;
 
     // show the landing of the page if the reader is at the top
     if (pos < pos_map_top){
-      // var dayData = protestData.filter(function(d) {
-      //     return d.Day <= 101
-      // });
-      // drawMap(dayData,101);
 
-      var prevmapIDX = -1;
+      var prevrestaurant = "";
+      drawMap();
 
     // show the appropriate dots if the reader is in the middle of the page
     } else if (pos < pos_map_bottom){
 
-      var currentIDX = -1;
-      // protestData.forEach(function(map,mapIDX) {
-      //   var pos_map = $('#mapevent'+mapIDX).offset().top-offset_top;
-      //   if (pos > pos_map) {
-      //     currentIDX = Math.max(mapIDX,currentIDX);
-      //   }
-      // });
-      // console.log(currentIDX);
-      // prevmapIDX = currentIDX;
-      // var dayData = protestData.filter(function(d) {
-      //     return d.Count <= currentIDX
-      // });
-      // drawMap(dayData,+currentIDX);
+      var currentrestaurant = "";
+      var data = [];
+      var panels = document.getElementsByClassName("panel");
+      for (var panelIDX = 0; panelIDX < panels.length; panelIDX++){
+        restaurant_info.forEach(function(map,mapIDX){
+          if (panels[panelIDX].id == map.Restaurant.toLowerCase().replace(/ /g,'')) {
+            var pos_map = $('#'+panels[panelIDX].id).offset().top-offset_top;
+            if (pos > pos_map) {
+              data = map;
+              currentrestaurant = panels[panelIDX].id;
+            }
+          }
+        });
+      }
+      console.log(currentrestaurant);
+      prevrestaurant = currentrestaurant;
+      drawMap(currentrestaurant,data);
 
-    // hide the day box if the reader is at the bottom of the page
-    } else {
-      // document.getElementById("day-box").classList.remove("show");
     }
 }

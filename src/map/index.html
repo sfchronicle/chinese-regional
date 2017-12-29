@@ -44,13 +44,15 @@
       <div id="bottom-of-top"></div>
 
       <div class="panel-container">
+      <% var count = 0; %>
       <% json.chinese_regional_capsules_west_taiwan.regions.forEach(function(d,dIDX){ %>
-        <div class="region-panel" id="mapevent<%=dIDX%>"><%=d.Region%>
+        <div class="region-panel"><%=d.Region%>
           <% d.restaurants.forEach(function(k,dIDX){ %>
-            <div class="panel">
+            <div class="panel" id="<%=k.Restaurant.toLowerCase().replace(/ /g,'')%>">
               <div class="restaurant"><%=k.Restaurant%></div>
               <div class="capsule"><%=k.Capsule%></div>
             </div>
+            <% count++; %>
           <% }); %>
         </div>
       <% }); %>
