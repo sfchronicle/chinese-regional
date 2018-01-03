@@ -2,49 +2,15 @@ require("./lib/social"); //Do not delete
 require("./lib/leaflet-mapbox-gl");
 var d3 = require("d3");
 
-console.log(d3);
-
-var timeTimeout = 10;
+var timeTimeout = 1;
 
 // setting parameters for the center of the map and initial zoom level
-// if (screen.width <= 480) {
-//   var sf_lat = 34.2;
-//   var sf_long = -119.0;
-//   var zoom_deg = 8;
-//   var max_zoom_deg = 16;
-//   var min_zoom_deg = 4;
-//
-//   var offset_top = 900;
-//   var bottomOffset = 100;
-// } else if (screen.width <= 800) {
-//   var sf_lat = 34.2;
-//   var sf_long = -119;
-//   var zoom_deg = 9;
-//   var max_zoom_deg = 16;
-//   var min_zoom_deg = 4;
-//
-//   var offset_top = 900;
-//   var bottomOffset = 100;
-// } else if (screen.width <= 1400){
-//   var sf_lat = 34.2;
-//   var sf_long = -119.25;
-//   var zoom_deg = 9;
-//   var max_zoom_deg = 16;
-//   var min_zoom_deg = 4;
-//
-//   var offset_top = 900;
-//   var bottomOffset = 200;
-// } else {
-
-  var sf_lat = 37.667064;
-  var sf_long = -122.662503;
-  var zoom_deg = 9;
-  var max_zoom_deg = 16;
-  var min_zoom_deg = 4;
-
-  var offset_top = 300;
-  var bottomOffset = 200;
-// }
+var sf_lat = 37.667064;
+var sf_long = -122.662503;
+var zoom_deg = 9;
+var max_zoom_deg = 16;
+var min_zoom_deg = 4;
+var start_top = 200;
 
 function color_function(region) {
   if (region == "Northern") {
@@ -78,15 +44,36 @@ var map = L.map("map-leaflet", {
 // initializing the svg layer
 L.svg().addTo(map);
 
-var gl = L.mapboxGL({
-    accessToken: 'pk.eyJ1IjoiZW1ybyIsImEiOiJjaXl2dXUzMGQwMDdsMzJuM2s1Nmx1M29yIn0._KtME1k8LIhloMyhMvvCDA',
-    style: 'mapbox://styles/emro/cjbib4t5e089k2sm7j3xygp50'
-}).addTo(map);
+// var gl = L.mapboxGL({
+//     accessToken: 'pk.eyJ1IjoiZW1ybyIsImEiOiJjaXl2dXUzMGQwMDdsMzJuM2s1Nmx1M29yIn0._KtME1k8LIhloMyhMvvCDA',
+//     style: 'mapbox://styles/emro/cjbib4t5e089k2sm7j3xygp50'
+// }).addTo(map);
 
-var attribution = L.control.attribution();
-attribution.setPrefix('');
-attribution.addAttribution('Map data: <a href="http://openstreetmap.org/copyright" target="_blank">© OpenStreetMap</a> <a href="https://www.mapbox.com/about/maps/" target="_blank">© Mapbox</a> | <a href="https://www.mapbox.com/map-feedback/" target="_blank" class="mapbox-improve-map">Improve this map</a>');
-attribution.addTo(map);
+// var attribution = L.control.attribution();
+// attribution.setPrefix('');
+// attribution.addAttribution('Map data: <a href="http://openstreetmap.org/copyright" target="_blank">© OpenStreetMap</a> <a href="https://www.mapbox.com/about/maps/" target="_blank">© Mapbox</a> | <a href="https://www.mapbox.com/map-feedback/" target="_blank" class="mapbox-improve-map">Improve this map</a>');
+// attribution.addTo(map);
+
+// var OpenStreetMap_BlackAndWhite = L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
+// 	maxZoom: 18,
+// 	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+// }).addTo(map);
+
+// var Stamen_Watercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
+// 	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+// 	subdomains: 'abcd',
+// 	minZoom: 1,
+// 	maxZoom: 16,
+// 	ext: 'png'
+// }).addTo(map);
+
+var Stamen_Terrain = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.{ext}', {
+	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+	subdomains: 'abcd',
+	minZoom: 0,
+	maxZoom: 18,
+	ext: 'png'
+}).addTo(map);
 
 // zoom control is on top right
 L.control.zoom({
@@ -179,9 +166,10 @@ g = svg.append("g");
 // show tooltip
 var tooltip = d3.select("div.tooltip-map");
 
+var feature;
+
 // draw map with dots on it
 var drawMap = function(currentrestaurant,data) {
-  console.log(data);
 
   console.log("re-drawing the map");
 
@@ -193,25 +181,25 @@ var drawMap = function(currentrestaurant,data) {
   // var duration = 700;
 
   // adding circles to the map
-  var feature = g.selectAll("circle")
+  feature = g.selectAll("circle")
     .data(restaurant_info)
     .enter().append("circle")
-    // .attr("id",function(d) {
-    //   return d.Location;
-    // })
+    .attr("id",function(d) {
+      return d.Restaurant.toLowerCase().replace(/ /g,'');
+    })
     .attr("class",function(d) {
       return "dot";
     })
     .style("opacity", function(d) {
-      if (currentrestaurant){
-        if (d.Restaurant.toLowerCase().replace(/ /g,'') == currentrestaurant){
-          return 1;
-        } else {
-          return 0.3;
-        }
-      } else {
+      // if (currentrestaurant){
+      //   if (d.Restaurant.toLowerCase().replace(/ /g,'').replace(new RegExp(/[èéêë]/g),"e") == currentrestaurant){
+      //     return 1;
+      //   } else {
+      //     return 0.3;
+      //   }
+      // } else {
         return 0.9;
-      }
+      // }
     })
     .style("fill", function(d) {
       return color_function(d.ChineseRegion);
@@ -219,7 +207,7 @@ var drawMap = function(currentrestaurant,data) {
     })
     .style("stroke","#696969")
     .attr("r", function(d) {
-      return 8;
+      return 10;
       // if (screen.width <= 480) {
       //   return d.Size*6;
       // } else {
@@ -228,7 +216,6 @@ var drawMap = function(currentrestaurant,data) {
     })
     .on('mouseover', function(d) {
       var html_str = tooltip_function(d);
-      console.log(html_str);
       tooltip.html(html_str);
       tooltip.style("visibility", "visible");
     })
@@ -246,7 +233,7 @@ var drawMap = function(currentrestaurant,data) {
           .style("left",(d3.event.pageX)+"px");
       } else {
         return tooltip
-          .style("top", (d3.event.pageY+20)+"px")
+          .style("top", (d3.event.pageY-10)+"px")
           .style("left",(d3.event.pageX-100)+"px");
       }
     })
@@ -254,10 +241,9 @@ var drawMap = function(currentrestaurant,data) {
         return tooltip.style("visibility", "hidden");
     });
 
-  map.on("zoom", update);
-  update();
 
   function update() {
+    console.log("panning the map");
     feature.attr("transform",
     function(d) {
       return "translate("+
@@ -267,21 +253,29 @@ var drawMap = function(currentrestaurant,data) {
     )
   }
 
-  if (currentrestaurant){
-    console.log("pan");
-    if (screen.width <= 480){
-      map.panTo(data.LatLng);
-    } else {
-      map.panTo(new L.LatLng(data.Lat-0.3, data.Lng));
-    }
-  } else {
-    map.panTo(new L.LatLng(sf_lat, sf_long));
-    // map.setView(new L.LatLng(sf_lat, sf_long), map.getZoom(), {"animation": true});
-  }
+  map.on("zoom", update);
+  update();
+
+  // if (currentrestaurant){
+  //   if (screen.width <= 480){
+  //     map.panTo(data.LatLng);
+  //   } else {
+  //     map.panTo(new L.LatLng(data.Lat-0.3, data.Lng));
+  //   }
+  // } else {
+  //   map.panTo(new L.LatLng(sf_lat, sf_long));
+  //   // map.setView(new L.LatLng(sf_lat, sf_long), map.getZoom(), {"animation": true});
+  // }
 
 }
 
 drawMap();
+var currentrestaurant, prevrestaurant = "", currentLat, currentLon;
+var panels = document.getElementsByClassName("panel");
+
+var offset_top = $(".panel-container").offset().top;
+console.log("offset_top = ");
+console.log($(".panel-container").offset().top);
 
 // set up scrolling timeout
 var scrollTimer = null;
@@ -300,35 +294,67 @@ function handleScroll() {
 
     // figure out where the top of the page is, and also the top and beginning of the map content
     var pos = document.body.scrollTop || document.documentElement.scrollTop;
-    var pos_map_top = $('#bottom-of-top').offset().top;
-    var pos_map_bottom = $('#top-of-bottom').offset().top-bottomOffset;
+    // var pos = $(this).scrollTop();
+    var pos_map_top = $('#bottom-of-top').offset().top-start_top;
+    var pos_map_bottom = $('#top-of-bottom').offset().top;
 
     // show the landing of the page if the reader is at the top
     if (pos < pos_map_top){
 
-      var prevrestaurant = "";
-      drawMap();
+      // drawMap();
+      // if (feature) {
+        // map.setView(new L.LatLng(sf_lat, sf_long),zoom_deg);
+        // update(feature);
+      // } else {
+        map.panTo(new L.LatLng(sf_lat, sf_long));
+      // }
+
+      prevrestaurant = "";
+      $(".dot").css("opacity",0.9);
+      console.log("we are at the top");
 
     // show the appropriate dots if the reader is in the middle of the page
     } else if (pos < pos_map_bottom){
 
-      var currentrestaurant = "";
-      var data = [];
-      var panels = document.getElementsByClassName("panel");
-      for (var panelIDX = 0; panelIDX < panels.length; panelIDX++){
-        restaurant_info.forEach(function(map,mapIDX){
-          if (panels[panelIDX].id == map.Restaurant.toLowerCase().replace(/ /g,'')) {
-            var pos_map = $('#'+panels[panelIDX].id).offset().top-offset_top;
-            if (pos > pos_map) {
-              data = map;
-              currentrestaurant = panels[panelIDX].id;
-            }
-          }
-        });
-      }
-      console.log(currentrestaurant);
-      prevrestaurant = currentrestaurant;
-      drawMap(currentrestaurant,data);
+      console.log("we are in the middle");
 
+      currentrestaurant = "";
+      // var panels = document.getElementsByClassName("panel");
+      for (var panelIDX = 0; panelIDX < panels.length; panelIDX++){//; panelIDX++){
+        // console.log($('#'+panels[panelIDX].id));
+        if (panelIDX == 0) {
+          var pos_map = $('#'+panels[panelIDX].id).offset().top - offset_top - pos - start_top;//offset_top;
+        } else {
+          var pos_map = $('#'+panels[panelIDX].id).offset().top - offset_top - pos;
+        }
+
+        if (pos_map < 0) {
+          currentrestaurant = panels[panelIDX].id;
+        }
+
+        // if (currentrestaurant){
+          restaurant_info.forEach(function(map,mapIDX){
+            if (currentrestaurant == "panel"+map.Restaurant.toLowerCase().replace(/ /g,'')) {
+              currentLat = +map.Lat;
+              currentLon = +map.Lng;
+            }
+          });
+        // }
+      };
+      if (currentrestaurant != prevrestaurant){
+        // if (feature) {
+          // map.setView(new L.LatLng(sf_lat, sf_long),zoom_deg);
+          // update(feature);
+        // } else {
+        console.log("panning");
+          // map.panTo(new L.LatLng(currentLat, currentLon));
+          map.setView(new L.LatLng(currentLat,currentLon),zoom_deg);
+        // }
+        $(".dot").css("opacity",0.3);
+        console.log(currentrestaurant.substring(5));
+        $("#"+currentrestaurant.substring(5)).css("opacity",1);
+      }
+      prevrestaurant = currentrestaurant;
     }
+
 }

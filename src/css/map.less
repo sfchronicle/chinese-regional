@@ -54,14 +54,18 @@ circle {
   }
 }
 
+.space-container {
+  height: 700px;
+}
+
 .map-container {
   // position: absolute;
   .hed-container {
     position: relative;
     max-width: 400px;
     padding: 30px;
-    top: 200px;
-    left: 20px;
+    margin-top: 200px;
+    margin-left: 30px;
     // padding: 30px;
     text-align: center;
     line-height: 1.2;
@@ -79,13 +83,14 @@ circle {
       padding-top: 10px;
       font-family: @med-graphics;
     }
-    margin-bottom: 500px;
+    margin-bottom: 0;
     background: rgba(255,255,255,0.8);
   }
   .panel-container {
     position: relative;
     margin-left: 30px;
     pointer-events: none;
+    // top: 900px;
   }
   .panel {
     // margin-top: 500px;
@@ -97,7 +102,35 @@ circle {
     font-family: @med-graphics;
     font-size: 14px;
     background: rgba(255,255,255,0.8);
+    .fa {
+      padding-right: 7px;
+      color: @dark-gray;
+    }
+    .restaurant {
+      font-family: @bold-graphics;
+      border-bottom: 1px solid @light-gray;
+      padding-bottom: 2px;
+      margin-bottom: 5px;
+      font-size: 16px;
+    }
+    .address {
+      font-style: italic;
+    }
+    .line {
+      padding-bottom: 5px;
+    }
+    .capsule {
+      padding-top: 10px;
+    }
+    .writer {
+      padding-top: 10px;
+      text-align: right;
+    }
   }
+}
+
+a {
+  pointer-events: all;
 }
 
 #map-leaflet {
