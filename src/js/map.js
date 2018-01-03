@@ -80,77 +80,6 @@ L.control.zoom({
      position:'bottomright'
 }).addTo(map);
 
-var redIcon = new L.Icon({
-  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
-  // shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-  iconSize: [20, 32],
-  iconAnchor: [12, 32],
-  popupAnchor: [-2, -30],
-  // shadowSize: [, 41]
-});
-
-var greenIcon = new L.Icon({
-  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png',
-  // shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-  iconSize: [20, 32],
-  iconAnchor: [12, 32],
-  popupAnchor: [-2, -30],
-  // shadowSize: [, 41]
-});
-
-var purpleIcon = new L.Icon({
-  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-violet.png',
-  // shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-  iconSize: [20, 32],
-  iconAnchor: [12, 32],
-  popupAnchor: [-2, -30],
-  // shadowSize: [, 41]
-});
-
-var yellowIcon = new L.Icon({
-  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png',
-  // shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-  iconSize: [20, 32],
-  iconAnchor: [12, 32],
-  popupAnchor: [-2, -30],
-  // shadowSize: [, 41]
-});
-
-var blueIcon = new L.Icon({
-  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
-  // shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-  iconSize: [20, 32],
-  iconAnchor: [12, 32],
-  popupAnchor: [-2, -30],
-  // shadowSize: [, 41]
-});
-
-var grayIcon = new L.Icon({
-  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-grey.png',
-  // shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-  iconSize: [20, 32],
-  iconAnchor: [12, 32],
-  popupAnchor: [-2, -30],
-  // shadowSize: [, 41]
-});
-
-// restaurant_info.forEach(function(d){
-//   if (d.Lat){
-//     var html_str = "<b>"+d.Restaurant+"</b><br><em>"+d.Address+"</em><br>Region in China: "+d.ChineseRegion+"<br>Cuisine: "+d.Cuisine;
-//     if (d.ChineseRegion == "Northern"){
-//       var tempmarker = L.marker([+d.Lat, +d.Lng], {icon: redIcon}).addTo(map).bindPopup(html_str);
-//     } else if (d.ChineseRegion == "Eastern"){
-//       var tempmarker = L.marker([+d.Lat, +d.Lng], {icon: purpleIcon}).addTo(map).bindPopup(html_str);
-//     } else if (d.ChineseRegion == "Taiwanese"){
-//       var tempmarker = L.marker([+d.Lat, +d.Lng], {icon: yellowIcon}).addTo(map).bindPopup(html_str);
-//     } else if (d.ChineseRegion == "Western"){
-//       var tempmarker = L.marker([+d.Lat, +d.Lng], {icon: blueIcon}).addTo(map).bindPopup(html_str);
-//     } else if (d.ChineseRegion == "Southern"){
-//       var tempmarker = L.marker([+d.Lat, +d.Lng], {icon: grayIcon}).addTo(map).bindPopup(html_str);
-//     }
-//   }
-// });
-
 // creating Lat/Lon objects that d3 is expecting
 restaurant_info.forEach(function(d,idx) {
   if (d.Lat){
@@ -191,28 +120,14 @@ var drawMap = function(currentrestaurant,data) {
       return "dot";
     })
     .style("opacity", function(d) {
-      // if (currentrestaurant){
-      //   if (d.Restaurant.toLowerCase().replace(/ /g,'').replace(new RegExp(/[èéêë]/g),"e") == currentrestaurant){
-      //     return 1;
-      //   } else {
-      //     return 0.3;
-      //   }
-      // } else {
-        return 0.9;
-      // }
+      return 0.9;
     })
     .style("fill", function(d) {
       return color_function(d.ChineseRegion);
-      // return "#c11a1a";//"#E32B2B";//"#3C87CF";
     })
     .style("stroke","#696969")
     .attr("r", function(d) {
       return 10;
-      // if (screen.width <= 480) {
-      //   return d.Size*6;
-      // } else {
-      //   return d.Size*10;
-      // }
     })
     .on('mouseover', function(d) {
       var html_str = tooltip_function(d);
@@ -224,8 +139,6 @@ var drawMap = function(currentrestaurant,data) {
         return tooltip
           .style("top",70+"px")
           .style("left",40+"px");
-          // .style("top",(d3.event.pageY+40)+"px")//(d3.event.pageY+40)+"px")
-          // .style("left",10+"px");
       } else if (screen.width <= 1024) {
         console.log("mid");
         return tooltip
@@ -243,7 +156,6 @@ var drawMap = function(currentrestaurant,data) {
 
 
   function update() {
-    console.log("panning the map");
     feature.attr("transform",
     function(d) {
       return "translate("+
@@ -256,17 +168,6 @@ var drawMap = function(currentrestaurant,data) {
   map.on("zoom", update);
   update();
 
-  // if (currentrestaurant){
-  //   if (screen.width <= 480){
-  //     map.panTo(data.LatLng);
-  //   } else {
-  //     map.panTo(new L.LatLng(data.Lat-0.3, data.Lng));
-  //   }
-  // } else {
-  //   map.panTo(new L.LatLng(sf_lat, sf_long));
-  //   // map.setView(new L.LatLng(sf_lat, sf_long), map.getZoom(), {"animation": true});
-  // }
-
 }
 
 drawMap();
@@ -274,8 +175,6 @@ var currentrestaurant, prevrestaurant = "", currentLat, currentLon;
 var panels = document.getElementsByClassName("panel");
 
 var offset_top = $(".panel-container").offset().top;
-console.log("offset_top = ");
-console.log($(".panel-container").offset().top);
 
 // set up scrolling timeout
 var scrollTimer = null;
@@ -301,55 +200,37 @@ function handleScroll() {
     // show the landing of the page if the reader is at the top
     if (pos < pos_map_top){
 
-      // drawMap();
-      // if (feature) {
-        // map.setView(new L.LatLng(sf_lat, sf_long),zoom_deg);
-        // update(feature);
-      // } else {
-        map.panTo(new L.LatLng(sf_lat, sf_long));
-      // }
+      map.setView(new L.LatLng(sf_lat,sf_long),zoom_deg);
+      // map.panTo(new L.LatLng(sf_lat, sf_long));
 
       prevrestaurant = "";
       $(".dot").css("opacity",0.9);
-      console.log("we are at the top");
 
     // show the appropriate dots if the reader is in the middle of the page
     } else if (pos < pos_map_bottom){
 
-      console.log("we are in the middle");
-
       currentrestaurant = "";
-      // var panels = document.getElementsByClassName("panel");
       for (var panelIDX = 0; panelIDX < panels.length; panelIDX++){//; panelIDX++){
-        // console.log($('#'+panels[panelIDX].id));
         if (panelIDX == 0) {
-          var pos_map = $('#'+panels[panelIDX].id).offset().top - offset_top - pos - start_top;//offset_top;
+          var pos_map = $('#'+panels[panelIDX].id).offset().top - pos - start_top;//offset_top;
         } else {
-          var pos_map = $('#'+panels[panelIDX].id).offset().top - offset_top - pos;
+          var pos_map = $('#'+panels[panelIDX].id).offset().top - pos - start_top*1.5;
         }
 
         if (pos_map < 0) {
           currentrestaurant = panels[panelIDX].id;
         }
 
-        // if (currentrestaurant){
-          restaurant_info.forEach(function(map,mapIDX){
-            if (currentrestaurant == "panel"+map.Restaurant.toLowerCase().replace(/ /g,'')) {
-              currentLat = +map.Lat;
-              currentLon = +map.Lng;
-            }
-          });
-        // }
+        restaurant_info.forEach(function(map,mapIDX){
+          if (currentrestaurant == "panel"+map.Restaurant.toLowerCase().replace(/ /g,'')) {
+            currentLat = +map.Lat;
+            currentLon = +map.Lng;
+          }
+        });
       };
       if (currentrestaurant != prevrestaurant){
-        // if (feature) {
-          // map.setView(new L.LatLng(sf_lat, sf_long),zoom_deg);
-          // update(feature);
-        // } else {
         console.log("panning");
-          // map.panTo(new L.LatLng(currentLat, currentLon));
-          map.setView(new L.LatLng(currentLat,currentLon),zoom_deg);
-        // }
+        map.setView(new L.LatLng(currentLat,currentLon-0.4),zoom_deg);
         $(".dot").css("opacity",0.3);
         console.log(currentrestaurant.substring(5));
         $("#"+currentrestaurant.substring(5)).css("opacity",1);
