@@ -107,6 +107,8 @@ L.control.zoom({
      position:'bottomright'
 }).addTo(map);
 
+map.doubleClickZoom.enable();
+
 // creating Lat/Lon objects that d3 is expecting
 restaurant_info.forEach(function(d,idx) {
   if (d.Lat){
@@ -141,7 +143,7 @@ var drawMap = function(currentrestaurant,data) {
     .data(restaurant_info)
     .enter().append("circle")
     .attr("id",function(d) {
-      return d.Restaurant.toLowerCase().replace(/ /g,'');
+      return d.Restaurant.toLowerCase().replace(/ /g,'').replace("'",'');
     })
     .attr("class",function(d) {
       return "dot";
@@ -180,7 +182,17 @@ var drawMap = function(currentrestaurant,data) {
     })
     .on("mouseout", function(){
         return tooltip.style("visibility", "hidden");
-    });
+    })
+    .on("click",function(d){
+        console.log("real click");
+        if($("#panel"+d.Restaurant.toLowerCase().replace(/ /g,'').replace("'",''))){
+          $('html, body').animate({
+              scrollTop: $("#panel"+d.Restaurant.toLowerCase().replace(/ /g,'').replace("'",'')).offset().top-50
+          }, 2000);
+        } else {
+          console.log("NO CAPSULE YET");
+        }
+    })
 
 
   function update() {
@@ -201,6 +213,8 @@ var drawMap = function(currentrestaurant,data) {
 drawMap();
 var currentrestaurant, prevrestaurant = "", currentLat, currentLon;
 var panels = document.getElementsByClassName("panel");
+var dots = document.getElementsByClassName("dot");
+console.log(dots);
 
 var offset_top = $(".panel-container").offset().top;
 
@@ -214,6 +228,16 @@ $(window).scroll(function () {
   scrollTimer = setTimeout(handleScroll, timeTimeout);   // set new timer
   tooltip.style("visibility", "hidden");
 });
+
+// for (var dotIDX=0; dotIDX<dots.length; dotIDX++){
+//   dots[dotIDX].addEventListener("click", function(e) {
+//     console.log("real click");
+//     console.log(dots[dotIDX].id);
+//     $('html, body').animate({
+//         scrollTop: $("#panel"+dots[dotIDX].id).offset().top
+//     }, 2000);
+//   });
+// };
 
 // function for updating with scroll
 function handleScroll() {

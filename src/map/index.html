@@ -47,7 +47,7 @@
       <% var count = 0; %>
       <% json.chinese_regional_caps_final.regions.forEach(function(d,dIDX){ %>
           <% d.restaurants.forEach(function(k,dIDX){ %>
-            <div class="panel" id="panel<%=k.Restaurant.toLowerCase().replace(/ /g,'')%>">
+            <div class="panel" id="panel<%=k.Restaurant.toLowerCase().replace(/ /g,'').replace(''','')%>">
               <div class="restaurant line"><%=k.Restaurant%></div>
               <div class="cuisine line <%=k.Cuisine%>"><i class="fa fa-cutlery" aria-hidden="true"></i><%=k.Cuisine%></div>
               <div class="address line"><i class="fa fa-map-marker" aria-hidden="true"></i><a href="https://www.google.com/maps/place/<%=k.Address%>"  target="_blank" class="google-link"><%=k.Address%></a></div>
