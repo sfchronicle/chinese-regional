@@ -60,8 +60,16 @@
               <% if (k["Signature dishes"]){ %>
                 <div class="website line"><i class="fa fa-star" aria-hidden="true"></i><%=k["Signature dishes"]%></div>
               <% } %>
-              <% if (k.Website){ %>
+              <% if (k.Website && k.Website != "n/a"){ %>
                 <div class="website line"><i class="fa fa-link" aria-hidden="true"></i><a href="<%=k.Website%>" target="_blank"><%=k.Website%></a></div>
+              <% } %>
+              <% if (k.Tags){ %>
+                <% var tags_list = k.Tags.split(",");%>
+                <div class="tags line">
+                  <% tags_list.forEach(function(t,tIDX){ %>
+                    <span class="tag <%=t%>"><%=t%></span>
+                  <% }) %>
+                </div>
               <% } %>
               <div class="capsule"><%=k.Capsule%></div>
               <div class="writer">- <%=k.Writer%></div>

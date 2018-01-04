@@ -30,6 +30,10 @@ circle {
   position: relative;
 }
 
+.leaflet-control-zoom {
+  z-index: 999 !important;
+}
+
 .tooltip-map {
   // width: 300px;
   position: absolute;
@@ -69,6 +73,11 @@ circle {
     // padding: 30px;
     text-align: center;
     line-height: 1.2;
+    @media @mobile {
+      max-width: 100%;
+      margin: auto;
+      margin-top: 0;
+    }
     .hed {
       padding-bottom: 10px;
     }
@@ -90,6 +99,9 @@ circle {
     position: relative;
     margin-left: 30px;
     pointer-events: none;
+    @media @mobile {
+      margin: auto;
+    }
     // top: 900px;
   }
   .panel {
@@ -102,6 +114,10 @@ circle {
     font-family: @med-graphics;
     font-size: 14px;
     background: rgba(255,255,255,0.8);
+    @media @mobile {
+      margin-bottom: 500px;
+      max-width: 100%;
+    }
     .fa {
       padding-right: 7px;
       color: @dark-gray;
@@ -126,6 +142,18 @@ circle {
       padding-top: 10px;
       text-align: right;
       font-style: italic;
+    }
+    .tags {
+      margin-top: 5px;
+      margin-bottom: 5px;
+      .tag {
+        padding: 0 10px 4px 10px;
+        margin: 2px;
+        background: @light-gray;
+        font-family: @bold-graphics;
+        color: white;
+        border-radius: 2px;
+      }
     }
   }
 }

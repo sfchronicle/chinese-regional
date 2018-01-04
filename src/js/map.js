@@ -5,12 +5,29 @@ var d3 = require("d3");
 var timeTimeout = 1;
 
 // setting parameters for the center of the map and initial zoom level
-var sf_lat = 37.667064;
-var sf_long = -122.662503;
 var zoom_deg = 9;
 var max_zoom_deg = 16;
 var min_zoom_deg = 4;
-var start_top = 200;
+
+if (screen.width <= 480) {
+
+  var sf_lat_landing = 37.867064;
+  var sf_lat = 37.667064;
+  var sf_long = -122.162503;
+
+  var lon_offset = 0;
+  var lat_offset = 0.4;
+  var start_top = 500;
+
+} else {
+
+  var sf_lat = 37.667064;
+  var sf_long = -122.662503;
+
+  var lon_offset = 0.4;
+  var lat_offset = 0;
+  var start_top = 200;
+}
 
 function color_function(region) {
   if (region == "Northern") {
@@ -33,13 +50,23 @@ function tooltip_function (d) {
 }
 
 // initialize map with center position and zoom levels
-var map = L.map("map-leaflet", {
-  minZoom: min_zoom_deg,
-  maxZoom: max_zoom_deg,
-  zoomControl: false,
-  scrollWheelZoom: false,
-  attributionControl: false
-}).setView([sf_lat,sf_long], zoom_deg);
+if (screen.width <= 480){
+  var map = L.map("map-leaflet", {
+    minZoom: min_zoom_deg,
+    maxZoom: max_zoom_deg,
+    zoomControl: false,
+    scrollWheelZoom: false,
+    attributionControl: false
+  }).setView([sf_lat_landing,sf_long], zoom_deg);
+} else {
+  var map = L.map("map-leaflet", {
+    minZoom: min_zoom_deg,
+    maxZoom: max_zoom_deg,
+    zoomControl: false,
+    scrollWheelZoom: false,
+    attributionControl: false
+  }).setView([sf_lat,sf_long], zoom_deg);
+}
 
 // initializing the svg layer
 L.svg().addTo(map);
@@ -130,6 +157,7 @@ var drawMap = function(currentrestaurant,data) {
       return 10;
     })
     .on('mouseover', function(d) {
+      console.log("click");
       var html_str = tooltip_function(d);
       tooltip.html(html_str);
       tooltip.style("visibility", "visible");
@@ -137,7 +165,7 @@ var drawMap = function(currentrestaurant,data) {
     .on("mousemove", function() {
       if (screen.width <= 480) {
         return tooltip
-          .style("top",70+"px")
+          .style("top",(d3.event.pageY-10)+"px")
           .style("left",40+"px");
       } else if (screen.width <= 1024) {
         console.log("mid");
@@ -184,6 +212,7 @@ $(window).scroll(function () {
       clearTimeout(scrollTimer);   // clear any previous pending timer
   }
   scrollTimer = setTimeout(handleScroll, timeTimeout);   // set new timer
+  tooltip.style("visibility", "hidden");
 });
 
 // function for updating with scroll
@@ -230,8 +259,8 @@ function handleScroll() {
       };
       if (currentrestaurant != prevrestaurant){
         console.log("panning");
-        map.setView(new L.LatLng(currentLat,currentLon-0.4),zoom_deg);
-        $(".dot").css("opacity",0.3);
+        map.setView(new L.LatLng(currentLat-lat_offset,currentLon-lon_offset),zoom_deg);
+        $(".dot").css("opacity",0.2);
         console.log(currentrestaurant.substring(5));
         $("#"+currentrestaurant.substring(5)).css("opacity",1);
       }
