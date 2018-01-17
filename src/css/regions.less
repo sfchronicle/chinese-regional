@@ -1,0 +1,87 @@
+@import "values";
+@import "flexbox";
+@import "fonts";
+@import "sfchronicle";
+@import "footer";
+@import "project";
+
+.hed {
+  font-size: 40px;
+  padding-top: 40px;
+  padding-bottom: 20px;
+}
+.deck {
+  font-family: @med-graphics;
+  max-width: 600px;
+  margin: auto;
+}
+
+.scrolly-container {
+  padding: 40px 0;
+}
+
+.china-map-container {
+  max-width: 600px;
+  margin: auto;
+  margin-bottom: 30px;
+  img {
+    width: 100%;
+  }
+}
+
+.region-hed {
+  font-family: @bold-graphics;
+  border-bottom: 1px solid @light-gray;
+  text-align: center;
+  padding-bottom: 10px;
+  max-width: 800px;
+  margin: auto;
+  margin-bottom: 20px;
+  margin-top: 50px;
+}
+
+.dishes-container {
+  max-width: 400px;
+  margin: auto;
+  margin-top: 40px;
+  background: lighten(@light-gray,15%);
+  padding: 15px;
+  .dishes-hed {
+    font-family: @block-graphics;
+    border-bottom: 1px solid @dark-gray;
+    margin-bottom: 10px;
+  }
+  .dish {
+    padding-bottom: 2px;
+    .display-flex;
+    .flex-wrap(wrap);
+    // display: block;
+    .english, .chinese {
+
+      // display: inline-block;
+    }
+    .english {
+      .flex(0 0 70%);
+      font-family: @med-graphics;
+      font-style: italic;
+      font-size: 18px;
+      line-height: 1;
+      text-align: left;
+      padding-top: 8px;
+      vertical-align: middle;
+      // float: left;
+    }
+    .chinese {
+      padding-top: 3px;
+      .flex(0 0 30%);
+      text-align: right;
+    }
+  }
+}
+
+// .dishes-container::after {
+//    content: " ";
+//    display: block;
+//    height: 0;
+//    clear: both;
+// }

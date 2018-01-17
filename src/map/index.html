@@ -45,9 +45,12 @@
       <div id="bottom-of-top"></div>
       <div class="panel-container">
       <% var count = 0; %>
-      <% json.chinese_regional_caps_final.regions.forEach(function(d,dIDX){ %>
-          <% d.restaurants.forEach(function(k,dIDX){ %>
-            <div class="panel" id="panel<%=k.Restaurant.toLowerCase().replace(/ /g,'').replace(''','')%>">
+      <% console.log(json.caps); %>
+      <% for (var i = 0; i < json.caps.regions.length; i++) { %>
+          <% for (var j=0; j < json.caps.regions[i].restaurants.length; j++) { %>
+            <% k = json.caps.regions[i].restaurants[j];%>
+            <div class="panel" id="panel<%=k.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'')%>">
+              <% console.log(k.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'')) %>
               <div class="restaurant line"><%=k.Restaurant%></div>
               <div class="cuisine line <%=k.Cuisine%>"><i class="fa fa-cutlery" aria-hidden="true"></i><%=k.Cuisine%></div>
               <div class="address line"><i class="fa fa-map-marker" aria-hidden="true"></i><a href="https://www.google.com/maps/place/<%=k.Address%>"  target="_blank" class="google-link"><%=k.Address%></a></div>
@@ -64,9 +67,9 @@
                 <div class="website line"><i class="fa fa-link" aria-hidden="true"></i><a href="<%=k.Website%>" target="_blank"><%=k.Website%></a></div>
               <% } %>
               <% if (k.Tags){ %>
-                <% var tags_list = k.Tags.split(",");%>
+                <% var tags_list = k.Tags.split(",") %>
                 <div class="tags line">
-                  <% tags_list.forEach(function(t,tIDX){ %>
+                  <% tags_list.forEach(function(t,tIDX) { %>
                     <span class="tag <%=t%>"><%=t%></span>
                   <% }) %>
                 </div>
@@ -75,8 +78,8 @@
               <div class="writer">- <%=k.Writer%></div>
             </div>
             <% count++; %>
-          <% }); %>
-      <% }); %>
+          <% } %>
+      <% } %>
       </div>
 
     </div>

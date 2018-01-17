@@ -143,7 +143,7 @@ var drawMap = function(currentrestaurant,data) {
     .data(restaurant_info)
     .enter().append("circle")
     .attr("id",function(d) {
-      return d.Restaurant.toLowerCase().replace(/ /g,'').replace("'",'');
+      return d.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'');
     })
     .attr("class",function(d) {
       return "dot";
