@@ -76,31 +76,46 @@ L.svg().addTo(map);
 //     style: 'mapbox://styles/emro/cjbib4t5e089k2sm7j3xygp50'
 // }).addTo(map);
 
-// var attribution = L.control.attribution();
-// attribution.setPrefix('');
-// attribution.addAttribution('Map data: <a href="http://openstreetmap.org/copyright" target="_blank">© OpenStreetMap</a> <a href="https://www.mapbox.com/about/maps/" target="_blank">© Mapbox</a> | <a href="https://www.mapbox.com/map-feedback/" target="_blank" class="mapbox-improve-map">Improve this map</a>');
-// attribution.addTo(map);
-
-// var OpenStreetMap_BlackAndWhite = L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
-// 	maxZoom: 18,
-// 	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-// }).addTo(map);
-
-// var Stamen_Watercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
+// var Stamen_Terrain = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.{ext}', {
 // 	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 // 	subdomains: 'abcd',
-// 	minZoom: 1,
-// 	maxZoom: 16,
+// 	minZoom: 0,
+// 	maxZoom: 18,
 // 	ext: 'png'
 // }).addTo(map);
 
-var Stamen_Terrain = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.{ext}', {
-	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-	subdomains: 'abcd',
+
+L.tileLayer('https://api.mapbox.com/styles/v1/emro/cj8lviggc6b302rqjyezdqc2m/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZW1ybyIsImEiOiJjaXl2dXUzMGQwMDdsMzJuM2s1Nmx1M29yIn0._KtME1k8LIhloMyhMvvCDA', {
 	minZoom: 0,
 	maxZoom: 18,
-	ext: 'png'
 }).addTo(map);
+
+var attribution = L.control.attribution();
+attribution.setPrefix('');
+attribution.addAttribution('Map data: <a href="http://openstreetmap.org/copyright" target="_blank">© OpenStreetMap</a> <a href="https://www.mapbox.com/about/maps/" target="_blank">© Mapbox</a> | <a href="https://www.mapbox.com/map-feedback/" target="_blank" class="mapbox-improve-map">Improve this map</a>');
+attribution.addTo(map);
+
+// var Stamen_TonerLite = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
+// 	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+// 	subdomains: 'abcd',
+// 	minZoom: 0,
+// 	maxZoom: 20,
+// 	ext: 'png'
+// }).addTo(map);
+// var Stamen_TonerHybrid = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-hybrid/{z}/{x}/{y}.{ext}', {
+// 	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+// 	subdomains: 'abcd',
+// 	minZoom: 0,
+// 	maxZoom: 20,
+// 	ext: 'png'
+// }).addTo(map);
+// var Stamen_TonerLines = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lines/{z}/{x}/{y}.{ext}', {
+// 	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+// 	subdomains: 'abcd',
+// 	minZoom: 0,
+// 	maxZoom: 20,
+// 	ext: 'png'
+// }).addTo(map);
 
 // zoom control is on top right
 L.control.zoom({
@@ -185,9 +200,9 @@ var drawMap = function(currentrestaurant,data) {
     })
     .on("click",function(d){
         console.log("real click");
-        if($("#panel"+d.Restaurant.toLowerCase().replace(/ /g,'').replace("'",''))){
+        if($("#panel"+d.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,''))){
           $('html, body').animate({
-              scrollTop: $("#panel"+d.Restaurant.toLowerCase().replace(/ /g,'').replace("'",'')).offset().top-50
+              scrollTop: $("#panel"+d.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'')).offset().top-50
           }, 2000);
         } else {
           console.log("NO CAPSULE YET");

@@ -29,11 +29,17 @@
     <div class="hed">Chinese Regions</div>
     <div class="deck">This is a deck about how we are going to tell you all about all the different cuisines in China.</div>
 
+    <div class="header-button-container">
+      <% for (var i=0; i < json.regional_chinese_descriptions.capsules.length; i++){ %>
+        <div class="header-button"><a href="#<%=json.regional_chinese_descriptions.capsules[i].Cuisine%>"><%=json.regional_chinese_descriptions.capsules[i].Cuisine%></a></div>
+      <% } %>
+    </div>
+
     <div class="scrolly-container">
     <% for (var i=0; i < json.regional_chinese_descriptions.capsules.length; i++){ %>
 
       <% var region = json.regional_chinese_descriptions.capsules[i]; %>
-      <div class="region-hed"><%=region.Region%>: <%=region.Cuisine%></div>
+      <div class="region-hed" id="<%=region.Cuisine%>"><%=region.Region%>: <%=region.Cuisine%></div>
       <div class="china-map-container">
         <img src="../assets/graphics/image001.png"></img>
       </div>
@@ -42,6 +48,7 @@
           <p><%=d.value %></p>
         <% } %>
       <% }) %>
+      <p class="writer">- <%=region.Author%></p>
       <% if (region.dishes) { %>
       <div class="dishes-container">
         <div class="dishes-hed"><%=region.DishesTitle%></div>
