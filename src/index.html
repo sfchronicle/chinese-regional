@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="__sync_contentCategory" content="meterA">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="landing_style.css">
 
     <%= !json.project.embedded ? t.include("partials/_paywall.html") : t.include("partials/_embedframe.html") %>
 
@@ -18,10 +18,49 @@
 
     <%= t.include("partials/_nav.html") %>
 
-
-    <div class="container">
-      <p>Content goes here...</p>
+    <div class="title-container">
+          <h1 class="title long landingtitle">Chinese Regional Cuisine</h1>
     </div>
+
+    <div class="aboutcontainer">
+      <div class="aboutlanding">
+        <p style="text-align: center; font-size: 18px">Chronicle Urban Design Critic John King explores the changes reshaping the area between the Embarcadero and the Yerba Buena district.</p>
+      </div>
+
+      <div class="linkbox-container">
+        <div class="linkbox" style="border-top: 0;">
+          <div class="linkimg" id="p1">
+            <a href="./cuisines">
+              <div class="overlay">
+                <div class="linkdesc">The Cuisines<div class="subdesc">Learn about the food</div></div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="linkbox" style="border-top: 0;">
+          <div class="linkimg" id="p2">
+            <a href="./map">
+              <div class="overlay">
+                <div class="linkdesc">The Restaurants<div class="subdesc">Find a place to eat</div></div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+      <div class="linkbox" style="border-top: 0;">
+        <div class="linkimg" id="p3">
+          <a href="./stories">
+            <div class="overlay">
+              <div class="linkdesc">The Stories<div class="subdesc">Read, watch, explore</div></div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    </div>
+
 
     <%= t.include("partials/_footer.html") %>
 

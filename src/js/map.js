@@ -90,6 +90,11 @@ L.tileLayer('https://api.mapbox.com/styles/v1/emro/cj8lviggc6b302rqjyezdqc2m/til
 	maxZoom: 18,
 }).addTo(map);
 
+// L.tileLayer('https://api.mapbox.com/styles/v1/emro/cjcl3kt1c07l32qnklvj12kn7/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZW1ybyIsImEiOiJjaXl2dXUzMGQwMDdsMzJuM2s1Nmx1M29yIn0._KtME1k8LIhloMyhMvvCDA', {
+// 	minZoom: 0,
+// 	maxZoom: 18,
+// }).addTo(map);
+
 var attribution = L.control.attribution();
 attribution.setPrefix('');
 attribution.addAttribution('Map data: <a href="http://openstreetmap.org/copyright" target="_blank">© OpenStreetMap</a> <a href="https://www.mapbox.com/about/maps/" target="_blank">© Mapbox</a> | <a href="https://www.mapbox.com/map-feedback/" target="_blank" class="mapbox-improve-map">Improve this map</a>');

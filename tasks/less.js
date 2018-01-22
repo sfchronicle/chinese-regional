@@ -20,6 +20,7 @@ module.exports = function(grunt) {
 
     var seeds = {
       "src/css/seed.less": "build/style.css",
+      "src/css/landing.less": "build/landing_style.css",
       "src/css/map.less": "build/map_style.css",
       "src/css/regions.less": "build/regions_style.css"
     };
