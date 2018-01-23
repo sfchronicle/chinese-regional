@@ -120,7 +120,7 @@
   .justify-content(center);
   margin-bottom: 30px;
   .dishes-container {
-    .flex(0 0 30%);
+    .flex(0 0 33%);
     margin:auto;
     &.EAST {
       background: lighten(@east,15%);
@@ -139,12 +139,23 @@
     }
   }
   .china-map-container {
-    .flex(0 0 66%);
+    .flex(0 0 65%);
+    position: relative;
+    svg {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+    }
 
     img {
       width: 100%;
     }
   }
+}
+
+#chinabase,#taiwan_1_,#guangdong,#guangxi,#hunan,#yunnan,#sichuan,#tibet,#xinjiang,#shanghai,#shaanxi,#shandong,#dongbei,#beijing,#chinaoutline_x5F_nofill {
+  opacity: 0;
 }
 
 .dishes-container {

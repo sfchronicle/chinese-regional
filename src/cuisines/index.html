@@ -52,8 +52,9 @@
           <% }) %>
         </div>
         <% } %>
-        <div class="china-map-container">
+        <div class="china-map-container" id="container<%=i%>">
           <img src="../assets/graphics/china0211_map_GR_online.jpg"></img>
+          <%= t.include("assets/graphics/CHINA_FOOD_ALL_REGIONS.svg") %>
         </div>
       </div>
 
@@ -71,7 +72,7 @@
     <%= t.include("partials/_footer.html") %>
 
     <script>
-      var restaurant_info= <%= JSON.stringify(json.ListForMap) %>
+      var region_info= <%= JSON.stringify(json.regional_chinese_descriptions.capsules) %>
     </script>
 
     <script src="../regions_app.js" async></script>
