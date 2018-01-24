@@ -68,6 +68,8 @@
             <input class="input" id="searchmap" type="text" placeholder='Try "vegetarian", "spicy", or "Fremont" ...'></input>
           </div>
 
+          <div class="how-many-restaurants">There are <span id="count-how-many">35</span> result(s) for your search.</div>
+
         </div>
 
 
@@ -76,7 +78,7 @@
         <div class="restaurant-container">
         <% for (var j=0; j < json.chinese_regional_caps_final.restaurants.length; j++) { %>
             <% k = json.chinese_regional_caps_final.restaurants[j];%>
-            <div class="restaurant-element active <%=k.City.replace(/ /g,'')%> <%=k.Cuisine%> <%=k.Area%> <%=k['Signature dishes']%> <%=k.Tags%>" id="REST<%=k.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),'e')%>">
+            <div class="restaurant-element active <%=k.City.replace(/ /g,'')%> <%=k.Cuisine.replace('/',' ')%> <%=k.Area%> <%=k['Signature dishes']%> <%=k.Tags%>" id="REST<%=k.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),'e')%>">
               <% console.log(k.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),"e")) %>
               <div class="restaurant line"><%=k.Restaurant%></div>
               <div class="cuisine line <%=k.Cuisine%>"><i class="fa fa-cutlery" aria-hidden="true"></i><%=k.Cuisine%> Cuisine</div>

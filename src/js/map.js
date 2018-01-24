@@ -205,22 +205,18 @@ $("#searchmap").bind("input propertychange", function () {
   var filter = $(this).val().toLowerCase().replace(/ /g,'').replace(/'/g,'').replace(new RegExp(/[èéêë]/g),"e");
   var class_match = 0;
   count = 0;
+  $(".how-many-restaurants").css("display","block");
 
   var button_list = document.getElementsByClassName("button");
   for (var i=0; i<button_list.length; i++) {
     button_list[i].classList.remove("selected");
   };
-  // if (filter == "") {
-  //   document.getElementById("showall").classList.add("selected");
-  // }
 
   selCuisine.selectedIndex = 0;
 
   $(".restaurant-element").filter(function() {
-    console.log(this);
 
     var classes = this.className.split(" ");
-    console.log(classes);
     for (var i=0; i< classes.length; i++) {
 
       var current_class = classes[i].toLowerCase();
@@ -239,6 +235,13 @@ $("#searchmap").bind("input propertychange", function () {
     class_match = 0;
 
   });
+
+  if (count < 35){
+    document.getElementById("count-how-many").innerHTML = count;
+  } else {
+    $(".how-many-restaurants").css("display","none");
+  }
+
 });
 
 selCuisine.addEventListener("change",function(event){
@@ -287,6 +290,7 @@ var cuisine_flag = 1, north_flag = 1, south_flag = 1, east_flag = 1, west_flag =
 
 function check_filters() {
 
+  $(".how-many-restaurants").css("display","block");
   // document.getElementById("restaurants-wrap").classList.remove("hide");
   // document.getElementById("intro-container").classList.add("hide");
   // document.getElementById("about").classList.remove("selected");
@@ -308,7 +312,7 @@ function check_filters() {
 
     // check cuisine
     if (selCuisine.value != "all"){
-      cuisine_flag = (classes.indexOf(selCuisine.value)>0)
+      cuisine_flag = (classes.indexOf(selCuisine.value.toLowerCase())>0);
     } else {
       cuisine_flag = 1;
     }
@@ -362,6 +366,8 @@ function check_filters() {
 
   console.log("COUNT IS");
   console.log(count);
+
+  document.getElementById("count-how-many").innerHTML = count;
   //
   // // display text for empty search results
   // if (count > 0) {
