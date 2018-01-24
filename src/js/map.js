@@ -230,11 +230,11 @@ $("#searchmap").bind("input propertychange", function () {
     }
     if (class_match > 0) {
       $(this).addClass("active");
-      $("#"+this.id.split("restaurant")[1]).css("opacity",1);
+      $("#"+this.id.split("REST")[1]).css("opacity",1);
       count+=1;
     } else {
       $(this).removeClass("active");
-      $("#"+this.id.split("restaurant")[1]).css("opacity",0);
+      $("#"+this.id.split("REST")[1]).css("opacity",0);
     }
     class_match = 0;
 
@@ -350,12 +350,12 @@ function check_filters() {
     // show it if yes
     if (flag_min == 1){
       $(this).addClass("active");
-      $("#"+this.id.split("restaurant")[1]).css("opacity",1);
+      $("#"+this.id.split("REST")[1]).css("opacity",1);
       console.log(this.id.split("restaurant")[1]);
       count += 1;
     } else {
       $(this).removeClass("active");
-      $("#"+this.id.split("restaurant")[1]).css("opacity",0);
+      $("#"+this.id.split("REST")[1]).css("opacity",0);
     }
 
   });
