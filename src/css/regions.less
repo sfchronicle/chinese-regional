@@ -68,7 +68,8 @@
   max-width: 800px;
   margin: auto;
   margin-bottom: 20px;
-  margin-top: 30px;
+  padding-top: 40px;
+  margin-top: 0px;
   // color: white;
   &.EAST {
     border-bottom: 1px solid @east;
@@ -121,6 +122,9 @@
   margin-bottom: 30px;
   .dishes-container {
     .flex(0 0 33%);
+    @media @mobile {
+      .flex(0 0 90%);
+    }
     margin:auto;
     &.EAST {
       background: lighten(@east,15%);
@@ -140,6 +144,9 @@
   }
   .china-map-container {
     .flex(0 0 65%);
+    @media @mobile {
+      .flex(0 0 100%);
+    }
     position: relative;
     svg {
       position: absolute;

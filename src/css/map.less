@@ -24,6 +24,9 @@ body {
 }
 circle {
   cursor: pointer;
+  transition: opacity .25s ease-in-out;
+  -moz-transition: opacity .25s ease-in-out;
+  -webkit-transition: opacity .25s ease-in-out;
 }
 
 .map {
@@ -63,60 +66,72 @@ circle {
 }
 
 .map-container {
-  // position: absolute;
-  .hed-container {
+  .sidebar {
     position: relative;
-    max-width: 400px;
-    padding: 30px;
-    margin-top: 200px;
-    margin-left: 30px;
-    // padding: 30px;
-    text-align: center;
+    max-width: 600px;
+    width: 40%;
+    padding: 20px;
     line-height: 1.2;
     @media @mobile {
       max-width: 100%;
       margin: auto;
       margin-top: 0;
     }
-    .hed {
+    .title {
+      font-family: @bold-graphics;
+      font-size: 25px;
       padding-bottom: 10px;
+      text-align: center;
     }
     .deck {
       font-family: @med-graphics;
-      padding-bottom: 10px;
+      padding-top: 5px;
+      padding-bottom: 20px;
       text-align: center;
       font-size: 18px;
     }
-    .instructions {
-      font-size: 14px;
-      padding-top: 10px;
-      font-family: @med-graphics;
-    }
     margin-bottom: 0;
-    background: rgba(255,255,255,0.8);
+    background: rgba(255,255,255,0.9);
   }
-  .panel-container {
-    position: relative;
-    margin-left: 30px;
-    pointer-events: none;
-    @media @mobile {
-      margin: auto;
-    }
-    // top: 900px;
+  .restaurant-container {
+    // height: 500px;
+    // overflow-y: scroll;
+    // border: 1px solid @dark-gray;
+    // border-radius: 5px;
+    // padding: 10px;
   }
-  .panel {
-    // margin-top: 500px;
-    // background: rgba(255,255,255,0.8);
-    max-width: 400px;
-    padding: 30px;
-    margin-bottom: 400px;
+  .restaurant-element {
+    padding: 10px 0;
     line-height: 1.2;
     font-family: @med-graphics;
     font-size: 14px;
-    background: rgba(255,255,255,0.8);
+    display: none;
+    &.active {
+      display: block;
+    }
     @media @mobile {
       margin-bottom: 500px;
       max-width: 100%;
+    }
+    .regionEast, .regionWest, .regionNorth, .regionSouth, .regionTaiwan {
+      font-family: @block-graphics;
+      font-style: italic;
+      padding-top: 10px;
+    }
+    .regionEast {
+      a { color: @east-dark; border-bottom: 2px solid @east-dark;}
+    }
+    .regionNorth {
+      a { color: @north-dark; border-bottom: 2px solid @north-dark;}
+    }
+    .regionSouth {
+      a { color: @south-dark; border-bottom: 2px solid @south-dark;}
+    }
+    .regionWest {
+      a { color: @west-dark; border-bottom: 2px solid @west-dark;}
+    }
+    .regionTaiwan {
+      a { color: @taiwan-dark; border-bottom: 2px solid @taiwan-dark;}
     }
     .fa {
       padding-right: 7px;
@@ -158,6 +173,166 @@ circle {
   }
 }
 
+#fullwidth-social{
+  width:100%;
+  text-align:center;
+  padding: 5px 0 10px 0;
+  font-size: 16px;
+
+  .social{
+    display:inline-block;
+    padding:0 5px;
+
+    @media @mobile{
+      font-size: 17px;
+    }
+  }
+}
+
+.filter-container {
+  font-family: @med-graphics;
+  font-size: 14px;
+  text-align: center;
+  // padding-bottom: 30px;
+  .buttons-group {
+    display: block;
+    padding: 10px 5px;
+    .button {
+      display: inline-block;
+      cursor: pointer;
+      padding: 3px 10px;
+      font-family: @bold-graphics;
+      border-radius: 5px;
+      &.east {
+        color: @east-dark;
+        border: 2px solid @east-dark;
+        // &:hover {
+        //   background: @east-dark;
+        //   color: white;
+        // }
+        &.selected {
+          background: @east-dark;
+          color: white;
+        }
+      }
+      &.west {
+        color: @west-dark;
+        border: 2px solid @west-dark;
+        // &:hover {
+        //   background: @west-dark;
+        //   color: white;
+        // }
+        &.selected {
+          background: @west-dark;
+          color: white;
+        }
+
+      }
+      &.south {
+        color: @south-dark;
+        border: 2px solid @south-dark;
+        // &:hover {
+        //   background: @south-dark;
+        //   color: white;
+        // }
+        &.selected {
+          background: @south-dark;
+          color: white;
+        }
+      }
+      &.north {
+        color: @north-dark;
+        border: 2px solid @north-dark;
+        // &:hover {
+        //   background: @north-dark;
+        //   color: white;
+        // }
+        &.selected {
+          background: @north-dark;
+          color: white;
+        }
+      }
+      &.taiwan {
+        color: @taiwan-dark;
+        border: 2px solid @taiwan-dark;
+        // &:hover {
+        //   background: @taiwan-dark;
+        //   color: white;
+        // }
+        &.selected {
+          background: @taiwan-dark;
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+.search-container {
+  max-width: 900px;
+  margin: auto;
+  font-family: @block-graphics;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  // text-align: left;
+  @media @mobile {
+    // text-align: center;
+    margin: 10px 0 20px 0;
+  }
+  .search {
+    font-family: @med-graphics;
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  input {
+    margin-left: 5px;
+    border-radius: 5px;
+    border: 1px solid @dark-gray;
+    font-family: @block-graphics;
+    padding: 5px;
+    width: 70%;
+    font-size: 14px;
+    @media @mobile {
+      width: 80%;
+      font-size: 14px;
+      display: inline-block;
+      margin: auto;
+      margin-top: 0px;
+    }
+  }
+}
+
+.dropdown-container {
+  font-family: @block-graphics;
+  font-size: 16px;
+  padding-top: 10px;
+  .drop-down {
+    display: inline-block;
+    &.right {
+    }
+  }
+  .select-text {
+    font-size: 14px;
+    display: inline-block;
+    padding-right: 5px;
+    font-family: @med-graphics;
+  }
+  select {
+    font-family: @med-graphics;
+    font-size: 14px;
+    background: white;//lighten(@light-gray,5%);
+    padding: 5px 10px;
+    @media @mobile {
+      padding: 5px 10px;
+    }
+    border-radius: 0;
+  }
+}
+
+.drop-down {
+  position: relative;
+}
+
 a {
   pointer-events: all;
 }
@@ -174,4 +349,8 @@ a {
  left: 0;
  top: 0;
 
+}
+
+.nav-bottom {
+  margin-top: 0;
 }

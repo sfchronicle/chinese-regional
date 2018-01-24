@@ -26,7 +26,7 @@
 
     <%= t.include("partials/_nav_regions.html") %>
 
-    <div class="hed">Chinese Regions</div>
+    <div class="hed">Chinese Regional Cuisines</div>
     <div class="deck">This is a deck about how we are going to tell you all about all the different cuisines in China.</div>
 
     <div class="header-button-container">
@@ -44,6 +44,10 @@
       </div>
 
       <div class="map-dishes-container">
+        <div class="china-map-container" id="container<%=i%>">
+          <img src="../assets/graphics/china0211_map_GR_online.jpg"></img>
+          <%= t.include("assets/graphics/CHINA_FOOD_ALL_REGIONS.svg") %>
+        </div>
         <% if (region.dishes) { %>
         <div class="dishes-container <%=region.Region%>">
           <div class="dishes-hed"><%=region.DishesTitle%></div>
@@ -52,10 +56,6 @@
           <% }) %>
         </div>
         <% } %>
-        <div class="china-map-container" id="container<%=i%>">
-          <img src="../assets/graphics/china0211_map_GR_online.jpg"></img>
-          <%= t.include("assets/graphics/CHINA_FOOD_ALL_REGIONS.svg") %>
-        </div>
       </div>
 
       <% region.text.forEach(function(d,didx){ %>

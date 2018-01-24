@@ -42,6 +42,12 @@ $(window).scroll(function(){
   });
 
   if (regionCUR != regionPREV) {
+    $("#container0 #chinabase").fadeTo("opacity",0);
+    $("#container1 #chinabase").fadeTo("opacity",0);
+    $("#container2 #chinabase").fadeTo("opacity",0);
+    $("#container3 #chinabase").fadeTo("opacity",0);
+    $("#container4 #chinabase").fadeTo("opacity",0);
+
     $("#container0 #sichuan").fadeTo("opacity",0);
     $("#container1 #shanghai").fadeTo("opacity",0);
     $("#container2 #hunan").fadeTo("opacity",0);
@@ -55,16 +61,21 @@ $(window).scroll(function(){
     $("#container3 #shaanxi").fadeTo("opacity",0);
     $("#container3 #shandong").fadeTo("opacity",0);
     $("#container4 #taiwan_1_").fadeTo("opacity",0);
+
     regionPREV = regionCUR;
     if (regionCUR == 0){
+      $("#container0 #chinabase").fadeTo("opacity",0.5);
       $("#container0 #sichuan").fadeTo("opacity",0.8);
     } else if (regionCUR == 1){
+      $("#container1 #chinabase").fadeTo("opacity",0.5);
       $("#container1 #shanghai").fadeTo("opacity",0.8);
     } else if (regionCUR == 2){
+      $("#container2 #chinabase").fadeTo("opacity",0.5);
       $("#container2 #hunan").fadeTo("opacity",0.8);
       $("#container2 #guangxi").fadeTo("opacity",0.8);
       $("#container2 #guangdong").fadeTo("opacity",0.8);
     } else if (regionCUR == 3){
+      $("#container3 #chinabase").fadeTo("opacity",0.5);
       $("#container3 #dongbei").fadeTo("opacity",0.8);
       $("#container3 #xinjiang").fadeTo("opacity",0.8);
       $("#container3 #tibet").fadeTo("opacity",0.8);
@@ -73,6 +84,7 @@ $(window).scroll(function(){
       $("#container3 #shaanxi").fadeTo("opacity",0.8);
       $("#container3 #shandong").fadeTo("opacity",0.8);
     } else if (regionCUR == 4){
+      $("#container4 #chinabase").fadeTo("opacity",0.5);
       $("#container4 #taiwan_1_").fadeTo("opacity",0.8);
     }
   }
