@@ -4,3 +4,45 @@
 @import "sfchronicle";
 @import "footer";
 @import "project";
+
+.title {
+  font-size: 40px;
+  padding-top: 40px;
+  padding-bottom: 20px;
+  font-family: @body-bold;
+}
+
+.deck {
+  // font-family: @med-graphics;
+  font-family: @body;
+  max-width: 600px;
+  margin: auto;
+  font-size: 20px;
+  text-align: center;
+  line-height: 1.2;
+  margin-bottom: 40px;
+}
+
+.existing-container {
+  .display-flex;
+  .flex-wrap(wrap);
+  max-width: 1000px;
+  margin: auto;
+  .feature {
+    .flex(0 0 45%);
+    margin: auto;
+    margin-top: 0;
+    margin-bottom: 40px;
+    border: 1px solid @light-gray;
+    padding: 10px;
+    padding-bottom: 20px;
+    background: lighten(@light-gray,18%);
+    img {
+      max-width: 100%;
+      margin-bottom: 15px;
+    }
+    font-family: @bold-graphics;
+    line-height: 1.2;
+    font-size: 17px;
+  }
+}

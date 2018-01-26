@@ -26,6 +26,30 @@
 
     <%= t.include("partials/_nav_stories.html") %>
 
+    <div class="title">The Stories</div>
+    <div class="deck">This is a deck about how we are going to tell you all about all the different cuisines in China.</div>
+
+    <!-- <div class="features-container">
+    <% json.chron_chinese_food_stories["new-features"].forEach(function(story){ %>
+      <div class="feature">
+        <%=story.Headline %>
+      </div>
+    <% }); %>
+    </div> -->
+
+    <div class="existing-container">
+    <% json.chron_chinese_food_stories["existing-features"].forEach(function(story){ %>
+      <div class="feature">
+        <a href="<%=story.Link%>">
+          <% if (story.PhotoID){ %>
+          <img src="//ww3.hdnux.com/photos/66/46/24/<%=story.PhotoID%>/9/premium_landscape.jpg">
+          <% } %>
+          <%=story.Headline %>
+        </a>
+      </div>
+    <% }); %>
+    </div>
+
 
     <%= t.include("partials/_footer.html") %>
 

@@ -175,6 +175,7 @@ var drawMap = function(currentrestaurant,data) {
     .on("click",function(d){
         d3.selectAll(".restaurant-element").classed("active",false);
         d3.selectAll(".dot").transition().style("r",10);
+        $("#see-all").removeClass("selected");
         $(".how-many-restaurants").css("display","none");
         $(".button-china").value = "all";
         $(".button-china").removeClass("selected");
@@ -211,6 +212,7 @@ $("#searchmap").bind("input propertychange", function () {
   var class_match = 0;
   count = 0;
   $(".how-many-restaurants").css("display","block");
+  $("#see-all").removeClass("selected");
 
   var button_list = document.getElementsByClassName("button");
   for (var i=0; i<button_list.length; i++) {
@@ -267,6 +269,7 @@ var taiwan_button = document.getElementById('button-region-taiwan');
 [north_button, south_button, west_button, east_button, taiwan_button].forEach(function (item, idx) {
     item.addEventListener('click', function () {
       document.getElementById('searchmap').value = "";
+      $("#see-all").removeClass("selected");
       if (this.classList.contains("selected")){
         $(".button-china").value = "all";
         $(".button-china").removeClass("selected");
@@ -285,9 +288,11 @@ var taiwan_button = document.getElementById('button-region-taiwan');
 document.getElementById("see-all").addEventListener("click",function(){
   $(".button-china").value = "all";
   $(".button-china").removeClass("selected");
+  $("#see-all").addClass("selected");
   document.getElementById('searchmap').value = "";
   check_filters();
   $(".how-many-restaurants").css("display","none");
+  d3.selectAll(".dot").transition().style("r",10);
 });
 
   // display text for empty search results
