@@ -76,7 +76,7 @@ if (screen.width <= 480){
 // initializing the svg layer
 L.svg().addTo(map);
 
-L.tileLayer('https://api.mapbox.com/styles/v1/emro/cjbib4t5e089k2sm7j3xygp50/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZW1ybyIsImEiOiJjaXl2dXUzMGQwMDdsMzJuM2s1Nmx1M29yIn0._KtME1k8LIhloMyhMvvCDA', {
+L.tileLayer('https://api.mapbox.com/styles/v1/emro/cj8lviggc6b302rqjyezdqc2m/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZW1ybyIsImEiOiJjaXl2dXUzMGQwMDdsMzJuM2s1Nmx1M29yIn0._KtME1k8LIhloMyhMvvCDA', {
 	minZoom: 0,
 	maxZoom: 18,
 }).addTo(map);
@@ -261,13 +261,18 @@ var taiwan_button = document.getElementById('button-region-taiwan');
 
 [north_button, south_button, west_button, east_button, taiwan_button].forEach(function (item, idx) {
     item.addEventListener('click', function () {
-      console.log(this);
-      $(".button-china").value = "all";
-      $(".button-china").removeClass("selected");
-      $(this).addClass("selected");
-      check_filters();
-      this.value = "chosen";
-      console.log(this.value);
+      if (this.classList.contains("selected")){
+        $(".button-china").value = "all";
+        $(".button-china").removeClass("selected");
+        check_filters();
+        $(".how-many-restaurants").css("display","none");
+      } else {
+        $(".button-china").value = "all";
+        $(".button-china").removeClass("selected");
+        $(this).addClass("selected");
+        check_filters();
+        this.value = "chosen";
+      }
     });
 });
 
@@ -291,19 +296,8 @@ var cuisine_flag = 1, north_flag = 1, south_flag = 1, east_flag = 1, west_flag =
 function check_filters() {
 
   $(".how-many-restaurants").css("display","block");
-  // document.getElementById("restaurants-wrap").classList.remove("hide");
-  // document.getElementById("intro-container").classList.add("hide");
-  // document.getElementById("about").classList.remove("selected");
-  //
-  // document.getElementById('searchrestaurants').value = "";
-  //
+
   count = 0;
-  // showall_button.classList.remove("selected");
-  // mylist_starred_button.classList.remove("selected");
-  // mylist_checked_button.classList.remove("selected");
-  //
-  // document.getElementById('no-saved-restaurants').classList.add("hide");
-  // document.getElementById('no-checked-restaurants').classList.add("hide");
 
   $(".restaurant-element").filter(function() {
 

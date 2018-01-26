@@ -74,12 +74,10 @@
 
 
         <% var count = 0; %>
-        <% console.log(json.chinese_regional_capsules_final); %>
         <div class="restaurant-container">
         <% for (var j=0; j < json.chinese_regional_caps_final.restaurants.length; j++) { %>
             <% k = json.chinese_regional_caps_final.restaurants[j];%>
             <div class="restaurant-element active <%=k.City.replace(/ /g,'')%> <%=k.Cuisine.replace('/',' ')%> <%=k.Area%> <%=k['Signature dishes']%> <%=k.Tags%>" id="REST<%=k.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),'e')%>">
-              <% console.log(k.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),"e")) %>
               <div class="restaurant line"><%=k.Restaurant%></div>
               <div class="cuisine line <%=k.Cuisine%>"><i class="fa fa-cutlery" aria-hidden="true"></i><%=k.Cuisine%> Cuisine</div>
               <div class="address line"><i class="fa fa-map-marker" aria-hidden="true"></i><a href="https://www.google.com/maps/place/<%=k.Address%>"  target="_blank" class="google-link"><%=k.Address%></a></div>
@@ -96,10 +94,23 @@
                 <div class="website line"><i class="fa fa-link" aria-hidden="true"></i><a href="<%=k.Website%>" target="_blank"><%=k.Website%></a></div>
               <% } %>
               <% if (k.Tags){ %>
-                <% var tags_list = k.Tags.split(",") %>
+                <% var tags_list = k.Tags.split(", ") %>
                 <div class="tags line">
                   <% tags_list.forEach(function(t,tIDX) { %>
-                    <span class="tag <%=t%>"><%=t%></span>
+                    <% if (t == "group meal") { %>
+                      <div class="icon"><img src="../assets/graphics/families.png"></img></div>
+                    <% } else if (t == "spicy") { %>
+                      <div class="icon"><img src="../assets/graphics/spicy.png"></img></div>
+                    <% } else if (t == "group dinners") { %>
+                      <div class="icon"><img src="../assets/graphics/families.png"></img></div>
+                    <% } else if (t == "vegetarian-friendly") { %>
+                      <div class="icon"><img src="../assets/graphics/vegetarian.png"></img></div>
+                    <% } else if (t == "good for solo diners") { %>
+                      <div class="icon"><img src="../assets/graphics/diningsolo.png"></img></div>
+                    <% } else { %>
+                      <% console.log(t) %>
+                      <span class="tag <%=t%>"><%=t%></span>
+                    <% } %>
                   <% }) %>
                 </div>
               <% } %>
