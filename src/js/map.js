@@ -26,8 +26,8 @@ if (screen.width <= 480) {
 
 } else {
 
-  var sf_lat = 37.667064;
-  var sf_long = -122.662503;
+  var sf_lat = 37.67064;
+  var sf_long = -122.962503;
 
   var lon_offset = 0.4;
   var lat_offset = 0;
@@ -76,9 +76,14 @@ if (screen.width <= 480){
 // initializing the svg layer
 L.svg().addTo(map);
 
-L.tileLayer('https://api.mapbox.com/styles/v1/emro/cj8lviggc6b302rqjyezdqc2m/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZW1ybyIsImEiOiJjaXl2dXUzMGQwMDdsMzJuM2s1Nmx1M29yIn0._KtME1k8LIhloMyhMvvCDA', {
-	minZoom: 0,
-	maxZoom: 18,
+// L.tileLayer('https://api.mapbox.com/styles/v1/emro/cj8lviggc6b302rqjyezdqc2m/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZW1ybyIsImEiOiJjaXl2dXUzMGQwMDdsMzJuM2s1Nmx1M29yIn0._KtME1k8LIhloMyhMvvCDA', {
+// 	minZoom: 0,
+// 	maxZoom: 18,
+// }).addTo(map);
+
+var gl = L.mapboxGL({
+    accessToken: 'pk.eyJ1IjoiZW1ybyIsImEiOiJjaXl2dXUzMGQwMDdsMzJuM2s1Nmx1M29yIn0._KtME1k8LIhloMyhMvvCDA',
+    style: 'mapbox://styles/emro/cj8lviggc6b302rqjyezdqc2m'
 }).addTo(map);
 
 var attribution = L.control.attribution();
@@ -168,14 +173,14 @@ var drawMap = function(currentrestaurant,data) {
         return tooltip.style("visibility", "hidden");
     })
     .on("click",function(d){
-        console.log("real click");
-        // if($("#panel"+d.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,''))){
-        //   $('html, body').animate({
-        //       scrollTop: $("#panel"+d.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'')).offset().top-50
-        //   }, 2000);
-        // } else {
-        //   console.log("NO CAPSULE YET");
-        // }
+        d3.selectAll(".restaurant-element").classed("active",false);
+        d3.selectAll(".dot").transition().style("r",10);
+        $(".how-many-restaurants").css("display","none");
+        $(".button-china").value = "all";
+        $(".button-china").removeClass("selected");
+        document.getElementById('searchmap').value = "";
+        d3.select("#REST"+d.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),"e")).classed("active",true);
+        d3.select(this).transition().style("r",20);
     })
 
 
@@ -261,6 +266,7 @@ var taiwan_button = document.getElementById('button-region-taiwan');
 
 [north_button, south_button, west_button, east_button, taiwan_button].forEach(function (item, idx) {
     item.addEventListener('click', function () {
+      document.getElementById('searchmap').value = "";
       if (this.classList.contains("selected")){
         $(".button-china").value = "all";
         $(".button-china").removeClass("selected");
@@ -274,6 +280,14 @@ var taiwan_button = document.getElementById('button-region-taiwan');
         this.value = "chosen";
       }
     });
+});
+
+document.getElementById("see-all").addEventListener("click",function(){
+  $(".button-china").value = "all";
+  $(".button-china").removeClass("selected");
+  document.getElementById('searchmap').value = "";
+  check_filters();
+  $(".how-many-restaurants").css("display","none");
 });
 
   // display text for empty search results
@@ -349,7 +363,7 @@ function check_filters() {
     if (flag_min == 1){
       $(this).addClass("active");
       $("#"+this.id.split("REST")[1]).css("opacity",1);
-      console.log(this.id.split("restaurant")[1]);
+      console.log(this.id.split("REST")[1]);
       count += 1;
     } else {
       $(this).removeClass("active");
@@ -379,7 +393,24 @@ function check_filters() {
 
 };
 
+// hide the about the data box
+document.getElementById("close-capsules-box").addEventListener("click",function() {
+  document.getElementById("overlay-capsules").classList.remove("active");
+  $('body').removeClass('noscroll');
+  $(".capsule").removeClass("showme");
+});
 
+// show the about the data box
+var capsules_buttons = document.getElementsByClassName("capsule-link");
+for (var tidx=0; tidx < capsules_buttons.length; tidx++){
+  capsules_buttons[tidx].addEventListener("click",function(t) {
+    document.getElementById("capsules-box").classList.add("active");
+    document.getElementById("overlay-capsules").classList.add("active");
+    $('body').addClass('noscroll');
+    console.log(t.target.id);
+    $("#capsule"+t.target.id.split("capsule")[1]).addClass("showme");
+  });
+};
 
 
 

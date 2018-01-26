@@ -5,6 +5,87 @@
 @import "footer";
 @import "project";
 
+.overlay-capsules {
+  background: rgba(178, 178, 178, 0.4);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 1999;
+  display: none;
+  &.active {
+    display: block;
+  }
+  overflow-y: scroll;
+}
+
+#capsules-box {
+  position: absolute;
+  top: 10%;
+  left: 0;
+  right: 0;
+  text-align: left;
+  background: white;
+  padding: 20px;
+  padding-bottom: 50px;
+  border: 1px solid @dark-gray;
+  z-index: 2000;
+  margin:auto;
+  margin-bottom: 40px;
+  max-width: 600px;
+  line-height: 1.4;
+  font-size: 16px;
+  font-family: @med-graphics;
+  .source {
+    padding-bottom: 10px;
+  }
+  display: none;
+  &.active {
+    display: block;
+  }
+  .close-button {
+    width: 100%;
+    height: 20px;
+    cursor: pointer;
+  }
+  .fa-times {
+    float: right;
+    font-size: 20px;
+    padding-bottom: 20px;
+  }
+  @media @mobile {
+    width: 80%;
+    right: 0;
+    left: 0;
+  }
+}
+
+.capsule {
+  display: none;
+  &.showme {
+    display: block;
+  }
+  .capsule-title {
+    font-family: @bold-graphics;
+    padding-bottom: 2px;
+    border-bottom: 1px solid @light-gray;
+    margin-bottom: 20px;
+  }
+  .capsule-img {
+    max-width: 80%;
+    img {
+      width: 100%;
+    }
+    margin-bottom: 20px;
+  }
+  .capsule-author {
+    text-align: right;
+    padding-top: 20px;
+    font-size: 14px;
+    font-style: italic;
+  }
+}
+
 .mapboxgl-ctrl-compass {
   display: none !important;
 }
@@ -34,7 +115,7 @@ circle {
 }
 
 .how-many-restaurants {
-  margin-top: -10px;
+  // margin-top: -10px;
   margin-bottom: 20px;
   font-style: italic;
   display: none;
@@ -124,25 +205,34 @@ circle {
       font-family: @block-graphics;
       font-style: italic;
       padding-top: 10px;
-    }
-    .regionEast {
-      a { color: @east-dark; border-bottom: 2px solid @east-dark;}
-    }
-    .regionNorth {
-      a { color: @north-dark; border-bottom: 2px solid @north-dark;}
-    }
-    .regionSouth {
-      a { color: @south-dark; border-bottom: 2px solid @south-dark;}
-    }
-    .regionWest {
-      a { color: @west-dark; border-bottom: 2px solid @west-dark;}
-    }
-    .regionTaiwan {
-      a { color: @taiwan-dark; border-bottom: 2px solid @taiwan-dark;}
+      margin-bottom: 10px;
     }
     .fa {
       padding-right: 7px;
       color: @dark-gray;
+    }
+    .fa-hand-o-right {
+      color: @highlight;
+    }
+    .regionEast {
+      a { color: @east-dark; border-bottom: 2px solid @east-dark;}
+      .fa {color: @east-dark;}
+    }
+    .regionNorth {
+      a { color: @north-dark; border-bottom: 2px solid @north-dark;}
+      .fa {color: @north-dark;}
+    }
+    .regionSouth {
+      a { color: @south-dark; border-bottom: 2px solid @south-dark;}
+      .fa {color: @south-dark;}
+    }
+    .regionWest {
+      a { color: @west-dark; border-bottom: 2px solid @west-dark;}
+      .fa {color: @west-dark;}
+    }
+    .regionTaiwan {
+      a { color: @taiwan-dark; border-bottom: 2px solid @taiwan-dark;}
+      .fa {color: @taiwan-dark;}
     }
     .restaurant {
       font-family: @bold-graphics;
@@ -153,6 +243,17 @@ circle {
     }
     .address {
       font-style: italic;
+    }
+    .capsule-link {
+      font-family: @bold-graphics;
+      color: @highlight;
+      cursor: pointer;
+      font-style: italic;
+      font-size: 14px;
+      padding-top: 10px;
+      padding-bottom: 2px;
+      border-bottom: 2px solid @highlight;
+      width: 160px;
     }
     .line {
       padding-bottom: 5px;
@@ -170,6 +271,7 @@ circle {
       // margin-bottom: 5px;
       .icon {
         display: inline-block;
+        margin-right: 5px;
         // padding: 2px;
         img {
           width: 30px;
@@ -196,6 +298,24 @@ circle {
   }
 }
 
+.see-all {
+  background: white;
+  cursor: pointer;
+  padding: 3px 10px;
+  font-family: @bold-graphics;
+  border-radius: 5px;
+  width: 130px;
+  margin: auto;
+  margin-top: -15px;
+  margin-bottom: 10px;
+  color: @dark-gray;
+  border: 2px solid @dark-gray;
+  &.selected {
+    color: white;
+    background: @dark-gray;
+  }
+}
+
 .filter-container {
   font-family: @med-graphics;
   font-size: 14px;
@@ -206,6 +326,7 @@ circle {
     padding: 10px 5px;
     .button {
       display: inline-block;
+      background: white;
       cursor: pointer;
       padding: 3px 10px;
       font-family: @bold-graphics;

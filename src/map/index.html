@@ -26,6 +26,20 @@
 
     <%= t.include("partials/_nav_map.html") %>
 
+    <div class="overlay-capsules" id="overlay-capsules">
+      <div class="capsules-box" id="capsules-box">
+        <div class="close-button" id="close-capsules-box"><i class="fa fa-times" aria-hidden="true"></i></div>
+        <% for (var j=0; j < json.chinese_regional_caps_final.restaurants.length; j++) { %>
+          <div class="capsule" id="capsule<%=j%>">
+            <div class="capsule-img"><img src="//ww3.hdnux.com/photos/66/46/24/14904267/9/1200x0.jpg"></div>
+            <div class="capsule-title"><%=json.chinese_regional_caps_final.restaurants[j].Restaurant %></div>
+            <div class="capsule-text"><%=json.chinese_regional_caps_final.restaurants[j].Capsule%></div>
+            <div class="capsule-author">— <%=json.chinese_regional_caps_final.restaurants[j].Writer%></div>
+          </div>
+        <% } %>
+      </div>
+    </div>
+
     <div class="map">
       <div id="map-leaflet"></div>
       <div class="tooltip-map"></div>
@@ -68,6 +82,7 @@
             <input class="input" id="searchmap" type="text" placeholder='Try "vegetarian", "spicy", or "Fremont" ...'></input>
           </div>
 
+          <div class="see-all button" id="see-all">See all</div>
           <div class="how-many-restaurants">There are <span id="count-how-many">35</span> result(s) for your search.</div>
 
         </div>
@@ -77,7 +92,7 @@
         <div class="restaurant-container">
         <% for (var j=0; j < json.chinese_regional_caps_final.restaurants.length; j++) { %>
             <% k = json.chinese_regional_caps_final.restaurants[j];%>
-            <div class="restaurant-element active <%=k.City.replace(/ /g,'')%> <%=k.Cuisine.replace('/',' ')%> <%=k.Area%> <%=k['Signature dishes']%> <%=k.Tags%>" id="REST<%=k.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),'e')%>">
+            <div class="restaurant-element active <%=k.City.replace(/ /g,'')%> <%=k.Cuisine.replace('/',' ')%> <%=k.Area%> <%=k['Signature dishes']%> <%=k.Tags%> <%=k.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),'e')%>" id="REST<%=k.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),'e')%>">
               <div class="restaurant line"><%=k.Restaurant%></div>
               <div class="cuisine line <%=k.Cuisine%>"><i class="fa fa-cutlery" aria-hidden="true"></i><%=k.Cuisine%> Cuisine</div>
               <div class="address line"><i class="fa fa-map-marker" aria-hidden="true"></i><a href="https://www.google.com/maps/place/<%=k.Address%>"  target="_blank" class="google-link"><%=k.Address%></a></div>
@@ -92,6 +107,18 @@
               <% } %>
               <% if (k.Website && k.Website != "n/a"){ %>
                 <div class="website line"><i class="fa fa-link" aria-hidden="true"></i><a href="<%=k.Website%>" target="_blank"><%=k.Website%></a></div>
+              <% } %>
+              <div class="capsule-link" id="capsule<%=j%>"><i class="fa fa-hand-o-right" aria-hidden="true"></i>Read the full review</div>
+              <% if (k.Area == "West") { %>
+                <div class="region line region<%=k.Area%>"><a href="../cuisines/#Sichuan" target="_blank"><i class="fa fa-hand-o-right" aria-hidden="true"></i>Read about <%=k.Area%> China cuisine</a></div>
+              <% } else if (k.Area == "East") { %>
+                <div class="region line region<%=k.Area%>"><a href="../cuisines/#Shanghai" target="_blank"><i class="fa fa-hand-o-right" aria-hidden="true"></i>Read about <%=k.Area%> China cuisine</a></div>
+              <% } else if (k.Area == "South") { %>
+                <div class="region line region<%=k.Area%>"><a href="../cuisines/#Cantonese" target="_blank"><i class="fa fa-hand-o-right" aria-hidden="true"></i>Read about <%=k.Area%> China cuisine</a></div>
+              <% } else if (k.Area == "North") { %>
+                <div class="region line region<%=k.Area%>"><a href="../cuisines/#Northern" target="_blank"><i class="fa fa-hand-o-right" aria-hidden="true"></i>Read about <%=k.Area%> China cuisine</a></div>
+              <% } else if (k.Area == "Taiwan") { %>
+                <div class="region line region<%=k.Area%>"><a href="../cuisines/#Taiwanese" target="_blank"><i class="fa fa-hand-o-right" aria-hidden="true"></i>Read about <%=k.Area%> China cuisine</a></div>
               <% } %>
               <% if (k.Tags){ %>
                 <% var tags_list = k.Tags.split(", ") %>
@@ -114,25 +141,16 @@
                   <% }) %>
                 </div>
               <% } %>
-              <% if (k.Area == "West") { %>
-                <div class="region line region<%=k.Area%>"><a href="../cuisines/#Sichuan" target="_blank">Read about <%=k.Area%> China cuisine</a></div>
-              <% } else if (k.Area == "East") { %>
-                <div class="region line region<%=k.Area%>"><a href="../cuisines/#Shanghai" target="_blank">Read about <%=k.Area%> China cuisine</a></div>
-              <% } else if (k.Area == "South") { %>
-                <div class="region line region<%=k.Area%>"><a href="../cuisines/#Cantonese" target="_blank">Read about <%=k.Area%> China cuisine</a></div>
-              <% } else if (k.Area == "North") { %>
-                <div class="region line region<%=k.Area%>"><a href="../cuisines/#Northern" target="_blank">Read about <%=k.Area%> China cuisine</a></div>
-              <% } else if (k.Area == "Taiwan") { %>
-                <div class="region line region<%=k.Area%>"><a href="../cuisines/#Taiwanese" target="_blank">Read about <%=k.Area%> China cuisine</a></div>
-              <% } %>
             </div>
         <% } %>
         </div>
+
+        <%= t.include("partials/_footer.html") %>
+
       </div>
 
     </div>
 
-    <%= t.include("partials/_footer.html") %>
 
     <script>
       var restaurant_info= <%= JSON.stringify(json.ListForMap) %>
