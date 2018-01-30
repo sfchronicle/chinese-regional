@@ -5,6 +5,10 @@
 @import "footer";
 @import "project";
 
+footer {
+  background: 0;
+}
+
 .overlay-capsules {
   background: rgba(178, 178, 178, 0.4);
   width: 100%;
@@ -179,7 +183,7 @@ circle {
       font-size: 18px;
     }
     margin-bottom: 0;
-    background: rgba(255,255,255,0.9);
+    background: rgba(255,255,255,0.95);
   }
   .restaurant-container {
     // height: 500px;
@@ -201,11 +205,13 @@ circle {
       margin-bottom: 500px;
       max-width: 100%;
     }
-    .regionEast, .regionWest, .regionNorth, .regionSouth, .regionTaiwan {
+    .region {
       font-family: @block-graphics;
       font-style: italic;
-      padding-top: 10px;
-      margin-bottom: 10px;
+      // padding: 10px;
+      margin: 10px 10px 0 0;
+      // background: lighten(@light-gray,15%);
+      // border: 1px solid @light-gray;
     }
     .fa {
       padding-right: 7px;
@@ -214,32 +220,12 @@ circle {
     .fa-hand-o-right {
       color: @highlight;
     }
-    .regionEast {
-      a { color: @east-dark; border-bottom: 2px solid @east-dark;}
-      .fa {color: @east-dark;}
-    }
-    .regionNorth {
-      a { color: @north-dark; border-bottom: 2px solid @north-dark;}
-      .fa {color: @north-dark;}
-    }
-    .regionSouth {
-      a { color: @south-dark; border-bottom: 2px solid @south-dark;}
-      .fa {color: @south-dark;}
-    }
-    .regionWest {
-      a { color: @west-dark; border-bottom: 2px solid @west-dark;}
-      .fa {color: @west-dark;}
-    }
-    .regionTaiwan {
-      a { color: @taiwan-dark; border-bottom: 2px solid @taiwan-dark;}
-      .fa {color: @taiwan-dark;}
-    }
     .restaurant {
       font-family: @bold-graphics;
       border-bottom: 1px solid @light-gray;
       padding-bottom: 2px;
       margin-bottom: 5px;
-      font-size: 16px;
+      font-size: 18px;
     }
     .address {
       font-style: italic;
@@ -251,10 +237,13 @@ circle {
       font-style: italic;
       font-size: 14px;
       padding-top: 10px;
-      padding-bottom: 2px;
+      margin-bottom: 10px;
       border-bottom: 2px solid @highlight;
       width: 160px;
     }
+    // .read-link {
+    //   display: inline-block;
+    // }
     .line {
       padding-bottom: 5px;
     }
@@ -266,18 +255,24 @@ circle {
       text-align: right;
       font-style: italic;
     }
+    .icon {
+      max-width: 100px;
+      padding: 10px;
+      margin-left: 15px;
+    }
     .tags {
-      margin-top: 5px;
-      // margin-bottom: 5px;
-      .icon {
+      // margin-top: 10px;
+      .tag {
         display: inline-block;
-        margin-right: 5px;
-        // padding: 2px;
-        img {
-          width: 30px;
-          height: 30px;
-        }
+        padding: 3px 10px;
+        margin-right: 7px;
+        margin-bottom: 5px;
+        background: darken(#F4E1A1,5%);
+        // color: white;
+        color: @dark-gray;
+        border-radius: 5px;
       }
+      // margin-bottom: 5px;
     }
   }
 }
@@ -286,7 +281,7 @@ circle {
   width:100%;
   text-align:center;
   padding: 5px 0 10px 0;
-  font-size: 16px;
+  font-size: 18px;
 
   .social{
     display:inline-block;

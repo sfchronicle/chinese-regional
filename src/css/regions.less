@@ -5,11 +5,39 @@
 @import "footer";
 @import "project";
 
+@yellow: #F4E1A1;
+
+.lead-image {
+  max-width: 1200px;
+  @media @width1400 {
+    max-width: 1000px;
+  }
+  margin: auto;
+  img {
+    width: 100%;
+  }
+  &.mobile {
+    display: none;
+    @media @mobile {
+      display: block;
+    }
+  }
+  &.desktop {
+    @media @mobile {
+      display: none;
+    }
+  }
+}
+
 .hed {
   font-size: 40px;
-  padding-top: 40px;
+  padding-top: 10px;
   padding-bottom: 20px;
   font-family: @body-bold;
+  @media @mobile {
+    font-size: 30px;
+    line-height: 1.2;
+  }
 }
 .deck {
   // font-family: @med-graphics;
@@ -28,64 +56,47 @@
 .writer {
   text-align: right;
   font-style: italic;
-  font-size: 19px;
+  // font-size: 19px;
 }
 
-.header-button-container {
-  display: block;
-  padding-top: 30px;
+.region {
   text-align: center;
-  .header-button {
-    display: inline-block;
-    font-family: @banner;
-    text-decoration: underline;
-    padding: 0 5px;
-    color: @dark-gray;
-    font-size: 16px;
-    font-weight: 800;
-    // &.EAST {
-    //   a {color: @east;}
-    // }
-    // &.WEST {
-    //   a {color: @west;}
-    // }
-    // &.SOUTH {
-    //   a {color: @south;}
-    // }
-    // &.NORTH {
-    //   a {color: @north;}
-    // }
-    // &.TAIWAN {
-    //   a {color: @taiwan;}
-    // }
-  }
+  padding: 10px;
+  margin-bottom: 20px;
+  padding-top: 40px;
+  margin-top: 0px;
+  // background: lighten(@light-gray,15%);
+  font-family: @med-graphics;
+  font-size: 18px;
+  padding: 20px;
+  margin: 30px auto;
+  // color: white;
 }
 
 .region-hed {
   font-family: @bold-graphics;
   border-bottom: 1px solid @light-gray;
-  text-align: center;
-  padding: 10px;
-  max-width: 800px;
+  max-width: 600px;
   margin: auto;
-  margin-bottom: 20px;
-  padding-top: 40px;
-  margin-top: 0px;
-  // color: white;
-  &.EAST {
-    border-bottom: 1px solid @east;
+  margin-top: 10px;
+  font-size: 20px;
+}
+.region-map {
+  max-width: 200px;
+  margin: auto;
+  img {
+    max-width: 100%;
   }
-  &.WEST {
-    border-bottom: 1px solid @west;
-  }
-  &.SOUTH {
-    border-bottom: 1px solid @south;
-  }
-  &.NORTH {
-    border-bottom: 1px solid @north;
-  }
-  &.TAIWAN {
-    border-bottom: 1px solid @taiwan;
+}
+.region-desc {
+  max-width: 600px;
+  margin: auto;
+  margin-top: 10px;
+  line-height: 1.4;
+  padding: 0 20px 20px 20px;
+  text-align: left;
+  @media @mobile {
+    font-size: 16px;
   }
 }
 
@@ -93,88 +104,92 @@
   font-family: @banner;
   font-size: 16px;
   font-weight: 800;
-  &.EAST {
-    color: @east;
-  }
-  &.WEST {
-    color: @west;
-  }
-  &.SOUTH {
-    color: @south;
-  }
-  &.NORTH {
-    color: @north;
-  }
-  &.TAIWAN {
-    color: @taiwan;
-  }
 }
 .cuisine-span {
   font-family: @block-graphics;
   font-size: 20px;
 }
 
-.map-dishes-container {
-  max-width: 1200px;
-
-  .display-flex;
-  .flex-wrap(wrap);
-  .justify-content(center);
-  margin-bottom: 30px;
-  .dishes-container {
-    .flex(0 0 50%);
-    margin-left: 0;
-    // margin: auto;
-    @media @mobile {
-      .flex(0 0 90%);
-    }
-    // margin:auto;
-    &.EAST {
-      background: lighten(@east,28%);
-    }
-    &.WEST {
-      background: lighten(@west,20%);
-    }
-    &.SOUTH {
-      background: lighten(@south,28%);
-    }
-    &.NORTH {
-      background: lighten(@north,28%);
-    }
-    &.TAIWAN {
-      background: lighten(@taiwan,28%);
-    }
+.visit-restaurants {
+  max-width: 600px;
+  margin: auto;
+  text-align: left;
+  padding-left: 100px;
+  @media @mobile {
+    font-size: 16px;
+    padding-left: 50px;
   }
-  .china-map-container {
-    .flex(0 0 50%);
-    margin: auto;
+  .visit-restaurants-hed {
+    font-family: @block-graphics;
+  }
+  .visit-restaurant-restaurant {
+    font-size: 16px;
     @media @mobile {
-      .flex(0 0 100%);
+      font-size: 14px;
     }
-    position: relative;
-    svg {
-      position: absolute;
-      top: 0;
-      right: 0;
-      left: 0;
-    }
-
-    img {
-      width: 100%;
-    }
+    // font-style: italic;
+  }
+  .fa {
+    padding-left: 20px;
+    padding-right: 7px;
+    color: @dark-gray;
+    font-size: 14px;
   }
 }
+
+// .deep-dive {
+//   max-width: 1200px;
+//   margin: 30px auto;
+//   padding: 30px 10px;
+//   // border: 2px solid @yellow;
+//   // background: lighten(@yellow,18%);
+//
+//   .display-flex;
+//   .flex-wrap(wrap);
+//   .justify-content(center);
+//   .deep-dive-title {
+//     // .flex(0 0 100%);
+//     padding-bottom: 30px;
+//     font-size: 20px;
+//     font-family: @bold-graphics;
+//   }
+//   // margin-bottom: 30px;
+//   .dishes-container {
+//     .flex(0 0 35%);
+//     height: fit-content;
+//     margin-left: 0;
+//     // margin: auto;
+//     @media @mobile {
+//       .flex(0 0 90%);
+//     }
+//   }
+//   .capsule-container {
+//     .flex(0 0 60%);
+//     margin-left: 10px;
+//     font-size: 16px;
+//     line-height: 1.2;
+//     text-align: left;
+//     @media @mobile {
+//       .flex(0 0 100%);
+//     }
+//   }
+// }
 
 #chinabase,#taiwan_1_,#guangdong,#guangxi,#hunan,#yunnan,#sichuan,#tibet,#xinjiang,#shanghai,#shaanxi,#shandong,#dongbei,#beijing,#chinaoutline_x5F_nofill {
   opacity: 0;
 }
 
 .dishes-container {
-  max-width: 400px;
-  margin: auto;
+  max-width: 600px;
+  margin: 20px auto;
+  @media @mobile {
+    margin: 20px;
+  }
   // margin-top: 20px;
   // margin-bottom: 50px;
-  background: lighten(@light-gray,15%);
+  // background: lighten(@light-gray,15%);
+  // border: 1px solid @light-gray;
+  background: lighten(@yellow,15%);
   padding: 15px;
   .dishes-hed {
     font-family: @block-graphics;

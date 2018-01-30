@@ -35,17 +35,19 @@ if (screen.width <= 480) {
 }
 
 function color_function(region) {
-  if (region == "Northern") {
-    return "#A8B5A5";//#FFCC32";
-  } else if (region == "Eastern") {
-    return "#E68173";
-  } else if (region == "Taiwanese") {
-    return "#7BC2CD";//"#EB8F6A";
-  } else if (region == "Western") {
-    return "#C9CDAB";
-  } else if (region == "Southern") {
-    return "#E4C268";
-  }
+  return "#F4E1A1";
+  // return "#96BAC6";
+  // if (region == "Northern") {
+  //   return "#A8B5A5";//#FFCC32";
+  // } else if (region == "Eastern") {
+  //   return "#E68173";
+  // } else if (region == "Taiwanese") {
+  //   return "#7BC2CD";//"#EB8F6A";
+  // } else if (region == "Western") {
+  //   return "#C9CDAB";
+  // } else if (region == "Southern") {
+  //   return "#E4C268";
+  // }
 }
 
 // tooltip information
@@ -175,11 +177,13 @@ var drawMap = function(currentrestaurant,data) {
     .on("click",function(d){
         d3.selectAll(".restaurant-element").classed("active",false);
         d3.selectAll(".dot").transition().style("r",10);
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
         $("#see-all").removeClass("selected");
         $(".how-many-restaurants").css("display","none");
         $(".button-china").value = "all";
         $(".button-china").removeClass("selected");
         document.getElementById('searchmap').value = "";
+        // $('body, html').animate({scrollTop: 0});
         d3.select("#REST"+d.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),"e")).classed("active",true);
         d3.select(this).transition().style("r",20);
     })
@@ -260,36 +264,37 @@ selCuisine.addEventListener("change",function(event){
   check_filters();
 });
 
-var north_button = document.getElementById('button-region-north');
-var south_button = document.getElementById('button-region-south');
-var west_button = document.getElementById('button-region-west');
-var east_button = document.getElementById('button-region-east');
-var taiwan_button = document.getElementById('button-region-taiwan');
+// var north_button = document.getElementById('button-region-north');
+// var south_button = document.getElementById('button-region-south');
+// var west_button = document.getElementById('button-region-west');
+// var east_button = document.getElementById('button-region-east');
+// var taiwan_button = document.getElementById('button-region-taiwan');
 
-[north_button, south_button, west_button, east_button, taiwan_button].forEach(function (item, idx) {
-    item.addEventListener('click', function () {
-      document.getElementById('searchmap').value = "";
-      $("#see-all").removeClass("selected");
-      if (this.classList.contains("selected")){
-        $(".button-china").value = "all";
-        $(".button-china").removeClass("selected");
-        check_filters();
-        $(".how-many-restaurants").css("display","none");
-      } else {
-        $(".button-china").value = "all";
-        $(".button-china").removeClass("selected");
-        $(this).addClass("selected");
-        check_filters();
-        this.value = "chosen";
-      }
-    });
-});
+// [north_button, south_button, west_button, east_button, taiwan_button].forEach(function (item, idx) {
+//     item.addEventListener('click', function () {
+//       document.getElementById('searchmap').value = "";
+//       $("#see-all").removeClass("selected");
+//       if (this.classList.contains("selected")){
+//         $(".button-china").value = "all";
+//         $(".button-china").removeClass("selected");
+//         check_filters();
+//         $(".how-many-restaurants").css("display","none");
+//       } else {
+//         $(".button-china").value = "all";
+//         $(".button-china").removeClass("selected");
+//         $(this).addClass("selected");
+//         check_filters();
+//         this.value = "chosen";
+//       }
+//     });
+// });
 
 document.getElementById("see-all").addEventListener("click",function(){
   $(".button-china").value = "all";
   $(".button-china").removeClass("selected");
   $("#see-all").addClass("selected");
   document.getElementById('searchmap').value = "";
+  selCuisine.selectedIndex = 0;
   check_filters();
   $(".how-many-restaurants").css("display","none");
   d3.selectAll(".dot").transition().style("r",10);
@@ -330,36 +335,36 @@ function check_filters() {
       cuisine_flag = 1;
     }
 
-    // check for new restaurants
-    if (north_button.className.indexOf("selected")>0){
-      north_flag = (classes.indexOf("north")>0);
-    } else {
-      north_flag = 1;
-    }
-
-    if (south_button.className.indexOf("selected")>0){
-      south_flag = (classes.indexOf("south")>0);
-    } else {
-      south_flag = 1;
-    }
-
-    if (west_button.className.indexOf("selected")>0){
-      west_flag = (classes.indexOf("west")>0);
-    } else {
-      west_flag = 1;
-    }
-
-    if (east_button.className.indexOf("selected")>0){
-      east_flag = (classes.indexOf("east")>0);
-    } else {
-      east_flag = 1;
-    }
-
-    if (taiwan_button.className.indexOf("selected")>0){
-      taiwan_flag = (classes.indexOf("taiwan")>0);
-    } else {
-      taiwan_flag = 1;
-    }
+    // // check for new restaurants
+    // if (north_button.className.indexOf("selected")>0){
+    //   north_flag = (classes.indexOf("north")>0);
+    // } else {
+    //   north_flag = 1;
+    // }
+    //
+    // if (south_button.className.indexOf("selected")>0){
+    //   south_flag = (classes.indexOf("south")>0);
+    // } else {
+    //   south_flag = 1;
+    // }
+    //
+    // if (west_button.className.indexOf("selected")>0){
+    //   west_flag = (classes.indexOf("west")>0);
+    // } else {
+    //   west_flag = 1;
+    // }
+    //
+    // if (east_button.className.indexOf("selected")>0){
+    //   east_flag = (classes.indexOf("east")>0);
+    // } else {
+    //   east_flag = 1;
+    // }
+    //
+    // if (taiwan_button.className.indexOf("selected")>0){
+    //   taiwan_flag = (classes.indexOf("taiwan")>0);
+    // } else {
+    //   taiwan_flag = 1;
+    // }
 
     // see if the restaurant satisfies all conditions set by user
     flag_min = [cuisine_flag, north_flag, south_flag, west_flag, east_flag, taiwan_flag].min();

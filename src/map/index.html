@@ -55,16 +55,8 @@
 
         <div class="filter-container">
 
-          Filter by region:
-          <div class="buttons-group">
-            <div class="button north button-china" id="button-region-north">North</div>
-            <div class="button south button-china" id="button-region-south">South</div>
-            <div class="button west button-china" id="button-region-west">West</div>
-            <div class="button east button-china" id="button-region-east">East</div>
-            <div class="button taiwan button-china" id="button-region-taiwan">Taiwan</div>
-          </div>
+          <% var cuisine_list = ["Dongbei","Shandong","Beijing","Shaanxi","Taiwan","Shanghai","Jiangnan","Sichuan","Xinjiang","Tibet","Yunnan","Guangdong (Cantonese)","Hunan","Guangxi","Hong Kong","Toisan","Hakka","Teochew","Northern dumplings","Uighur (Xinjiang)"] %>
 
-          <% var cuisine_list = ["Jiangnan","Wuxi","Shanghai","Korean-Chinese","Beijing","Dongbei","Dumplings","Shaanxi","Uyghur","Yunnan","Sichuan","Hakka","Hunan","Guangxi","Toisanese","Cantonese","Hong Kong"] %>
           <div class="dropdown-container">
               <div class="drop-down right">
                 <div class="select-text">Filter by cuisine:</div>
@@ -109,35 +101,11 @@
                 <div class="website line"><i class="fa fa-link" aria-hidden="true"></i><a href="<%=k.Website%>" target="_blank"><%=k.Website%></a></div>
               <% } %>
               <div class="capsule-link" id="capsule<%=j%>"><i class="fa fa-hand-o-right" aria-hidden="true"></i>Read the full review</div>
-              <% if (k.Area == "West") { %>
-                <div class="region line region<%=k.Area%>"><a href="../cuisines/#Sichuan" target="_blank"><i class="fa fa-hand-o-right" aria-hidden="true"></i>Read about <%=k.Area%> China cuisine</a></div>
-              <% } else if (k.Area == "East") { %>
-                <div class="region line region<%=k.Area%>"><a href="../cuisines/#Shanghai" target="_blank"><i class="fa fa-hand-o-right" aria-hidden="true"></i>Read about <%=k.Area%> China cuisine</a></div>
-              <% } else if (k.Area == "South") { %>
-                <div class="region line region<%=k.Area%>"><a href="../cuisines/#Cantonese" target="_blank"><i class="fa fa-hand-o-right" aria-hidden="true"></i>Read about <%=k.Area%> China cuisine</a></div>
-              <% } else if (k.Area == "North") { %>
-                <div class="region line region<%=k.Area%>"><a href="../cuisines/#Northern" target="_blank"><i class="fa fa-hand-o-right" aria-hidden="true"></i>Read about <%=k.Area%> China cuisine</a></div>
-              <% } else if (k.Area == "Taiwan") { %>
-                <div class="region line region<%=k.Area%>"><a href="../cuisines/#Taiwanese" target="_blank"><i class="fa fa-hand-o-right" aria-hidden="true"></i>Read about <%=k.Area%> China cuisine</a></div>
-              <% } %>
               <% if (k.Tags){ %>
                 <% var tags_list = k.Tags.split(", ") %>
                 <div class="tags line">
                   <% tags_list.forEach(function(t,tIDX) { %>
-                    <% if (t == "group meal") { %>
-                      <div class="icon"><img src="../assets/graphics/families.png"></img></div>
-                    <% } else if (t == "spicy") { %>
-                      <div class="icon"><img src="../assets/graphics/spicy.png"></img></div>
-                    <% } else if (t == "group dinners") { %>
-                      <div class="icon"><img src="../assets/graphics/families.png"></img></div>
-                    <% } else if (t == "vegetarian-friendly") { %>
-                      <div class="icon"><img src="../assets/graphics/vegetarian.png"></img></div>
-                    <% } else if (t == "good for solo diners") { %>
-                      <div class="icon"><img src="../assets/graphics/diningsolo.png"></img></div>
-                    <% } else { %>
-                      <% console.log(t) %>
-                      <span class="tag <%=t%>"><%=t%></span>
-                    <% } %>
+                    <span class="tag <%=t%>"><%=t%></span>
                   <% }) %>
                 </div>
               <% } %>

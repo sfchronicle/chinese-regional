@@ -8,14 +8,6 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="../regions_style.css">
 
-    <!-- Leaflet -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
-
-    <!-- Mapbox GL -->
-    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.css" rel='stylesheet' />
-    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.js"></script>
-
     <%= !json.project.embedded ? t.include("partials/_paywall.html") : t.include("partials/_embedframe.html") %>
 
     <%= t.include("partials/_head_map.html") %>
@@ -26,45 +18,43 @@
 
     <%= t.include("partials/_nav_regions.html") %>
 
-    <div class="hed">Chinese Regional Cuisines</div>
-    <div class="deck">This is a deck about how we are going to tell you all about all the different cuisines in China.</div>
-
-    <div class="header-button-container">
-      <% for (var i=0; i < json.regional_chinese_descriptions.capsules.length; i++){ %>
-        <div class="header-button <%=json.regional_chinese_descriptions.capsules[i].Region%>"><a href="#<%=json.regional_chinese_descriptions.capsules[i].Cuisine%>"><%=json.regional_chinese_descriptions.capsules[i].Region%></a></div>
-      <% } %>
+    <div class="lead-image desktop">
+      <img src="../assets/graphics/CHINA_whole_region_1500px.jpg"></img>
     </div>
 
+    <div class="lead-image mobile">
+      <img src="../assets/graphics/CHINA_whole_region_480px.jpg"></img>
+    </div>
+
+    <div class="hed">Explore Chinese Regional Cuisines</div>
+    <div class="deck">This is a deck about how we are going to tell you all about all the different cuisines in China.</div>
+
     <div class="scrolly-container">
-    <% for (var i=0; i < json.regional_chinese_descriptions.capsules.length; i++){ %>
+    <% for (var i=0; i < json.regional_chinese_descriptions.regions.length; i++){ %>
 
-      <% var region = json.regional_chinese_descriptions.capsules[i]; %>
-      <div class="region-hed <%=region.Region%>" id="<%=region.Cuisine%>"><span class="region-span <%=region.Region%>"><%=region.Region%></span>
-        <div class="cuisine-span">Featured Cuisine: <%=region.Cuisine%></div>
-      </div>
+      <% var region = json.regional_chinese_descriptions.regions[i]; %>
+      <div class="region" id="<%=region.Region%>">
+        <div class="region-map"><img src="../assets/graphics/china0211_map_GR_online_TINY_NO_<%=region.Region.split(', ')[0].split('/')[0].toUpperCase().replace(/ /g,'')%>.jpg"></img></div>
+        <div class="region-hed <%=region.Region%>"><%=region.Region%></div>
+        <div class="region-desc"><%=region.Description%></div>
 
-      <div class="map-dishes-container">
-        <div class="china-map-container" id="container<%=i%>">
-          <img src="../assets/graphics/CHINA_ONLINE_MAPBOXSTYLE_<%=region.Region.toUpperCase()%>.jpg"></img>
+        <div class="visit-restaurants">
+          <div class="visit-restaurants-hed">Visit the restaurant(s):</div>
+          <% for (var j=0; j < region.restaurants.length; j++){ %>
+            <div class="visit-restaurant-restaurant"><i class="fa fa-hand-o-right" aria-hidden="true"></i><%=region.restaurants[j].Restaurant%></div>
+          <% } %>
         </div>
-        <% if (region.dishes) { %>
-        <div class="dishes-container <%=region.Region%>">
-          <div class="dishes-hed"><%=region.DishesTitle%></div>
-          <% region.dishes.forEach(function(dd,ddidx){ %>
-            <div class="dish"><div class="english"><%=dd.Dish%></div><div class="chinese"><%=dd.Chinese%></div></div>
-          <% }) %>
-        </div>
+
+        <% if (region.Author) { %>
+            <div class="dishes-container">
+              <div class="dishes-hed"><%=region.DishesTitle%></div>
+              <% region.dishes.forEach(function(dd,ddidx){ %>
+                <div class="dish"><div class="english"><%=dd.Dish%></div><div class="chinese"><%=dd.Chinese%></div></div>
+              <% }) %>
+            </div>
         <% } %>
+
       </div>
-
-      <% region.text.forEach(function(d,didx){ %>
-        <% if (d.type == "text") { %>
-          <p><%=d.value %></p>
-        <% } %>
-      <% }) %>
-      <p class="writer">- <%=region.Author%></p>
-
-
     <% } %>
     </div>
 
