@@ -150,7 +150,6 @@ var drawMap = function(currentrestaurant,data) {
       return 10;
     })
     .on('mouseover', function(d) {
-      console.log("click");
       var html_str = tooltip_function(d);
       tooltip.html(html_str);
       tooltip.style("visibility", "visible");

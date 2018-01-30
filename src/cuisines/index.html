@@ -36,7 +36,17 @@
       <div class="region" id="<%=region.Region%>">
         <div class="region-map"><img src="../assets/graphics/china0211_map_GR_online_TINY_NO_<%=region.Region.split(', ')[0].split('/')[0].toUpperCase().replace(/ /g,'')%>.jpg"></img></div>
         <div class="region-hed <%=region.Region%>"><%=region.Region%></div>
-        <div class="region-desc"><%=region.Description%></div>
+        <% if (region.text) { %>
+          <div class="region-desc long">
+            <% region.text.forEach(function(d,didx){ %>
+              <% if (d.type == "text") { %>
+                <p><%=d.value %></p>
+              <% } %>
+            <% }) %>
+          </div>
+        <% } else { %>
+          <div class="region-desc"><p><%=region.Description%></p></div>
+        <% } %>
 
         <div class="visit-restaurants">
           <div class="visit-restaurants-hed">Visit the restaurant(s):</div>
