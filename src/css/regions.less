@@ -6,6 +6,7 @@
 @import "project";
 
 @yellow: #F4E1A1;
+// @highlight: #4886AE;
 
 .lead-image {
   max-width: 1200px;
@@ -77,11 +78,25 @@
 
 .region-hed {
   font-family: @bold-graphics;
-  border-bottom: 1px solid @light-gray;
+  // border-bottom: 1px solid @light-gray;
   max-width: 600px;
   margin: auto;
   margin-top: 10px;
-  font-size: 20px;
+  font-size: 24px;
+  // color: @highlight;
+}
+.chinese-region-hed {
+  display: inline-block;
+  height: 50px;
+  padding-bottom: 5px;
+  padding-left: 20px;
+  // padding-top: 10px;
+  img {
+    height: 100%;
+  }
+}
+.region-hed, .chinese-region-hed {
+  vertical-align: middle;
 }
 .region-map {
   max-width: 200px;
@@ -119,7 +134,7 @@
   max-width: 600px;
   margin: auto;
   text-align: left;
-  padding-left: 50px;
+  padding-left: 20px;
   @media @mobile {
     font-size: 16px;
     padding-left: 50px;
@@ -185,7 +200,7 @@
 }
 
 .dishes-container {
-  max-width: 600px;
+  max-width: 450px;
   margin: 30px auto 20px auto;
   @media @mobile {
     margin: 20px;
