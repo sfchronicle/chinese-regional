@@ -38,13 +38,7 @@
             <div class="capsule-info">
               <div class="region-map"><img src="../assets/graphics/china0211_map_GR_online_TINY_NO_<%=rest_temp.Cuisine.split(', ')[0].split('/')[0].toUpperCase().replace(/ /g,'')%>.jpg"></img></div>
               <div class="cuisine line <%=k.Cuisine%>"><i class="fa fa-cutlery" aria-hidden="true"></i><%=rest_temp.Cuisine%> Cuisine</div>
-              <div class="address line"><i class="fa fa-map-marker" aria-hidden="true"></i><a href="https://www.google.com/maps/place/<%=rest_temp.Address%>"  target="_blank" class="google-link"><%=rest_temp.Address%></a></div>
-              <% if (rest_temp.Phone){ %>
-                <div class="phone line"><i class="fa fa-phone" aria-hidden="true"></i><a href="tel:<%=rest_temp.Phone%>"><%=rest_temp.Phone%></a></div>
-                <% } %>
-              <% if (rest_temp.Hours){ %>
-                <div class="hours line"><i class="fa fa-calendar" aria-hidden="true"></i><%=rest_temp.Hours%></div>
-              <% } %>
+              <div class="address line"><i class="fa fa-map-marker" aria-hidden="true"></i><%=rest_temp.City%></div>
               <% if (rest_temp["Signature dishes"]){ %>
                 <div class="website line"><i class="fa fa-star" aria-hidden="true"></i><%=rest_temp["Signature dishes"]%></div>
               <% } %>

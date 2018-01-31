@@ -51,7 +51,7 @@
         <div class="visit-restaurants">
           <div class="visit-restaurants-hed">Visit the restaurant(s):</div>
           <% for (var j=0; j < region.restaurants.length; j++){ %>
-            <div class="visit-restaurant-restaurant"><i class="fa fa-hand-o-right" aria-hidden="true"></i><%=region.restaurants[j].Restaurant%></div>
+            <a href="../map/#REST<%=region.restaurants[j].Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),'e')%>" target="_blank"><div class="visit-restaurant-restaurant"><i class="fa fa-hand-o-right" aria-hidden="true"></i><%=region.restaurants[j].Restaurant%></div></a>
           <% } %>
         </div>
 
