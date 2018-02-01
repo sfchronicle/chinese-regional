@@ -49,11 +49,9 @@
             <div class="capsule-text"><%=json.chinese_regional_caps_final.restaurants[j].Capsule%></div>
             <div class="capsule-author">— <%=json.chinese_regional_caps_final.restaurants[j].Writer%></div>
 
-            <!-- <% console.log(rest_temp.links) %> -->
             <% if (rest_temp.links) { %>
               <div class="read-links">Read more: </div>
               <% for (var rr=0; rr < rest_temp.links.length; rr++) { %>
-                <% console.log(rest_temp.links[rr]) %>
                 <a href="<%=rest_temp.links[rr].Link%>"><%=rest_temp.links[rr].Headline%></a>
               <% } %>
             <% } %>
