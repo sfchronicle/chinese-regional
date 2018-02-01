@@ -34,12 +34,27 @@
 
       <% var region = json.regional_chinese_descriptions.regions[i]; %>
       <div class="region" id="<%=region.Region%>">
-        <% console.log(region.Region.replace(/ /g,'').replace('&nbsp;','').split('(')[0].toUpperCase()) %>
-        <div class="region-map"><img src="../assets/graphics/china0211_map_GR_online_TINY_NO_<%=region.Region.replace(/ /g,'').replace('&nbsp;','').split('(')[0].toUpperCase()%>.jpg"></img></div>
-        <div class="region-hed <%=region.Region%>">
-          <div class="chinese-region-hed"><img src="../assets/characters/chinesecharacters_BRUSH_PLAIN_<%=region.Region.replace(/ /g,'').replace('&nbsp;','').split('(')[0].toUpperCase()%>.jpg"></img></div>
-          <%=region.Region%>
+
+        <div class="regional-flex">
+
+          <div class="regional-food-image">
+            <% if (region.PhotoID) { %>
+              <img src="//ww3.hdnux.com/photos/66/46/24/<%=region.PhotoID%>/9/800x0.jpg">
+            <% } else { %>
+              <div class="fake-image"></div>
+            <% } %>
+          </div>
+
+          <div class="regional-map-hed">
+            <div class="region-map"><img src="../assets/graphics/china0211_map_GR_online_TINY_NO_<%=region.Region.replace(/ /g,'').replace('&nbsp;','').split('(')[0].toUpperCase()%>.jpg"></img></div>
+            <div class="region-hed <%=region.Region%>">
+              <div class="chinese-region-hed"><img src="../assets/characters/chinesecharacters_BRUSH_PLAIN_<%=region.Region.replace(/ /g,'').replace('&nbsp;','').split('(')[0].toUpperCase()%>.jpg"></img></div>
+              <%=region.Region%>
+            </div>
+          </div>
+
         </div>
+
         <% if (region.text) { %>
           <div class="region-desc long">
             <% region.text.forEach(function(d,didx){ %>

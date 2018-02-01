@@ -8,6 +8,31 @@
 @yellow: #F4E1A1;
 // @highlight: #4886AE;
 
+.regional-flex {
+  .display-flex;
+  .flex-wrap(wrap);
+  .align-items(center);
+  border-bottom: 1px solid @light-gray;
+  max-width: 700px;
+  margin: auto;
+  .regional-food-image {
+    .flex(0 0 50%);
+    margin-right: 0;
+    img {
+      // height: 100%;
+      width: 100%;
+    }
+    .fake-image {
+      height: 200px;
+      background: @light-gray;
+    }
+  }
+  .regional-map-hed {
+    .flex( 0 0 50%);
+    margin: left: 0;
+  }
+}
+
 .lead-image {
   max-width: 1200px;
   padding-top: 37px;
@@ -79,11 +104,11 @@
 
 .region-hed {
   font-family: @bold-graphics;
-  border-bottom: 1px solid @light-gray;
   max-width: 600px;
   margin: auto;
   margin-top: 10px;
   font-size: 24px;
+  padding-bottom: 10px;
   // color: @highlight;
 }
 .chinese-region-hed {

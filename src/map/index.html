@@ -33,17 +33,24 @@
           <% var rest_temp = json.chinese_regional_caps_final.restaurants[j]; %>
           <div class="capsule" id="capsule<%=j%>">
             <div class="capsule-img"><img src="//ww3.hdnux.com/photos/66/46/24/14904267/9/1200x0.jpg"></div>
-            <div class="capsule-title"><%=rest_temp.Restaurant %>, <i><%=rest_temp.City%></i></div>
+            <div class="capsule-title"><%=rest_temp.Restaurant %>, <span class="city-text"><%=rest_temp.City%></span></div>
 
             <div class="capsule-info">
-              <div class="region-map"><img src="../assets/graphics/china0211_map_GR_online_TINY_NO_<%=rest_temp.Cuisine.split(', ')[0].split('/')[0].toUpperCase().replace(/ /g,'')%>.jpg"></img></div>
-              <div class="cuisine line <%=rest_temp.Cuisine%>"><span class="italic-span">Cuisine:</span> <%=rest_temp.Cuisine%> Cuisine</div>
-              <% if (rest_temp["SignatureDishes"]){ %>
-                <div class="website line"><span class="italic-span">Signature dishes:</span> <%=rest_temp["SignatureDishes"]%></div>
-              <% } %>
-              <% if (rest_temp.Website && rest_temp.Website != "n/a"){ %>
-                <div class="website line"><i class="fa fa-link" aria-hidden="true"></i><a href="<%=rest_temp.Website%>" target="_blank"><%=rest_temp.Website%></a></div>
-              <% } %>
+
+              <div class="region-map">
+                <img src="../assets/graphics/china0211_map_GR_online_TINY_NO_<%=rest_temp.Cuisine.split(', ')[0].split('/')[0].toUpperCase().replace(/ /g,'')%>.jpg"></img>
+              </div>
+
+              <div class="region-text">
+                <div class="cuisine line <%=rest_temp.Cuisine%>"><span class="italic-span">Cuisine:</span> <%=rest_temp.Cuisine%> Cuisine</div>
+                <% if (rest_temp["SignatureDishes"]){ %>
+                  <div class="website line"><span class="italic-span">Signature dishes:</span> <%=rest_temp["SignatureDishes"]%></div>
+                <% } %>
+                <% if (rest_temp.Website && rest_temp.Website != "n/a"){ %>
+                  <div class="website line"><i class="fa fa-link" aria-hidden="true"></i><a href="<%=rest_temp.Website%>" target="_blank"><%=rest_temp.Website%></a></div>
+                <% } %>
+              </div>
+
             </div>
 
             <div class="capsule-text"><%=json.chinese_regional_caps_final.restaurants[j].Capsule%></div>

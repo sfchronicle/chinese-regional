@@ -9,6 +9,11 @@ footer {
   background: 0;
 }
 
+.city-text {
+  font-style: italic;
+  font-family: @med-graphics;
+}
+
 .overlay-capsules {
   background: rgba(178, 178, 178, 0.4);
   width: 100%;
@@ -97,13 +102,24 @@ footer {
   }
   .capsule-info {
     padding-bottom: 20px;
-  }
-  .region-map {
-    max-width: 100px;
-    img {
-      width: 100%;
+    .display-flex;
+    .flex-wrap(wrap);
+
+    .region-map {
+      margin-top: 10px;
+      max-width: 100px;
+      .flex(0 0 33%);
+      img {
+        width: 100%;
+      }
+    }
+
+    .region-text {
+      padding: 10px 20px;
+      .flex(0 0 66%);
     }
   }
+
 }
 
 .mapboxgl-ctrl-compass {
