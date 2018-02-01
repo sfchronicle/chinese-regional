@@ -5,6 +5,33 @@
 @import "footer";
 @import "project";
 
+#how-to-button {
+  text-align: center;
+  color: @highlight;
+  cursor: pointer;
+  font-family: @body-bold;
+  .fa {
+    padding-right: 10px;
+    // margin-top: -5px;
+    font-size: 30px;
+    vertical-align: text-bottom;
+    color: @highlight;
+  }
+}
+
+#how-to-text {
+  display: none;
+  padding: 20px;
+  width: 80%;
+  font-size: 16px;
+  margin: 20px auto;
+  background: lighten(@light-gray,18%);
+
+  &.visible {
+    display: block;
+  }
+}
+
 .landingtitle {
   padding-top: 60px;
   text-align: center;
