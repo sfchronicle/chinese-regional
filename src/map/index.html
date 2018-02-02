@@ -29,6 +29,10 @@
   <%= !json.project.embedded ? "<body>" : "<body is='responsive-body'>" %>
 
     <%= t.include("partials/_nav_map.html") %>
+    <div id="mobile-top">
+      <div class="title-mobile">Find a restaurant near you</div>
+      <div class="deck-mobile"><i class="fa fa-hand-o-right" aria-hidden="true"></i>Click on the map or use the filters below.</div>
+    </div>
 
     <div class="overlay-capsules" id="overlay-capsules">
       <div class="capsules-box" id="capsules-box">
@@ -78,7 +82,7 @@
             <% if (rest_temp.links) { %>
               <div class="read-links">Read more: </div>
               <% for (var rr=0; rr < rest_temp.links.length; rr++) { %>
-                <a href="<%=rest_temp.links[rr].Link%>"><%=rest_temp.links[rr].Headline%></a>
+                <div class="read-link-link"><a href="<%=rest_temp.links[rr].Link%>"><%=rest_temp.links[rr].Headline%></a></div>
               <% } %>
             <% } %>
 

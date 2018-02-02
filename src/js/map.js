@@ -16,7 +16,7 @@ Array.prototype.min = function() {
 
 if (screen.width <= 480) {
 
-  var sf_lat_landing = 37.867064;
+  var sf_lat_landing = 37.57;
   var sf_lat = 37.667064;
   var sf_long = -122.162503;
 
@@ -152,12 +152,14 @@ var drawMap = function(currentrestaurant,data) {
     .on('mouseover', function(d) {
       var html_str = tooltip_function(d);
       tooltip.html(html_str);
-      tooltip.style("visibility", "visible");
+      if (screen.width > 480){
+        tooltip.style("visibility", "visible");
+      }
     })
     .on("mousemove", function() {
       if (screen.width <= 480) {
         return tooltip
-          .style("top",(d3.event.pageY-10)+"px")
+          .style("top",(d3.event.pageY-20)+"px")
           .style("left",40+"px");
       } else if (screen.width <= 1024) {
         console.log("mid");
@@ -166,7 +168,7 @@ var drawMap = function(currentrestaurant,data) {
           .style("left",(d3.event.pageX)+"px");
       } else {
         return tooltip
-          .style("top", (d3.event.pageY-10)+"px")
+          .style("top", (d3.event.pageY+20)+"px")
           .style("left",(d3.event.pageX-100)+"px");
       }
     })
@@ -176,7 +178,12 @@ var drawMap = function(currentrestaurant,data) {
     .on("click",function(d){
         d3.selectAll(".restaurant-element").classed("active",false);
         d3.selectAll(".dot").transition().style("r",10);
-        document.body.scrollTop = document.documentElement.scrollTop = 0;
+        if (screen.width > 480){
+          document.body.scrollTop = document.documentElement.scrollTop = 0;
+        } else {
+          console.log(document.getElementById('mobile-top').clientHeight);
+          document.body.scrollTop = document.documentElement.scrollTop = document.getElementById('mobile-top').clientHeight;
+        }
         $("#see-all").removeClass("selected");
         $(".how-many-restaurants").css("display","none");
         $(".button-china").value = "all";
