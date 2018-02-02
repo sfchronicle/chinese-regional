@@ -255,6 +255,7 @@ $("#searchmap").bind("input propertychange", function () {
 });
 
 selCuisine.addEventListener("change",function(event){
+  document.getElementById('searchmap').value = "";
   if (event.target.value != "all") {
     selCuisine.classList.add("active");
   } else {

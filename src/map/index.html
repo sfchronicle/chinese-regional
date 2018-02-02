@@ -38,7 +38,7 @@
             <div class="capsule-info">
 
               <div class="region-map">
-                <img src="../assets/graphics/china0211_map_GR_online_TINY_NO_<%=rest_temp.Cuisine.split(', ')[0].split('/')[0].toUpperCase().replace(/ /g,'')%>.jpg"></img>
+                <img src="../assets/graphics/china0211_map_GR_online_TINY_NO_<%=rest_temp.Region.replace(/ /g,'').replace('&nbsp;','').split('(')[0].toUpperCase()%>.jpg"></img>
               </div>
 
               <div class="region-text">
@@ -91,7 +91,7 @@
                 <select name="select" id="select-cuisine">
                   <option value='all' class="option">All</option>
                   <% for (var idx=0; idx < cuisine_list.length; idx++) { %>
-                  <option value='<%=cuisine_list[idx]%>' class="option"><%=cuisine_list[idx]%></option>
+                  <option value='<%=cuisine_list[idx].replace(/ /g,'')%>' class="option"><%=cuisine_list[idx]%></option>
                   <% } %>
                 </select>
               </div>
@@ -112,7 +112,7 @@
         <div class="restaurant-container">
         <% for (var j=0; j < json.chinese_regional_caps_final.restaurants.length; j++) { %>
             <% k = json.chinese_regional_caps_final.restaurants[j];%>
-            <div class="restaurant-element active <%=k.City.replace(/ /g,'')%> <%=k.Cuisine.replace('/',' ')%> <%=k.Area%> <%=k['Signature dishes']%> <%=k.Tags%> <%=k.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),'e')%>" id="REST<%=k.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),'e')%>">
+            <div class="restaurant-element active <%=k.City.replace(/ /g,'')%> <%=k.Cuisine.replace(/ /g,'').replace(',',' ')%> <%=k.Area%> <%=k['Signature dishes']%> <%=k.Tags%> <%=k.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),'e')%>" id="REST<%=k.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),'e')%>">
               <div class="restaurant line"><%=k.Restaurant%></div>
               <div class="cuisine line <%=k.Cuisine%>"><i class="fa fa-cutlery" aria-hidden="true"></i><%=k.Cuisine%> Cuisine</div>
               <div class="address line"><i class="fa fa-map-marker" aria-hidden="true"></i><a href="https://www.google.com/maps/place/<%=k.Address%>"  target="_blank" class="google-link"><%=k.Address%></a></div>

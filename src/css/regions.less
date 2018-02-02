@@ -18,8 +18,10 @@
   .regional-food-image {
     .flex(0 0 50%);
     margin-right: 0;
+    @media @mobile {
+      .flex(0 0 100%);
+    }
     img {
-      // height: 100%;
       width: 100%;
     }
     .fake-image {
@@ -30,6 +32,9 @@
   .regional-map-hed {
     .flex( 0 0 50%);
     margin: left: 0;
+    @media @mobile {
+      .flex(0 0 100%);
+    }
   }
 }
 
@@ -74,6 +79,9 @@
   font-size: 20px;
   text-align: center;
   line-height: 1.2;
+  @media @tablet {
+    padding: 0 20px;
+  }
 }
 
 .scrolly-container {
@@ -81,11 +89,14 @@
 }
 
 .writer {
-  text-align: right;
+  // text-align: right;
   font-style: italic;
-  margin-bottom: 0;
+  margin-bottom: 20px;
   font-size: 16px;
-  margin-top: -5px;
+  @media @mobile {
+    font-size: 12px;
+  }
+  // margin-top: -5px;
   // font-size: 19px;
 }
 
@@ -226,9 +237,14 @@
   opacity: 0;
 }
 
+.dishes-wrapper {
+  max-width: 600px;
+  margin: auto;
+}
+
 .dishes-container {
   max-width: 450px;
-  margin: 30px auto 20px auto;
+  margin: 30px 0 20px 0;
   @media @mobile {
     margin: 20px;
   }

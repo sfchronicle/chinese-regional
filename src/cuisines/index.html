@@ -37,20 +37,20 @@
 
         <div class="regional-flex">
 
-          <div class="regional-food-image">
-            <% if (region.PhotoID) { %>
-              <img src="//ww3.hdnux.com/photos/66/46/24/<%=region.PhotoID%>/9/800x0.jpg">
-            <% } else { %>
-              <div class="fake-image"></div>
-            <% } %>
-          </div>
-
           <div class="regional-map-hed">
             <div class="region-map"><img src="../assets/graphics/china0211_map_GR_online_TINY_NO_<%=region.Region.replace(/ /g,'').replace('&nbsp;','').split('(')[0].toUpperCase()%>.jpg"></img></div>
             <div class="region-hed <%=region.Region%>">
               <div class="chinese-region-hed"><img src="../assets/characters/chinesecharacters_BRUSH_PLAIN_<%=region.Region.replace(/ /g,'').replace('&nbsp;','').split('(')[0].toUpperCase()%>.jpg"></img></div>
               <%=region.Region%>
             </div>
+          </div>
+
+          <div class="regional-food-image">
+            <% if (region.PhotoID) { %>
+              <img src="//ww3.hdnux.com/photos/66/46/24/<%=region.PhotoID%>/9/800x0.jpg">
+            <% } else { %>
+              <div class="fake-image"></div>
+            <% } %>
           </div>
 
         </div>
@@ -63,32 +63,38 @@
               <% } %>
             <% }) %>
             <% if (region.Author) { %>
-              <p><div class="writer">By <%=region.Author%></div></p>
+              <p class="writer">By <%=region.Author%></p>
             <% } %>
           </div>
         <% } else { %>
           <div class="region-desc">
             <p><%=region.Description%></p>
             <% if (region.Author) { %>
-              <p><div class="writer">By <%=region.Author%></div></p>
+              <p class="writer">By <%=region.Author%></p>
             <% } %>
           </div>
         <% } %>
 
         <div class="visit-restaurants">
-          <div class="visit-restaurants-hed">Visit the restaurant(s):</div>
+          <% if (region.restaurants.length > 1){ %>
+            <div class="visit-restaurants-hed">Visit the restaurants:</div>
+          <% } else { %>
+            <div class="visit-restaurants-hed">Visit the restaurant:</div>
+          <% } %>
           <% for (var j=0; j < region.restaurants.length; j++){ %>
             <a href="../map/#REST<%=region.restaurants[j].Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),'e')%>" target="_blank"><div class="visit-restaurant-restaurant"><i class="fa fa-hand-o-right" aria-hidden="true"></i><%=region.restaurants[j].Restaurant%></div></a>
           <% } %>
         </div>
 
         <% if (region.DishesTitle) { %>
+          <div class="dishes-wrapper">
             <div class="dishes-container">
               <div class="dishes-hed"><%=region.DishesTitle%></div>
               <% region.dishes.forEach(function(dd,ddidx){ %>
                 <div class="dish"><div class="english"><%=dd.Dish%></div><div class="chinese"><%=dd.Chinese%></div></div>
               <% }) %>
             </div>
+          </div>
         <% } %>
 
       </div>
