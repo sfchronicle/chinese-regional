@@ -431,7 +431,7 @@ for (var tidx=0; tidx < capsules_buttons.length; tidx++){
 
 
 // resize Flickities
-$(".capsule-link").click(function(event) {
+$(".capsule-slideshow").click(function(event) {
   var carousel = document.querySelector('.'+event.target.id);
   var flkty = new Flickity( carousel );
   flkty.resize();

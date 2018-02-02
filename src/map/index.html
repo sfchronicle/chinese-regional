@@ -48,11 +48,11 @@
                     <% var imageIDs = rest_temp.slideshow[0].Images.replace(/\s+/g, '').split(','); var photog = rest_temp.slideshow[0].Photographer  %>
                     <% imageIDs.forEach(function(slide) { %>
                       <div class="carousel-cell">
-                        <img src="//ww3.hdnux.com/photos/66/46/24/<%= slide %>/5/premium_gallery_landscape.jpg">
+                        <img src="//ww1.hdnux.com/photos/66/46/24/<%= slide %>/5/premium_gallery_landscape.jpg">
                       </div>
                     <% }); %>
                   </div>
-                  <div class="byline"><%= photog %></div>
+                  <div class="capsule-byline"><%= photog %></div>
                 </div>
               <%}%>
             </div>
@@ -148,7 +148,7 @@
               <% if (k["Signature dishes"]){ %>
                 <div class="dishes line"><i class="fa fa-star" aria-hidden="true"></i><%=k["Signature dishes"]%></div>
               <% } %>
-              <div class="capsule-link" id="capsule<%=j%>"><i class="fa fa-hand-o-right" aria-hidden="true"></i>What to eat here</div>
+              <div class="capsule-link <% if (k.slideshow){%>capsule-slideshow<%}%>" id="capsule<%=j%>"><i class="fa fa-hand-o-right" aria-hidden="true"></i>What to eat here</div>
               <% if (k.Tags){ %>
                 <% var tags_list = k.Tags.split(", ") %>
                 <div class="tags line">
