@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="__sync_contentCategory" content="meterA">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+
     <link rel="stylesheet" type="text/css" href="../map_style.css">
 
     <!-- Leaflet -->
@@ -32,7 +36,23 @@
         <% for (var j=0; j < json.chinese_regional_caps_final.restaurants.length; j++) { %>
           <% var rest_temp = json.chinese_regional_caps_final.restaurants[j]; %>
           <div class="capsule" id="capsule<%=j%>">
-            <div class="capsule-img"><img src="//ww3.hdnux.com/photos/66/46/24/14904267/9/1200x0.jpg"></div>
+
+            <div class="capsule-img">
+              <% if (rest_temp.slideshow) { %>
+                <div class="capsule-img">
+                  <div class="slideshow capsule<%=j%> js-flickity">
+                    <% var imageIDs = rest_temp.slideshow[0].Images.replace(/\s+/g, '').split(','); var photog = rest_temp.slideshow[0].Photographer  %>
+                    <% imageIDs.forEach(function(slide) { %>
+                      <div class="carousel-cell">
+                        <img src="//ww3.hdnux.com/photos/66/46/24/<%= slide %>/5/premium_gallery_landscape.jpg">
+                      </div>
+                    <% }); %>
+                  </div>
+                  <div class="byline"><%= photog %></div>
+                </div>
+              <%}%>     
+            </div>
+
             <div class="capsule-title"><%=rest_temp.Restaurant %>, <span class="city-text"><%=rest_temp.City%></span></div>
 
             <div class="capsule-info">
@@ -49,8 +69,7 @@
                 <% if (rest_temp.Website && rest_temp.Website != "n/a"){ %>
                   <div class="website line"><i class="fa fa-link" aria-hidden="true"></i><a href="<%=rest_temp.Website%>" target="_blank"><%=rest_temp.Website%></a></div>
                 <% } %>
-              </div>
-
+              </div>            
             </div>
 
             <div class="capsule-text"><%=json.chinese_regional_caps_final.restaurants[j].Capsule%></div>
@@ -78,7 +97,7 @@
       <div class="sidebar">
         <div class="title">Find a restaurant near you</div>
         <%= t.include("partials/_fullwidthmap-social.html") %>
-        <div class="deck">Click on the map or use the filters below.</div>
+        <div class="deck">Click on the map or use the filter below.</div>
 
 
         <div class="filter-container">
