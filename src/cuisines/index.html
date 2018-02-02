@@ -62,9 +62,17 @@
                 <p><%=d.value %></p>
               <% } %>
             <% }) %>
+            <% if (region.Author) { %>
+              <p><div class="writer">By <%=region.Author%></div></p>
+            <% } %>
           </div>
         <% } else { %>
-          <div class="region-desc"><p><%=region.Description%></p></div>
+          <div class="region-desc">
+            <p><%=region.Description%></p>
+            <% if (region.Author) { %>
+              <p><div class="writer">By <%=region.Author%></div></p>
+            <% } %>
+          </div>
         <% } %>
 
         <div class="visit-restaurants">
