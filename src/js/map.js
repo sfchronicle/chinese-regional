@@ -428,6 +428,7 @@ $(document).ready(function(){
         $(this).removeClass("active");
       }
     });
+    $('body,html').animate({scrollTop: 0}, 800);
   }
 
 });
