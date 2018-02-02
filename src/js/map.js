@@ -36,18 +36,6 @@ if (screen.width <= 480) {
 
 function color_function(region) {
   return "#F4E1A1";
-  // return "#96BAC6";
-  // if (region == "Northern") {
-  //   return "#A8B5A5";//#FFCC32";
-  // } else if (region == "Eastern") {
-  //   return "#E68173";
-  // } else if (region == "Taiwanese") {
-  //   return "#7BC2CD";//"#EB8F6A";
-  // } else if (region == "Western") {
-  //   return "#C9CDAB";
-  // } else if (region == "Southern") {
-  //   return "#E4C268";
-  // }
 }
 
 // tooltip information
@@ -137,7 +125,7 @@ var drawMap = function(currentrestaurant,data) {
       return d.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),"e");
     })
     .attr("class",function(d) {
-      return "dot";
+      return "dot "+d.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),"e");
     })
     .style("opacity", function(d) {
       return 0.9;
@@ -149,35 +137,35 @@ var drawMap = function(currentrestaurant,data) {
     .attr("r", function(d) {
       return 10;
     })
-    .on('mouseover', function(d) {
-      var html_str = tooltip_function(d);
-      tooltip.html(html_str);
-      if (screen.width > 480){
-        tooltip.style("visibility", "visible");
-      }
-    })
-    .on("mousemove", function() {
-      if (screen.width <= 480) {
-        return tooltip
-          .style("top",(d3.event.pageY-20)+"px")
-          .style("left",40+"px");
-      } else if (screen.width <= 1024) {
-        console.log("mid");
-        return tooltip
-          .style("top", (d3.event.pageY)+"px")
-          .style("left",(d3.event.pageX)+"px");
-      } else {
-        return tooltip
-          .style("top", (d3.event.pageY+20)+"px")
-          .style("left",(d3.event.pageX-100)+"px");
-      }
-    })
-    .on("mouseout", function(){
-        return tooltip.style("visibility", "hidden");
-    })
+    // .on('mouseover', function(d) {
+    //   var html_str = tooltip_function(d);
+    //   tooltip.html(html_str);
+    //   // if (screen.width > 480){
+    //   //   tooltip.style("visibility", "visible");
+    //   // }
+    // })
+    // .on("mousemove", function() {
+    //   if (screen.width <= 480) {
+    //     return tooltip
+    //       .style("top",(d3.event.pageY-20)+"px")
+    //       .style("left",40+"px");
+    //   } else if (screen.width <= 1024) {
+    //     console.log("mid");
+    //     return tooltip
+    //       .style("top", (d3.event.pageY)+"px")
+    //       .style("left",(d3.event.pageX)+"px");
+    //   } else {
+    //     return tooltip
+    //       .style("top", (d3.event.pageY+20)+"px")
+    //       .style("left",(d3.event.pageX-100)+"px");
+    //   }
+    // })
+    // .on("mouseout", function(){
+    //     return tooltip.style("visibility", "hidden");
+    // })
     .on("click",function(d){
         d3.selectAll(".restaurant-element").classed("active",false);
-        d3.selectAll(".dot").transition().style("r",10);
+        d3.selectAll(".dot").transition().style("r",0);
         if (screen.width > 480){
           document.body.scrollTop = document.documentElement.scrollTop = 0;
         } else {
@@ -244,6 +232,7 @@ $("#searchmap").bind("input propertychange", function () {
     if (class_match > 0) {
       $(this).addClass("active");
       $("#"+this.id.split("REST")[1]).css("opacity",1);
+      d3.select("#"+this.id.split("REST")[1]).style("r",10);
       count+=1;
     } else {
       $(this).removeClass("active");
@@ -254,7 +243,11 @@ $("#searchmap").bind("input propertychange", function () {
   });
 
   if (count < 35){
-    document.getElementById("count-how-many").innerHTML = count;
+    if (count == 1){
+      document.getElementById("count-how-many").innerHTML = "is 1 result";
+    } else {
+      document.getElementById("count-how-many").innerHTML = "are "+ count+" results";
+    }
   } else {
     $(".how-many-restaurants").css("display","none");
   }
@@ -264,6 +257,7 @@ $("#searchmap").bind("input propertychange", function () {
 selCuisine.addEventListener("change",function(event){
   document.getElementById('searchmap').value = "";
   if (event.target.value != "all") {
+    $("#see-all").removeClass("selected");
     selCuisine.classList.add("active");
   } else {
     selCuisine.classList.remove("active");
@@ -306,19 +300,6 @@ document.getElementById("see-all").addEventListener("click",function(){
   $(".how-many-restaurants").css("display","none");
   d3.selectAll(".dot").transition().style("r",10);
 });
-
-  // display text for empty search results
-  // if (count > 0) {
-  //   document.getElementById('search-noresults').classList.add("hide");
-  //   document.getElementById('count-results').classList.remove("hide");
-  //   document.getElementById('count-results').innerHTML = count+" result(s)";
-  // } else {
-  //   document.getElementById('search-noresults').classList.remove("hide");
-  //   document.getElementById('count-results').classList.add("hide");
-  // }
-  // if (count == 100) {
-  //   document.getElementById('count-results').classList.add("hide");
-  // }
 
 // function to assess all the filters when user picks a new one ---------------------------------------
 
@@ -380,7 +361,7 @@ function check_filters() {
     if (flag_min == 1){
       $(this).addClass("active");
       $("#"+this.id.split("REST")[1]).css("opacity",1);
-      console.log(this.id.split("REST")[1]);
+      d3.select("#"+this.id.split("REST")[1]).style("r",10);
       count += 1;
     } else {
       $(this).removeClass("active");
@@ -392,21 +373,11 @@ function check_filters() {
   console.log("COUNT IS");
   console.log(count);
 
-  document.getElementById("count-how-many").innerHTML = count;
-  //
-  // // display text for empty search results
-  // if (count > 0) {
-  //   document.getElementById('search-noresults').classList.add("hide");
-  //   document.getElementById('count-results').classList.remove("hide");
-  //   document.getElementById('count-results').innerHTML = count+" result(s)";
-  // } else {
-  //   document.getElementById('search-noresults').classList.remove("hide");
-  //   document.getElementById('count-results').classList.add("hide");
-  // }
-  // if (count == 100) {
-  //   showall_button.classList.add("selected");
-  //   document.getElementById('count-results').classList.add("hide");
-  // }
+  if (count == 1){
+    document.getElementById("count-how-many").innerHTML = "is 1 result";
+  } else {
+    document.getElementById("count-how-many").innerHTML = "are "+ count+" results";
+  }
 
 };
 
@@ -424,7 +395,6 @@ for (var tidx=0; tidx < capsules_buttons.length; tidx++){
     document.getElementById("capsules-box").classList.add("active");
     document.getElementById("overlay-capsules").classList.add("active");
     $('body').addClass('noscroll');
-    console.log(t.target.id);
     $("#capsule"+t.target.id.split("capsule")[1]).addClass("showme");
   });
 };
@@ -435,6 +405,31 @@ $(".capsule-slideshow").click(function(event) {
   var carousel = document.querySelector('.'+event.target.id);
   var flkty = new Flickity( carousel );
   flkty.resize();
+});
+
+// see if the reader is loading a specific restaurant
+$(document).ready(function(){
+
+  if(window.location.hash) {
+
+    $(".how-many-restaurants").css("display","block");
+    document.getElementById("count-how-many").innerHTML = "is 1 result";
+    $("#see-all").removeClass("selected");
+
+    var dotID = window.location.hash.split("#REST")[1];
+    d3.selectAll(".dot").transition().style("r",0);
+    d3.select("#"+dotID).transition().style("r",20);
+
+    $(".restaurant-element").filter(function() {
+      if ("REST"+dotID == this.id) {
+        $(this).addClass("active");
+      } else {
+        // console.log(this.id);
+        $(this).removeClass("active");
+      }
+    });
+  }
+
 });
 
 
