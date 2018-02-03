@@ -134,7 +134,7 @@ var drawMap = function(currentrestaurant,data) {
       return color_function(d.ChineseRegion);
     })
     .style("stroke","#696969")
-    .attr("r", "10px")
+    .attr("r", 10)
     // .attr("cx",10)
     // .attr("cy",10)
     // .on('mouseover', function(d) {
@@ -164,12 +164,12 @@ var drawMap = function(currentrestaurant,data) {
     //     return tooltip.style("visibility", "hidden");
     // })
     .on("click",function(d){
+      if (d3.select(this).attr("r") != 20){
         d3.selectAll(".restaurant-element").classed("active",false);
-        d3.selectAll(".dot").transition().style("r","0px");
+        d3.selectAll(".dot").transition(0).attr("r",0);
         if (screen.width > 480){
           document.body.scrollTop = document.documentElement.scrollTop = 0;
         } else {
-          console.log(document.getElementById('mobile-top').clientHeight);
           document.body.scrollTop = document.documentElement.scrollTop = document.getElementById('mobile-top').clientHeight;
         }
         $("#see-all").removeClass("selected");
@@ -179,7 +179,8 @@ var drawMap = function(currentrestaurant,data) {
         document.getElementById('searchmap').value = "";
         // $('body, html').animate({scrollTop: 0});
         d3.select("#REST"+d.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),"e")).classed("active",true);
-        d3.select(this).transition().style("r","20px");
+        d3.select(this).transition(100).attr("r",20);
+      }
     })
 
 
@@ -232,7 +233,7 @@ $("#searchmap").bind("input propertychange", function () {
     if (class_match > 0) {
       $(this).addClass("active");
       $("#"+this.id.split("REST")[1]).css("opacity",1);
-      d3.select("#"+this.id.split("REST")[1]).style("r","10px");
+      d3.select("#"+this.id.split("REST")[1]).attr("r",10);
       count+=1;
     } else {
       $(this).removeClass("active");
@@ -298,7 +299,7 @@ document.getElementById("see-all").addEventListener("click",function(){
   selCuisine.selectedIndex = 0;
   check_filters();
   $(".how-many-restaurants").css("display","none");
-  d3.selectAll(".dot").transition().style("r","10px");
+  d3.selectAll(".dot").transition().attr("r",10);
 });
 
 // function to assess all the filters when user picks a new one ---------------------------------------
@@ -361,7 +362,7 @@ function check_filters() {
     if (flag_min == 1){
       $(this).addClass("active");
       $("#"+this.id.split("REST")[1]).css("opacity",1);
-      d3.select("#"+this.id.split("REST")[1]).style("r","10px");
+      d3.select("#"+this.id.split("REST")[1]).attr("r",10);
       count += 1;
     } else {
       $(this).removeClass("active");
@@ -417,9 +418,9 @@ $(document).ready(function(){
     $("#see-all").removeClass("selected");
 
     var dotID = window.location.hash.split("#REST")[1];
-    d3.selectAll(".dot").transition().style("r","0px");
+    d3.selectAll(".dot").transition().attr("r",0);
     console.log(d3.selectAll(".dot"));
-    d3.select("#"+dotID).transition().style("r","20px");
+    d3.select("#"+dotID).transition().attr("r","20");
     console.log(d3.select("#"+dotID));
 
     $(".restaurant-element").filter(function() {
