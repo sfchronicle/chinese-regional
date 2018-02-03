@@ -419,9 +419,7 @@ $(document).ready(function(){
 
     var dotID = window.location.hash.split("#REST")[1];
     d3.selectAll(".dot").transition().attr("r",0);
-    console.log(d3.selectAll(".dot"));
     d3.select("#"+dotID).transition().attr("r","20");
-    console.log(d3.select("#"+dotID));
 
     $(".restaurant-element").filter(function() {
       if ("REST"+dotID == this.id) {
