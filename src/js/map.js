@@ -134,9 +134,9 @@ var drawMap = function(currentrestaurant,data) {
       return color_function(d.ChineseRegion);
     })
     .style("stroke","#696969")
-    .attr("r", function(d) {
-      return 10;
-    })
+    .attr("r", "10px")
+    // .attr("cx",10)
+    // .attr("cy",10)
     // .on('mouseover', function(d) {
     //   var html_str = tooltip_function(d);
     //   tooltip.html(html_str);
@@ -165,7 +165,7 @@ var drawMap = function(currentrestaurant,data) {
     // })
     .on("click",function(d){
         d3.selectAll(".restaurant-element").classed("active",false);
-        d3.selectAll(".dot").transition().style("r",0);
+        d3.selectAll(".dot").transition().style("r","0px");
         if (screen.width > 480){
           document.body.scrollTop = document.documentElement.scrollTop = 0;
         } else {
@@ -179,7 +179,7 @@ var drawMap = function(currentrestaurant,data) {
         document.getElementById('searchmap').value = "";
         // $('body, html').animate({scrollTop: 0});
         d3.select("#REST"+d.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),"e")).classed("active",true);
-        d3.select(this).transition().style("r",20);
+        d3.select(this).transition().style("r","20px");
     })
 
 
@@ -232,7 +232,7 @@ $("#searchmap").bind("input propertychange", function () {
     if (class_match > 0) {
       $(this).addClass("active");
       $("#"+this.id.split("REST")[1]).css("opacity",1);
-      d3.select("#"+this.id.split("REST")[1]).style("r",10);
+      d3.select("#"+this.id.split("REST")[1]).style("r","10px");
       count+=1;
     } else {
       $(this).removeClass("active");
@@ -298,7 +298,7 @@ document.getElementById("see-all").addEventListener("click",function(){
   selCuisine.selectedIndex = 0;
   check_filters();
   $(".how-many-restaurants").css("display","none");
-  d3.selectAll(".dot").transition().style("r",10);
+  d3.selectAll(".dot").transition().style("r","10px");
 });
 
 // function to assess all the filters when user picks a new one ---------------------------------------
@@ -361,7 +361,7 @@ function check_filters() {
     if (flag_min == 1){
       $(this).addClass("active");
       $("#"+this.id.split("REST")[1]).css("opacity",1);
-      d3.select("#"+this.id.split("REST")[1]).style("r",10);
+      d3.select("#"+this.id.split("REST")[1]).style("r","10px");
       count += 1;
     } else {
       $(this).removeClass("active");
@@ -417,8 +417,10 @@ $(document).ready(function(){
     $("#see-all").removeClass("selected");
 
     var dotID = window.location.hash.split("#REST")[1];
-    d3.selectAll(".dot").transition().style("r",0);
-    d3.select("#"+dotID).transition().style("r",20);
+    d3.selectAll(".dot").transition().style("r","0px");
+    console.log(d3.selectAll(".dot"));
+    d3.select("#"+dotID).transition().style("r","20px");
+    console.log(d3.select("#"+dotID));
 
     $(".restaurant-element").filter(function() {
       if ("REST"+dotID == this.id) {
@@ -432,86 +434,3 @@ $(document).ready(function(){
   }
 
 });
-
-
-// var currentrestaurant, prevrestaurant = "", currentLat, currentLon;
-// var panels = document.getElementsByClassName("panel");
-// var dots = document.getElementsByClassName("dot");
-// console.log(dots);
-//
-// var offset_top = $(".panel-container").offset().top;
-//
-// // set up scrolling timeout
-// var scrollTimer = null;
-// $(window).scroll(function () {
-//   // handleScroll();
-//   if (scrollTimer) {
-//       clearTimeout(scrollTimer);   // clear any previous pending timer
-//   }
-//   scrollTimer = setTimeout(handleScroll, timeTimeout);   // set new timer
-//   tooltip.style("visibility", "hidden");
-// });
-//
-// // for (var dotIDX=0; dotIDX<dots.length; dotIDX++){
-// //   dots[dotIDX].addEventListener("click", function(e) {
-// //     console.log("real click");
-// //     console.log(dots[dotIDX].id);
-// //     $('html, body').animate({
-// //         scrollTop: $("#panel"+dots[dotIDX].id).offset().top
-// //     }, 2000);
-// //   });
-// // };
-//
-// // function for updating with scroll
-// function handleScroll() {
-//
-//     scrollTimer = null;
-//
-//     // figure out where the top of the page is, and also the top and beginning of the map content
-//     var pos = document.body.scrollTop || document.documentElement.scrollTop;
-//     // var pos = $(this).scrollTop();
-//     var pos_map_top = $('#bottom-of-top').offset().top-start_top;
-//     var pos_map_bottom = $('#top-of-bottom').offset().top;
-//
-//     // show the landing of the page if the reader is at the top
-//     if (pos < pos_map_top){
-//
-//       map.setView(new L.LatLng(sf_lat,sf_long),zoom_deg);
-//       // map.panTo(new L.LatLng(sf_lat, sf_long));
-//
-//       prevrestaurant = "";
-//       $(".dot").css("opacity",0.9);
-//
-//     // show the appropriate dots if the reader is in the middle of the page
-//     } else if (pos < pos_map_bottom){
-//
-//       currentrestaurant = "";
-//       for (var panelIDX = 0; panelIDX < panels.length; panelIDX++){//; panelIDX++){
-//         if (panelIDX == 0) {
-//           var pos_map = $('#'+panels[panelIDX].id).offset().top - pos - start_top;//offset_top;
-//         } else {
-//           var pos_map = $('#'+panels[panelIDX].id).offset().top - pos - start_top*1.5;
-//         }
-//
-//         if (pos_map < 0) {
-//           currentrestaurant = panels[panelIDX].id;
-//         }
-//
-//         restaurant_info.forEach(function(map,mapIDX){
-//           if (currentrestaurant == "panel"+map.Restaurant.toLowerCase().replace(/ /g,'')) {
-//             currentLat = +map.Lat;
-//             currentLon = +map.Lng;
-//           }
-//         });
-//       };
-//       if (currentrestaurant != prevrestaurant){
-//         console.log("panning");
-//         map.setView(new L.LatLng(currentLat-lat_offset,currentLon-lon_offset),zoom_deg);
-//         $(".dot").css("opacity",0.2);
-//         console.log(currentrestaurant.substring(5));
-//         $("#"+currentrestaurant.substring(5)).css("opacity",1);
-//       }
-//       prevrestaurant = currentrestaurant;
-//     }
-//
-// }
