@@ -166,7 +166,7 @@ var drawMap = function(currentrestaurant,data) {
     .on("click",function(d){
       if (d3.select(this).attr("r") != 20){
         d3.selectAll(".restaurant-element").classed("active",false);
-        d3.selectAll(".dot").transition(0).attr("r",0);
+        d3.selectAll(".dot").transition(0).attr("r",10);
         if (screen.width > 480){
           document.body.scrollTop = document.documentElement.scrollTop = 0;
         } else {
@@ -418,8 +418,8 @@ $(document).ready(function(){
     $("#see-all").removeClass("selected");
 
     var dotID = window.location.hash.split("#REST")[1];
-    d3.selectAll(".dot").transition().attr("r",0);
-    d3.select("#"+dotID).transition().attr("r","20");
+    d3.selectAll(".dot").transition().attr("r",10);
+    d3.select("#"+dotID).transition().attr("r",20);
 
     $(".restaurant-element").filter(function() {
       if ("REST"+dotID == this.id) {
@@ -429,7 +429,9 @@ $(document).ready(function(){
         $(this).removeClass("active");
       }
     });
-    $('body,html').animate({scrollTop: 0}, 800);
+    if (screen.width > 480){
+      $('body,html').animate({scrollTop: 0}, 800);
+    }
   }
 
 });
