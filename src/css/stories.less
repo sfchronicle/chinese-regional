@@ -13,7 +13,6 @@
 }
 
 .deck {
-  // font-family: @med-graphics;
   font-family: @body;
   max-width: 600px;
   margin: auto;
@@ -26,23 +25,35 @@
 .existing-container {
   .display-flex;
   .flex-wrap(wrap);
-  max-width: 1000px;
+  max-width: 1100px;
   margin: auto;
+
   .feature {
-    .flex(0 0 45%);
+    .flex(0 0 30%);
     margin: auto;
     margin-top: 0;
     margin-bottom: 40px;
     border: 1px solid @light-gray;
     padding: 10px;
     padding-bottom: 20px;
-    background: lighten(@light-gray,18%);
-    img {
-      max-width: 100%;
-      margin-bottom: 15px;
-    }
+    background: #efefef;
     font-family: @bold-graphics;
     line-height: 1.2;
-    font-size: 17px;
+    font-size: 16px;
+    
+    img {
+      width: 100%;
+      margin-bottom:5px;
+    }
+
+    a{
+      text-decoration:none;
+    }
+
+    @media @mobile{
+      .flex(0 0 48%);
+      font-size:14px;
+    }
+
   }
 }
