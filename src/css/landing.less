@@ -9,10 +9,10 @@
   text-align: center;
   color: @highlight;
   cursor: pointer;
+  font-size:18px;
   font-family: @body-bold;
   .fa {
     padding-right: 10px;
-    // margin-top: -5px;
     font-size: 30px;
     vertical-align: text-bottom;
     color: @highlight;
@@ -22,7 +22,7 @@
 #how-to-text {
   display: none;
   padding: 20px;
-  width: 80%;
+  max-width:850px;
   font-size: 16px;
   margin: 20px auto;
   background: lighten(@light-gray,18%);
@@ -30,15 +30,39 @@
   &.visible {
     display: block;
   }
+
+  p{
+    padding:0;
+  }
 }
 
+.overhead{
+  max-width:300px;
+  margin:50px auto 0;
+
+  img{
+    width:100%;
+  }
+
+  @media @mobile{
+    max-width:250px;
+  }
+}
+.title-container{
+  margin-top:50px;
+}
+.title.long{
+  margin-top:0;
+  margin-bottom: 0;
+
+  @media @mobile{
+    line-height:1;
+  }
+}
 .landingtitle {
-  padding-top: 60px;
   text-align: center;
 
   @media @mobile {
-    padding: 20px;
-    padding-top: 50px;
     font-size: 30px;
     line-height: 1.3;
   }
@@ -47,8 +71,7 @@
 .linkbox {
   width: 100%;
   max-width: 750px;
-  margin: 0 auto;
-  padding: 30px 0;
+  padding: 10px 0;
   border-top: 1px solid #f0f0f0;
   @media @tablet {
     width: 95%;
@@ -69,15 +92,24 @@
   &:hover {
     opacity: 0.95;
   }
+  a :hover{
+    color:white;
+  }
 }
 
 .link-container {
+
   .landing-link {
     font-size: 18px;
     text-align: center;
+
     .fa {
       font-size: 16px;
       padding-right: 10px;
+    }
+
+    @media @mobile{
+      font-size:14px;
     }
   }
 }
@@ -85,11 +117,11 @@
 .linkbox-container {
   .display-flex;
   .flex-wrap(wrap);
+
   .linkbox {
-    .flex(0 0 33%);
-    // height: 500px;
+    .flex(1 0 33%);
     @media @mobile {
-      .flex(0 0 90%);
+      .flex(1 0 90%);
     }
   }
 }
@@ -104,8 +136,22 @@
   background-color: rgba(0,0,0,0.6);
 }
 
+.aboutlanding{
+  p{
+  max-width:650px;
+  font-size:18px;
+  text-align:center;
+
+  @media @mobile{
+    font-size: 17px;
+    padding: 10px 10px 0;
+    text-align:left;
+  }
+  }
+}
 .linkdesc {
-  font-family: @body-bold;
+  font-family: @block-graphics;
+  text-transform:uppercase;
   text-align: center;
   color: white;
   font-size: 28px;
@@ -120,6 +166,12 @@
   right: 0;
 }
 
+.subdesc{
+  text-transform: initial;
+  font-family: @body;
+  font-size: 20px;
+}
+
 // .linkdesc {
 //   font-family: @body-bold;
 //   line-height: 1.2;
@@ -127,7 +179,6 @@
 // }
 
 .linkimg:hover {
-  // text-shadow: 1px 1px black;
 
   &#r {
     text-shadow: none;
