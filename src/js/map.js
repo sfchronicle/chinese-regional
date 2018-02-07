@@ -50,7 +50,7 @@ if (screen.width <= 480){
     minZoom: min_zoom_deg,
     maxZoom: max_zoom_deg,
     zoomControl: false,
-    scrollWheelZoom: false,
+    scrollWheelZoom: true,
     attributionControl: false
   }).setView([sf_lat_landing,sf_long], zoom_deg);
 } else {
@@ -58,7 +58,7 @@ if (screen.width <= 480){
     minZoom: min_zoom_deg,
     maxZoom: max_zoom_deg,
     zoomControl: false,
-    scrollWheelZoom: false,
+    scrollWheelZoom: true,
     attributionControl: false
   }).setView([sf_lat,sf_long], zoom_deg);
 }
