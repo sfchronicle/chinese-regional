@@ -376,6 +376,26 @@ circle {
       }
       // margin-bottom: 5px;
     }
+    &.highlighted {
+      margin-top: 20px;
+      padding: 20px;
+      background: lighten(@highlight,30%);
+      color: #333;
+      .restaurant {
+        border-bottom: 1px solid @dark-gray;
+      }
+      .capsule-link-highlight {
+        font-family: @bold-graphics;
+        color: darken(@highlight,10%);
+        cursor: pointer;
+        // font-style: italic;
+        font-size: 14px;
+        // padding-top: 5px;
+        margin-bottom: 10px;
+        border-bottom: 2px solid darken(@highlight,10%);
+        width: 143px;
+      }
+    }
   }
 }
 

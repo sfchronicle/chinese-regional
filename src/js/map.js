@@ -38,6 +38,36 @@ function color_function(region) {
   return "#F4E1A1";
 }
 
+// put info for highlighted brewery at the top
+function fill_info(data){
+  // console.log(data);
+  var html = "<div class='restaurant-element active highlighted'><div class='restaurant line'>"+data.Restaurant+"</div><div class='cuisine line'><i class='fa fa-cutlery' aria-hidden='true'></i>"+data.Cuisine+"</div><div class='address line'><i class='fa fa-map-marker' aria-hidden='true'></i>"+data.Address+"</div>";
+  if (data.Phone){
+    html += "<div class='phone line'><i class='fa fa-phone' aria-hidden='true'></i>"+data.Phone+"</div>";
+  }
+  if (data.Hours){
+    html += "<div class='hours line'><i class='fa fa-calendar' aria-hidden='true'></i>"+data.Hours+"</div>";
+  }
+  if (data["Signature Dishes"]){
+    html += "<div class='dishes line'><i class='fa fa-star' aria-hidden='true'></i>"+data["Signature Dishes"]+"</div>";
+  }
+  if (data.slideshow){
+    html += "<div class='capsule-link-highlight capsule-slideshow' id='highlightcapsule"+data.Key+"'><i class='fa fa-hand-o-right' aria-hidden='true'></i>What to eat here</div>";
+  } else {
+    html += "<div class='capsule-link-highlight' id='highlightcapsule"+data.Key+"'><i class='fa fa-hand-o-right' aria-hidden='true'></i>What to eat here</div>";
+  }
+  if (data.Tags){
+    html += "<div class='tags line'>"
+    var tags_list = data.Tags.split(", ");
+    tags_list.forEach(function(t,tIDX){
+      html += "<span class='tag'><i class='fa fa-tag' aria-hidden='true'></i>"+t+"</span>"
+    });
+    html += "</div>"
+  }
+  html += "</div></div>";
+  return html;
+}
+
 // tooltip information
 function tooltip_function (d) {
   var html_str = "<div class='bold'>"+d.Restaurant+"</div><div class='address'>"+d.Address+"</div><div>Region in China: "+d.ChineseRegion+"</div><div>Cuisine: "+d.Cuisine+"</div>";
@@ -97,6 +127,10 @@ restaurant_info.forEach(function(d,idx) {
   }
 });
 
+capsule_info.forEach(function(d,idx){
+  d.Key = d.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),"e");
+});
+
 var svg = d3.select("#map-leaflet").select("svg"),
 g = svg.append("g");
 
@@ -135,38 +169,25 @@ var drawMap = function(currentrestaurant,data) {
     })
     .style("stroke","#696969")
     .attr("r", 10)
-    // .attr("cx",10)
-    // .attr("cy",10)
-    // .on('mouseover', function(d) {
-    //   var html_str = tooltip_function(d);
-    //   tooltip.html(html_str);
-    //   // if (screen.width > 480){
-    //   //   tooltip.style("visibility", "visible");
-    //   // }
-    // })
-    // .on("mousemove", function() {
-    //   if (screen.width <= 480) {
-    //     return tooltip
-    //       .style("top",(d3.event.pageY-20)+"px")
-    //       .style("left",40+"px");
-    //   } else if (screen.width <= 1024) {
-    //     console.log("mid");
-    //     return tooltip
-    //       .style("top", (d3.event.pageY)+"px")
-    //       .style("left",(d3.event.pageX)+"px");
-    //   } else {
-    //     return tooltip
-    //       .style("top", (d3.event.pageY+20)+"px")
-    //       .style("left",(d3.event.pageX-100)+"px");
-    //   }
-    // })
-    // .on("mouseout", function(){
-    //     return tooltip.style("visibility", "hidden");
-    // })
     .on("click",function(d){
       if (d3.select(this).attr("r") != 20){
-        d3.selectAll(".restaurant-element").classed("active",false);
+        // d3.selectAll(".restaurant-element").classed("active",false);
+        // document.querySelector("#highlight-restaurant").innerHTML = fill_info(d);
         d3.selectAll(".dot").transition(0).attr("r",10);
+        var restIDX;
+        for (var idx=0; idx<capsule_info.length; idx++){
+          restIDX = idx;
+          if (capsule_info[idx].Key == d.Key){
+            document.querySelector("#highlight-restaurant").innerHTML = fill_info(capsule_info[idx]);
+            var capsuleIDX = idx;
+            document.getElementById("highlightcapsule"+capsule_info[idx].Key).addEventListener("click",function(t) {
+              document.getElementById("capsules-box").classList.add("active");
+              document.getElementById("overlay-capsules").classList.add("active");
+              $('body').addClass('noscroll');
+              $("#capsule"+capsuleIDX).addClass("showme");
+            });
+          }
+        }
         if (screen.width > 480){
           document.body.scrollTop = document.documentElement.scrollTop = 0;
         } else {
@@ -176,9 +197,9 @@ var drawMap = function(currentrestaurant,data) {
         $(".how-many-restaurants").css("display","none");
         $(".button-china").value = "all";
         $(".button-china").removeClass("selected");
-        document.getElementById('searchmap').value = "";
+        // document.getElementById('searchmap').value = "";
         // $('body, html').animate({scrollTop: 0});
-        d3.select("#REST"+d.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),"e")).classed("active",true);
+        // d3.select("#REST"+d.Key).classed("active",true);
         d3.select(this).transition(100).attr("r",20);
       }
     })
@@ -212,6 +233,7 @@ $("#searchmap").bind("input propertychange", function () {
   count = 0;
   $(".how-many-restaurants").css("display","block");
   $("#see-all").removeClass("selected");
+  document.querySelector("#highlight-restaurant").innerHTML = "";
 
   var button_list = document.getElementsByClassName("button");
   for (var i=0; i<button_list.length; i++) {
@@ -256,6 +278,7 @@ $("#searchmap").bind("input propertychange", function () {
 });
 
 selCuisine.addEventListener("change",function(event){
+  document.querySelector("#highlight-restaurant").innerHTML = "";
   document.getElementById('searchmap').value = "";
   if (event.target.value != "all") {
     $("#see-all").removeClass("selected");
@@ -266,32 +289,8 @@ selCuisine.addEventListener("change",function(event){
   check_filters();
 });
 
-// var north_button = document.getElementById('button-region-north');
-// var south_button = document.getElementById('button-region-south');
-// var west_button = document.getElementById('button-region-west');
-// var east_button = document.getElementById('button-region-east');
-// var taiwan_button = document.getElementById('button-region-taiwan');
-
-// [north_button, south_button, west_button, east_button, taiwan_button].forEach(function (item, idx) {
-//     item.addEventListener('click', function () {
-//       document.getElementById('searchmap').value = "";
-//       $("#see-all").removeClass("selected");
-//       if (this.classList.contains("selected")){
-//         $(".button-china").value = "all";
-//         $(".button-china").removeClass("selected");
-//         check_filters();
-//         $(".how-many-restaurants").css("display","none");
-//       } else {
-//         $(".button-china").value = "all";
-//         $(".button-china").removeClass("selected");
-//         $(this).addClass("selected");
-//         check_filters();
-//         this.value = "chosen";
-//       }
-//     });
-// });
-
 document.getElementById("see-all").addEventListener("click",function(){
+  document.querySelector("#highlight-restaurant").innerHTML = "";
   $(".button-china").value = "all";
   $(".button-china").removeClass("selected");
   $("#see-all").addClass("selected");
@@ -323,37 +322,6 @@ function check_filters() {
     } else {
       cuisine_flag = 1;
     }
-
-    // // check for new restaurants
-    // if (north_button.className.indexOf("selected")>0){
-    //   north_flag = (classes.indexOf("north")>0);
-    // } else {
-    //   north_flag = 1;
-    // }
-    //
-    // if (south_button.className.indexOf("selected")>0){
-    //   south_flag = (classes.indexOf("south")>0);
-    // } else {
-    //   south_flag = 1;
-    // }
-    //
-    // if (west_button.className.indexOf("selected")>0){
-    //   west_flag = (classes.indexOf("west")>0);
-    // } else {
-    //   west_flag = 1;
-    // }
-    //
-    // if (east_button.className.indexOf("selected")>0){
-    //   east_flag = (classes.indexOf("east")>0);
-    // } else {
-    //   east_flag = 1;
-    // }
-    //
-    // if (taiwan_button.className.indexOf("selected")>0){
-    //   taiwan_flag = (classes.indexOf("taiwan")>0);
-    // } else {
-    //   taiwan_flag = 1;
-    // }
 
     // see if the restaurant satisfies all conditions set by user
     flag_min = [cuisine_flag, north_flag, south_flag, west_flag, east_flag, taiwan_flag].min();
@@ -400,7 +368,6 @@ for (var tidx=0; tidx < capsules_buttons.length; tidx++){
   });
 };
 
-
 // resize Flickities
 $(".capsule-slideshow").click(function(event) {
   var carousel = document.querySelector('.'+event.target.id);
@@ -413,22 +380,35 @@ $(document).ready(function(){
 
   if(window.location.hash) {
 
-    $(".how-many-restaurants").css("display","block");
-    document.getElementById("count-how-many").innerHTML = "is 1 result";
+    // $(".how-many-restaurants").css("display","block");
+    // document.getElementById("count-how-many").innerHTML = "is 1 result";
     $("#see-all").removeClass("selected");
 
     var dotID = window.location.hash.split("#REST")[1];
     d3.selectAll(".dot").transition(0).attr("r",10);
     d3.select("#"+dotID).transition(300).attr("r",20);
 
-    $(".restaurant-element").filter(function() {
-      if ("REST"+dotID == this.id) {
-        $(this).addClass("active");
-      } else {
-        // console.log(this.id);
-        $(this).removeClass("active");
+    for (var cdx=0; cdx<capsule_info.length; cdx++){
+      if (capsule_info[cdx].Key == dotID){
+        document.querySelector("#highlight-restaurant").innerHTML = fill_info(capsule_info[cdx]);
+        var capIDX = cdx;
+        document.getElementById("highlightcapsule"+capsule_info[cdx].Key).addEventListener("click",function(t) {
+          document.getElementById("capsules-box").classList.add("active");
+          document.getElementById("overlay-capsules").classList.add("active");
+          $('body').addClass('noscroll');
+          $("#capsule"+capIDX).addClass("showme");
+        });
       }
-    });
+    }
+
+    // $(".restaurant-element").filter(function() {
+    //   if ("REST"+dotID == this.id) {
+    //     $(this).addClass("active");
+    //   } else {
+    //     // console.log(this.id);
+    //     $(this).removeClass("active");
+    //   }
+    // });
     if (screen.width > 480){
       $('body,html').animate({scrollTop: 0}, 800);
     }

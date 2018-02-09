@@ -133,11 +133,12 @@
 
         <% var count = 0; %>
         <div class="restaurant-container">
+        <div id="highlight-restaurant"></div>
         <% for (var j=0; j < json.chinese_regional_caps_final.restaurants.length; j++) { %>
             <% k = json.chinese_regional_caps_final.restaurants[j];%>
             <div class="restaurant-element active <%=k.City.replace(/ /g,'')%> <%=k.Cuisine.replace(/ /g,'').replace(',',' ')%> <%=k.Area%> <%=k['Signature dishes']%> <%=k.Tags%> <%=k.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),'e')%>" id="REST<%=k.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),'e')%>">
               <div class="restaurant line"><%=k.Restaurant%></div>
-              <div class="cuisine line <%=k.Cuisine%>"><i class="fa fa-cutlery" aria-hidden="true"></i><%=k.Cuisine%> Cuisine</div>
+              <div class="cuisine line <%=k.Cuisine%>"><i class="fa fa-cutlery" aria-hidden="true"></i>Cuisine: <%=k.Cuisine%></div>
               <div class="address line"><i class="fa fa-map-marker" aria-hidden="true"></i><a href="https://www.google.com/maps/place/<%=k.Address%>"  target="_blank" class="google-link"><%=k.Address%></a></div>
               <% if (k.Phone){ %>
                 <div class="phone line"><i class="fa fa-phone" aria-hidden="true"></i><a href="tel:<%=k.Phone%>"><%=k.Phone%></a></div>
@@ -170,6 +171,7 @@
 
     <script>
       var restaurant_info= <%= JSON.stringify(json.ListForMap) %>
+      var capsule_info= <%= JSON.stringify(json.chinese_regional_caps_final.restaurants) %>
     </script>
 
     <script src="../map_app.js?5" async></script>
