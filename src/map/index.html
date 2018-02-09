@@ -80,7 +80,7 @@
             <div class="capsule-author">By <%=json.chinese_regional_caps_final.restaurants[j].Writer%></div>
 
             <% if (rest_temp.links) { %>
-              <div class="read-links">Read more: </div>
+              <div class="read-links">Read more</div>
               <% for (var rr=0; rr < rest_temp.links.length; rr++) { %>
                 <div class="read-link-link"><a href="<%=rest_temp.links[rr].Link%>" target="_blank"><%=rest_temp.links[rr].Headline%></a></div>
               <% } %>
@@ -149,7 +149,7 @@
               <% if (k["Signature dishes"]){ %>
                 <div class="dishes line"><i class="fa fa-star" aria-hidden="true"></i><%=k["Signature dishes"]%></div>
               <% } %>
-              <div class="capsule-link <% if (k.slideshow){%>capsule-slideshow<%}%>" id="capsule<%=j%>"><i class="fa fa-hand-o-right" aria-hidden="true"></i>What to eat here</div>
+              <div class="capsule-link <% if (k.slideshow){%>capsule-slideshow<%}%>" id="capsule<%=j%>"><i class="fa fa-hand-o-right" aria-hidden="true"></i>Read more about this restaurant</div>
               <% if (k.Tags){ %>
                 <% var tags_list = k.Tags.split(", ") %>
                 <div class="tags line">

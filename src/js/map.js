@@ -54,7 +54,7 @@ function fill_info(data){
   if (data.slideshow){
     html += "<div class='capsule-link-highlight capsule-slideshow' id='highlightcapsule"+data.Key+"'><i class='fa fa-hand-o-right' aria-hidden='true'></i>What to eat here</div>";
   } else {
-    html += "<div class='capsule-link-highlight' id='highlightcapsule"+data.Key+"'><i class='fa fa-hand-o-right' aria-hidden='true'></i>What to eat here</div>";
+    html += "<div class='capsule-link-highlight' id='highlightcapsule"+data.Key+"'><i class='fa fa-hand-o-right' aria-hidden='true'></i>Read more about this restaurant</div>";
   }
   if (data.Tags){
     html += "<div class='tags line'>"
