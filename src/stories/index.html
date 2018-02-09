@@ -8,14 +8,6 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="../stories_style.css">
 
-    <!-- Leaflet -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
-
-    <!-- Mapbox GL -->
-    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.css" rel='stylesheet' />
-    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.js"></script>
-
     <%= !json.project.embedded ? t.include("partials/_paywall.html") : t.include("partials/_embedframe.html") %>
 
     <%= t.include("partials/_head_stories.html") %>
@@ -29,21 +21,22 @@
     <div class="title">The Stories</div>
     <div class="deck">Learn more about Chinese cuisines and restaurants in the Bay Area.</div>
 
-    <!-- <div class="features-container">
+    <div class="features-container">
     <% json.chron_chinese_food_stories["new-features"].forEach(function(story){ %>
-      <div class="feature">
-        <%=story.Headline %>
+      <div class="main-feature">
+        <a href="<%=story.Link%>"><img src="//ww3.hdnux.com/photos/66/46/24/6372539/3/premium_landscape.jpg">
+          <!-- <img src="//ww3.hdnux.com/photos/66/46/24/<%=story.PhotoID%>/9/premium_landscape.jpg"> -->
+          <%=story.Headline %>
+        </a>
       </div>
     <% }); %>
-    </div> -->
+    </div>
 
     <div class="existing-container">
     <% json.chron_chinese_food_stories["existing-features"].forEach(function(story){ %>
       <div class="feature">
         <a href="<%=story.Link%>">
-          <% if (story.PhotoID){ %>
           <img src="//ww3.hdnux.com/photos/66/46/24/<%=story.PhotoID%>/9/premium_landscape.jpg">
-          <% } %>
           <%=story.Headline %>
         </a>
       </div>
