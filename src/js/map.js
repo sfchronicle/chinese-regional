@@ -207,7 +207,7 @@ var selCuisine = document.getElementById('select-cuisine');
 // search bar code -------------------------------------------------------------
 // searchbar code
 $("#searchmap").bind("input propertychange", function () {
-  var filter = $(this).val().toLowerCase().replace(/ /g,'').replace(/'/g,'').replace(new RegExp(/[èéêë]/g),"e");
+  var filter = $(this).val().toLowerCase().replace(/ /g,'').replace(/'/g,'').replace(new RegExp(/[èéêë]/g),"e").replace('&','');
   var class_match = 0;
   count = 0;
   $(".how-many-restaurants").css("display","block");
@@ -418,8 +418,8 @@ $(document).ready(function(){
     $("#see-all").removeClass("selected");
 
     var dotID = window.location.hash.split("#REST")[1];
-    d3.selectAll(".dot").transition().attr("r",10);
-    d3.select("#"+dotID).transition().attr("r",20);
+    d3.selectAll(".dot").transition(0).attr("r",10);
+    d3.select("#"+dotID).transition(300).attr("r",20);
 
     $(".restaurant-element").filter(function() {
       if ("REST"+dotID == this.id) {
