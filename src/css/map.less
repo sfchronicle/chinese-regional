@@ -9,6 +9,12 @@ footer {
   background: 0;
 }
 
+.dot {
+  &.hide {
+    display: none;
+  }
+}
+
 .read-links {
   font-family: @block-graphics;
   padding-top: 30px;
@@ -341,7 +347,7 @@ circle {
       // padding-top: 5px;
       margin-bottom: 10px;
       border-bottom: 2px solid @highlight;
-      width: 143px;
+      width: 245px;
     }
     // .read-link {
     //   display: inline-block;
@@ -379,7 +385,7 @@ circle {
     &.highlighted {
       margin-top: 20px;
       padding: 20px;
-      background: lighten(@highlight,30%);
+      background: @light-blue;
       color: #333;
       .restaurant {
         border-bottom: 1px solid @dark-gray;
@@ -393,7 +399,7 @@ circle {
         // padding-top: 5px;
         margin-bottom: 10px;
         border-bottom: 2px solid darken(@highlight,10%);
-        width: 143px;
+        width: 245px;
       }
     }
   }

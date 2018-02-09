@@ -106,7 +106,7 @@
 
         <div class="filter-container">
 
-          <% var cuisine_list = ["Dongbei","Shandong","Beijing","Shaanxi","Taiwan","Shanghai","Jiangnan","Sichuan","Xinjiang","Tibet","Yunnan","Guangdong (Cantonese)","Hunan","Guangxi","Hong Kong","Toisan","Hakka","Teochew","Northern dumplings","Uighur (Xinjiang)"] %>
+          <% var cuisine_list = ["Beijing","Dongbei","Guangdong (Cantonese)","Guangxi","Hakka","Hong Kong","Hunan","Jiangnan","Northern dumplings","Shaanxi","Shandong","Shanghai","Sichuan","Taiwan","Teochew","Tibet","Toisan","Xinjiang","Yunnan"] %>
 
           <div class="dropdown-container">
               <div class="drop-down right">
@@ -122,7 +122,7 @@
 
           <div class="search-container map">
             <span class="search"><i class="fa fa-search" aria-hidden="true"></i>  </span>
-            <input class="input" id="searchmap" type="text" placeholder='Try "vegetarian", "spicy", or "Fremont" ...'></input>
+            <input class="input" id="searchmap" type="text" placeholder='Try "vegetarian", "spicy", or "Fremont" . . . '></input>
           </div>
 
           <div class="see-all button selected" id="see-all">See all</div>
@@ -133,7 +133,6 @@
 
         <% var count = 0; %>
         <div class="restaurant-container">
-        <div id="highlight-restaurant"></div>
         <% for (var j=0; j < json.chinese_regional_caps_final.restaurants.length; j++) { %>
             <% k = json.chinese_regional_caps_final.restaurants[j];%>
             <div class="restaurant-element active <%=k.City.replace(/ /g,'')%> <%=k.Cuisine.replace(/ /g,'').replace(',',' ')%> <%=k.Area%> <%=k['Signature dishes']%> <%=k.Tags%> <%=k.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),'e')%>" id="REST<%=k.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),'e')%>">
