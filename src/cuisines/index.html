@@ -55,25 +55,13 @@
 
         </div>
 
-        <% if (region.text) { %>
-          <div class="region-desc long">
-            <% region.text.forEach(function(d,didx){ %>
-              <% if (d.type == "text") { %>
-                <p><%=d.value %></p>
-              <% } %>
-            <% }) %>
-            <% if (region.Author) { %>
-              <span class="writer">By <%=region.Author%></span>
-            <% } %>
-          </div>
-        <% } else { %>
-          <div class="region-desc">
+        <div class="region-desc">
+          <% if (region.Author) { %>
+            <p><%=region.Description%><span class="writer">By <%=region.Author%></span></p>
+          <% } else { %>
             <p><%=region.Description%></p>
-            <% if (region.Author) { %>
-              <span class="writer">By <%=region.Author%></span>
-            <% } %>
-          </div>
-        <% } %>
+          <% } %>
+        </div>
 
         <div class="visit-restaurants">
           <% if (region.restaurants.length > 1){ %>
