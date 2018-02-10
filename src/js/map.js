@@ -362,9 +362,14 @@ $(document).ready(function(){
     d3.select("#"+dotID).transition(300).attr("r",20);
     d3.select("#"+dotID).style("fill","#4884A1");
 
-    $("#REST"+dotID).addClass("highlighted");
-
-    $('html, body').animate({scrollTop: $("#REST"+dotID).offset().top - 40}, 600);
+    if (screen.width <= 480){
+      d3.selectAll(".restaurant-element").classed("active",false);
+      $("#REST"+dotID).addClass("active");
+      $('html, body').animate({scrollTop: $("#map-leaflet").offset().top}, 200);
+    } else {
+      $("#REST"+dotID).addClass("highlighted");
+      $('html, body').animate({scrollTop: $("#REST"+dotID).offset().top - 40}, 600);
+    }
 
   }
 
