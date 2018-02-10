@@ -295,6 +295,10 @@ circle {
     background: rgba(255,255,255,0.95);
   }
   .restaurant-container {
+    @media @mobile {
+      max-height: 1000px;
+      overflow-y: scroll;
+    }
     // height: 500px;
     // overflow-y: scroll;
     // border: 1px solid @dark-gray;

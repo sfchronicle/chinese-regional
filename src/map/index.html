@@ -132,7 +132,7 @@
 
 
         <% var count = 0; %>
-        <div class="restaurant-container">
+        <div class="restaurant-container" id="scrolly-container">
         <% for (var j=0; j < json.chinese_regional_caps_final.restaurants.length; j++) { %>
             <% k = json.chinese_regional_caps_final.restaurants[j];%>
             <div class="restaurant-element active <%=k.City.replace(/ /g,'')%> <%=k.Cuisine.replace(/ /g,'').replace(',',' ')%> <%=k.Area%> <%=k['Signature dishes']%> <%=k.Tags%> <%=k.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),'e')%>" id="REST<%=k.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),'e')%>">

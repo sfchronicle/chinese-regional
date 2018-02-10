@@ -114,9 +114,6 @@ var drawMap = function(currentrestaurant,data) {
 	var svg = d3.select("#map-leaflet").select("svg"),
 	g = svg.append("g");
 
-  // transition time
-  // var duration = 700;
-
   // adding circles to the map
   feature = g.selectAll("circle")
     .data(restaurant_info)
@@ -137,19 +134,20 @@ var drawMap = function(currentrestaurant,data) {
     .attr("r", 10)
     .on("click",function(d){
 
+      if (screen.width <= 480) {
+        d3.selectAll(".restaurant-element").classed("active",false);
+        $("#REST"+d.Key).addClass("active");
+        $('html, body').animate({scrollTop: $("#map-leaflet").offset().top}, 200);
+      } else {
+        $(".restaurant-element").removeClass("highlighted");
+        $("#REST"+d.Key).addClass("highlighted");
+        $('html, body').animate({scrollTop: $("#REST"+d.Key).offset().top - 40}, 200);
+      }
+
       // un-highlight all dots
       d3.selectAll(".dot").attr("r",10);
       d3.selectAll(".dot").style("fill","#F4E1A1");
 
-      $(".restaurant-element").removeClass("highlighted");
-      $("#REST"+d.Key).addClass("highlighted");
-      $('html, body').animate({scrollTop: $("#REST"+d.Key).offset().top - 40}, 200);
-
-      if (screen.width > 480){
-        document.body.scrollTop = document.documentElement.scrollTop = 0;
-      } else {
-        document.body.scrollTop = document.documentElement.scrollTop = document.getElementById('mobile-top').clientHeight;
-      }
       $("#see-all").removeClass("selected");
       $(".how-many-restaurants").css("display","none");
       $(".button-china").value = "all";
@@ -271,6 +269,10 @@ document.getElementById("see-all").addEventListener("click",function(){
   $(".how-many-restaurants").css("display","none");
   d3.selectAll(".dot").style("fill","#F4E1A1");
   d3.selectAll(".dot").attr("r",10);
+
+  if (screen.width <= 480){
+    $('.restaurant-container').animate({scrollTop: 0}, "fast");
+  }
 });
 
 // function to assess all the filters when user picks a new one ---------------------------------------
