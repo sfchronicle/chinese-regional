@@ -1,7 +1,7 @@
 <!-- Begin Hearst analytics -->
 <script type="text/javascript">
     var omni_channelPath = "<%= json.project.hearst_category %> :: Special Projects";
-    var omni_title = "<%= json.project.title_landing %>";
+    var omni_title = "<%= json.project.title_stories %>";
     var omni_className = "channel";
     var omni_paywallSite = "1";
     var omni_publicationDate = "<%= json.project.date %> 00:00:00";
@@ -13,7 +13,7 @@
     // HDN.dataLayer object for content and href data
     HDN.dataLayer.content = HDN.dataLayer.content || {};
     HDN.dataLayer.href = HDN.dataLayer.href || {};
-    HDN.dataLayer.content.title = "<%= json.project.title_landing %>";
+    HDN.dataLayer.content.title = "<%= json.project.title_stories %>";
     HDN.dataLayer.content.subtitle = "";
     HDN.dataLayer.content.objectId = "";
     HDN.dataLayer.content.objectType = "channel";
@@ -46,11 +46,11 @@
 
     // HDN.dataLayer object for sharing information
     HDN.dataLayer.sharing = HDN.dataLayer.sharing || {};
-    HDN.dataLayer.sharing.openGraphUrl = "<%= json.project.url_landing + json.project.slug_landing%>";
+    HDN.dataLayer.sharing.openGraphUrl = "<%= json.project.url_landing + json.project.slug_landing + json.project.slug_stories%>";
     HDN.dataLayer.sharing.openGraphType = "article";
 
-    HDN.dataLayer.href.pageUrl = "<%= json.project.url_landing + json.project.slug_landing%>";
-    HDN.dataLayer.href.canonicalUrl = "<%= json.project.url_landing + json.project.slug_landing%>";
+    HDN.dataLayer.href.pageUrl = "<%= json.project.url_landing + json.project.slug_landing + json.project.slug_stories%>";
+    HDN.dataLayer.href.canonicalUrl = "<%= json.project.url_landing + json.project.slug_landing + json.project.slug_stories%>";
     HDN.dataLayer.href.pageUrlPath = window.location.pathname;
     HDN.dataLayer.href.pageUrlPathFolders = window.location.pathname.replace(/[A-Za-z0-9-_.]+$/, '');
     HDN.dataLayer.href.pageUrlQueryParams = window.location.search.replace(/^\?/, '');
