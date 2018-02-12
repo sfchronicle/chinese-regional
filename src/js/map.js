@@ -9,6 +9,9 @@ var zoom_deg = 9;
 var max_zoom_deg = 16;
 var min_zoom_deg = 4;
 
+var numRestaurants = restaurant_info.length;
+console.log(numRestaurants);
+
 // function to find minimum
 Array.prototype.min = function() {
   return Math.min.apply(null, this);
@@ -230,7 +233,7 @@ $("#searchmap").bind("input propertychange", function () {
 
   });
 
-  if (count < 35){
+  if (count < numRestaurants){
     if (count == 1){
       document.getElementById("count-how-many").innerHTML = "is 1 result";
     } else {
