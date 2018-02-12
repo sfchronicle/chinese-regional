@@ -234,6 +234,8 @@ circle {
   padding: 10px;
   padding-top: 50px;
   @media @mobile {
+    max-width: 300px;
+    margin: auto;
     display: block;
   }
 }
@@ -259,6 +261,7 @@ circle {
     position: relative;
     max-width: 600px;
     height:100%;
+    min-height: 100%;
     width: 40%;
     padding: 20px;
     line-height: 1.2;
@@ -298,17 +301,17 @@ circle {
     margin-bottom: 0;
     background: rgba(255,255,255,0.95);
   }
-  .restaurant-container {
-    @media @mobile {
-      max-height: 1000px;
-      overflow-y: scroll;
-    }
+  // .restaurant-container {
+    // @media @mobile {
+    //   max-height: 1000px;
+    //   overflow-y: scroll;
+    // }
     // height: 500px;
     // overflow-y: scroll;
     // border: 1px solid @dark-gray;
     // border-radius: 5px;
     // padding: 10px;
-  }
+  // }
   .restaurant-element {
     padding-top: 40px;
     line-height: 1.2;

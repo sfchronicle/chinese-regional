@@ -16,15 +16,29 @@ Array.prototype.min = function() {
 
 if (screen.width <= 480) {
 
-  var sf_lat_landing = 37.57;
-  var sf_lat = 37.667064;
+  console.log("mobile");
+
+  var sf_lat = 37.57;
   var sf_long = -122.162503;
 
   var lon_offset = 0;
   var lat_offset = 0.4;
   var start_top = 500;
 
+} else if (screen.width <= 768) {
+
+  console.log("tablet");
+
+  var sf_lat = 37.67064;
+  var sf_long = -122.562503;
+
+  var lon_offset = 0;
+  var lat_offset = 0.4;
+  var start_top = 500;
+
 } else {
+
+  console.log("desktop");
 
   var sf_lat = 37.67064;
   var sf_long = -122.962503;
@@ -41,23 +55,13 @@ function tooltip_function (d) {
 }
 
 // initialize map with center position and zoom levels
-if (screen.width <= 480){
-  var map = L.map("map-leaflet", {
-    minZoom: min_zoom_deg,
-    maxZoom: max_zoom_deg,
-    zoomControl: false,
-    scrollWheelZoom: false,
-    attributionControl: false
-  }).setView([sf_lat_landing,sf_long], zoom_deg);
-} else {
-  var map = L.map("map-leaflet", {
-    minZoom: min_zoom_deg,
-    maxZoom: max_zoom_deg,
-    zoomControl: false,
-    scrollWheelZoom: false,
-    attributionControl: false
-  }).setView([sf_lat,sf_long], zoom_deg);
-}
+var map = L.map("map-leaflet", {
+  minZoom: min_zoom_deg,
+  maxZoom: max_zoom_deg,
+  zoomControl: false,
+  scrollWheelZoom: false,
+  attributionControl: false
+}).setView([sf_lat,sf_long], zoom_deg);
 
 // initializing the svg layer
 L.svg().addTo(map);
@@ -89,6 +93,7 @@ restaurant_info.forEach(function(d,idx) {
   if (d.Lat){
   	d.LatLng = new L.LatLng(+d.Lat,+d.Lng);
   } else {
+    console.log("ERROR");
     d.LatLng = new L.LatLng(sf_lat,sf_long);
   }
 });
