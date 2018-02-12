@@ -54,7 +54,9 @@
                   </div>
                   <div class="capsule-byline"><%= photog %></div>
                 </div>
-              <%}%>
+              <%} else {%>
+                <div class="capsule-img empty-capsule"></div>
+              <% } %>
             </div>
 
             <div class="capsule-title"><%=rest_temp.Restaurant %>, <span class="city-text"><%=rest_temp.City%></span></div>

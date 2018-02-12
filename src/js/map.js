@@ -360,7 +360,7 @@ $(document).ready(function(){
     var dotID = window.location.hash.split("#REST")[1];
 
     d3.select("#"+dotID).transition(300).attr("r",20);
-    d3.select("#"+dotID).style("fill","#4884A1");
+    d3.select("#"+dotID).style("fill","#7BB7D4");
 
     if (screen.width <= 480){
       d3.selectAll(".restaurant-element").classed("active",false);
