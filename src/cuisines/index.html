@@ -42,9 +42,7 @@
             <div class="region-map"><img src="../assets/graphics/china0211_map_GR_online_TINY_NO_<%=region.Region.replace(/ /g,'').replace('&nbsp;','').split('(')[0].toUpperCase()%>.jpg"></img></div>
             <div class="region-hed <%=region.Region%>">
               <div class="chinese-region-hed">
-                <% if (region.Region != "Toisan"){ %>
                   <img src="../assets/characters/chinesecharacters_BRUSH_PLAIN_<%=region.Region.replace(/ /g,'').replace('&nbsp;','').split('(')[0].toUpperCase()%>.jpg?"></img>
-                <% } %>
               </div>
               <%=region.Region%>
             </div>
