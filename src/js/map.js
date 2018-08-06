@@ -344,10 +344,30 @@ document.getElementById("close-capsules-box").addEventListener("click",function(
 var capsules_buttons = document.getElementsByClassName("capsule-link");
 for (var tidx=0; tidx < capsules_buttons.length; tidx++){
   capsules_buttons[tidx].addEventListener("click",function(t) {
+
+    var capsuleID = t.target.id.split("capsule")[1];
+
     document.getElementById("capsules-box").classList.add("active");
     document.getElementById("overlay-capsules").classList.add("active");
     $('body').addClass('noscroll');
-    $("#capsule"+t.target.id.split("capsule")[1]).addClass("showme");
+    $("#capsule"+capsuleID).addClass("showme");
+
+    // un-highlight all dots
+    d3.selectAll(".dot").attr("r",10);
+    d3.selectAll(".dot").style("fill","#F4E1A1");
+    // highlight clicked-on dot
+    d3.select("#"+capsuleID).transition(100).attr("r",20);
+    d3.select("#"+capsuleID).style("fill","#7BB7D4");
+
+    if (screen.width <= 480){
+      d3.selectAll(".restaurant-element").classed("active",false);
+      $("#REST"+capsuleID).addClass("active");
+      $('html, body').animate({scrollTop: $("#map-leaflet").offset().top}, 200);
+    } else {
+      $("#REST"+capsuleID).addClass("highlighted");
+      $('html, body').animate({scrollTop: $("#REST"+capsuleID).offset().top - 40}, 600);
+    }
+
   });
 };
 
@@ -367,13 +387,17 @@ $(document).ready(function(){
 
     var dotID = window.location.hash.split("#REST")[1];
 
-    d3.select("#"+dotID).transition(300).attr("r",20);
-    d3.select("#"+dotID).style("fill","#7BB7D4");
-
     document.getElementById("capsules-box").classList.add("active");
     document.getElementById("overlay-capsules").classList.add("active");
     $('body').addClass('noscroll');
     $("#capsule"+dotID).addClass("showme");
+
+    // un-highlight all dots
+    d3.selectAll(".dot").attr("r",10);
+    d3.selectAll(".dot").style("fill","#F4E1A1");
+    // highlight clicked-on dot
+    d3.select("#"+dotID).transition(100).attr("r",20);
+    d3.select("#"+dotID).style("fill","#7BB7D4");
 
     setTimeout(function(){
       var carousel = document.querySelector('.capsule'+dotID);
