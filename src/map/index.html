@@ -40,12 +40,13 @@
         <div class="close-button" id="close-capsules-box"><i class="fa fa-times" aria-hidden="true"></i></div>
         <% for (var j=0; j < json.chinese_regional_caps_final.restaurants.length; j++) { %>
           <% var rest_temp = json.chinese_regional_caps_final.restaurants[j]; %>
-          <div class="capsule" id="capsule<%=j%>">
+          <% j_restaurant_key = rest_temp.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),'e') %>
+          <div class="capsule" id="capsule<%=j_restaurant_key%>">
 
             <div class="capsule-img">
               <% if (rest_temp.slideshow) { %>
                 <div class="capsule-img">
-                  <div class="slideshow capsule<%=j%> js-flickity">
+                  <div class="slideshow capsule<%=j_restaurant_key%> js-flickity">
                     <% var imageIDs = rest_temp.slideshow[0].Images.replace(/\s+/g, '').split(','); var photog = rest_temp.slideshow[0].Photographer  %>
                     <% imageIDs.forEach(function(slide) { %>
                       <div class="carousel-cell">
@@ -138,6 +139,8 @@
         <div class="restaurant-container" id="scrolly-container">
         <% for (var j=0; j < json.chinese_regional_caps_final.restaurants.length; j++) { %>
             <% k = json.chinese_regional_caps_final.restaurants[j];%>
+            <% k_restaurant_key = k.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),'e') %>
+            <% console.log(k_restaurant_key) %>
             <div class="restaurant-element active <%=k.City.replace(/ /g,'')%> <%=k.Cuisine.replace(/ /g,'').replace(',',' ')%> <%=k.Area%> <%=k['Signature dishes']%> <%=k.Tags%> <%=k.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),'e')%>" id="REST<%=k.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),'e')%>">
               <div class="restaurant line"><%=k.Restaurant%></div>
               <div class="cuisine line <%=k.Cuisine%>"><i class="fa fa-cutlery" aria-hidden="true"></i>Cuisine: <%=k.Cuisine%></div>
@@ -151,7 +154,7 @@
               <% if (k["Signature dishes"]){ %>
                 <div class="dishes line"><i class="fa fa-star" aria-hidden="true"></i><%=k["Signature dishes"]%></div>
               <% } %>
-              <div class="capsule-link <% if (k.slideshow){%>capsule-slideshow<%}%>" id="capsule<%=j%>"><i class="fa fa-hand-o-right" aria-hidden="true"></i>Read more about this restaurant</div>
+              <div class="capsule-link <% if (k.slideshow){%>capsule-slideshow<%}%>" id="capsule<%=k_restaurant_key%>"><i class="fa fa-hand-o-right" aria-hidden="true"></i>Read more about this restaurant</div>
               <% if (k.Tags){ %>
                 <% var tags_list = k.Tags.split(", ") %>
                 <div class="tags line">

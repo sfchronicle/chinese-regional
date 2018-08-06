@@ -370,6 +370,17 @@ $(document).ready(function(){
     d3.select("#"+dotID).transition(300).attr("r",20);
     d3.select("#"+dotID).style("fill","#7BB7D4");
 
+    document.getElementById("capsules-box").classList.add("active");
+    document.getElementById("overlay-capsules").classList.add("active");
+    $('body').addClass('noscroll');
+    $("#capsule"+dotID).addClass("showme");
+
+    setTimeout(function(){
+      var carousel = document.querySelector('.capsule'+dotID);
+      var flkty = new Flickity( carousel );
+      flkty.resize();
+    },100);
+
     if (screen.width <= 480){
       d3.selectAll(".restaurant-element").classed("active",false);
       $("#REST"+dotID).addClass("active");
