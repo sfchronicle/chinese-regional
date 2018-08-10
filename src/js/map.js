@@ -359,10 +359,13 @@ for (var tidx=0; tidx < capsules_buttons.length; tidx++){
     d3.select("#"+capsuleID).transition(100).attr("r",20);
     d3.select("#"+capsuleID).style("fill","#7BB7D4");
 
+    $(".restaurant-element").removeClass("highlighted");
+
     if (screen.width <= 480){
       d3.selectAll(".restaurant-element").classed("active",false);
       $("#REST"+capsuleID).addClass("active");
       $('html, body').animate({scrollTop: $("#map-leaflet").offset().top}, 200);
+      $("#see-all").removeClass("selected");
     } else {
       $("#REST"+capsuleID).addClass("highlighted");
       $('html, body').animate({scrollTop: $("#REST"+capsuleID).offset().top - 40}, 600);
@@ -379,7 +382,8 @@ $(".capsule-slideshow").click(function(event) {
 });
 
 // see if the reader is loading a specific restaurant
-$(document).ready(function(){
+// $(document).ready(function(){
+window.addEventListener("load", function(event) {
 
   if(window.location.hash) {
 
