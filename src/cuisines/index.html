@@ -7,12 +7,9 @@
     <meta name="__sync_contentCategory" content="meterA">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="../regions_style.css?2">
-
     <%= !json.project.embedded ? t.include("partials/_paywall.html") : t.include("partials/_embedframe.html") %>
     <%= t.include("partials/_analytics_cuisines.html") %>
-
     <%= t.include("partials/_head_cuisines.html") %>
-
   </head>
 
   <%= !json.project.embedded ? "<body>" : "<body is='responsive-body'>" %>
@@ -28,7 +25,7 @@
     </div>
 
     <div class="hed">Explore Chinese Regional Cuisines</div>
-    <div class="deck">Bay Area diners can now taste many of China's regional cuisines — and the culinary diversity increases with every year. Here are 17 cuisines served at local restaurants.</div>
+    <div class="deck">Bay Area diners can now taste many of China's regional cuisines — and the culinary diversity increases with every year. Here are more than 20 cuisines served at local restaurants.</div>
 
     <div class="scrolly-container">
     <% for (var i=0; i < json.regional_chinese_descriptions.regions.length; i++){ %>
@@ -42,7 +39,7 @@
             <div class="region-map"><img src="../assets/graphics/china0211_map_GR_online_TINY_NO_<%=region.Region.replace(/ /g,'').replace('&nbsp;','').split('(')[0].toUpperCase()%>.jpg"></img></div>
             <div class="region-hed <%=region.Region%>">
               <div class="chinese-region-hed">
-                  <img src="../assets/characters/chinesecharacters_BRUSH_PLAIN_<%=region.Region.replace(/ /g,'').replace('&nbsp;','').split('(')[0].toUpperCase()%>.jpg?"></img>
+                  <img src="../assets/characters/chinesecharacters_BRUSH_PLAIN_<%=region.Region.replace(/ /g,'').replace('&nbsp;','').split('(')[0].toUpperCase()%>.jpg"></img>
               </div>
               <%=region.Region%>
             </div>

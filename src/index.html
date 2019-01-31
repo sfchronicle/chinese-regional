@@ -29,7 +29,7 @@
                 <div class="overhead"><img src="./assets/characters/manychinasmanytables_hed.svg"></div>
                 <h1 class="main-title">Many Chinas, Many Tables</h1>
               </div>
-              <div class="deck">Chinese food in Northern California has never been more varied and exciting. A guide to 17 regional cuisines, from Tibetan to Shanghainese.</div>
+              <div class="deck">Chinese food in Northern California has never been more varied and exciting. A guide to more than 20 regional cuisines, from Tibetan to Shanghainese.</div>
             </div>
           </div>
         </div>
@@ -69,9 +69,9 @@
 
     <div class="more-resources">More resources</div>
 
-    <div id="how-to-button"><span class="click-icon"><i class="fa fa-caret-down"></i></span>How to use this guide</div>
-    <div id="how-to-text">
-
+    
+    <div id="how-to-text" class="visible">
+      <div id="how-to-button">How to use this guide</div>
       <p>Most of us, whether born in China or not, have only a vague sense of how varied and distinctive the regional cuisines of China are. Chinese restaurants in the Bay Area, too, are growing ever more diverse and exciting thanks to changing immigration patterns.</p>
       <p>The Chronicle has created this curated guide to identify the best restaurants specializing in regional Chinese cuisines and offer signposts to help direct diners toward good food.</p>
       <p>Each restaurant capsule focuses on the restaurant’s strengths – most of them regional dishes – and lists a few of the specialties our team of writers enjoyed the most. Use each capsule as a starting point, a way to navigate large menus and start up conversations with the restaurant staff to pick out new favorites as well. Obviously, your success rate will improve by dining with someone who grew up eating the food you’re trying to order.</p>
@@ -83,9 +83,10 @@
 
     </div>
 
-    <div id="credits-button"><span class="click-icon"><i class="fa fa-caret-down"></i></span>Meet the team</div>
+    
 
-    <div  id="credits-text">
+    <div  id="credits-text" class="visible">
+      <div id="credits-button">Meet the team</div>
       <div class="credits">
 
         <div class="line top-line">Restaurant reviewers contributing to the guide:</div>
@@ -127,7 +128,7 @@
 
     <%= t.include("partials/_footer.html") %>
 
-    <script src="landing_app.js?2" async></script>
+    <script src="landing_app.js" async></script>
     <%= t.include("partials/_helloSFC.html") %>
 
   </body>

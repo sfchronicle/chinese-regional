@@ -109,8 +109,7 @@
 
 
         <div class="filter-container">
-
-          <% var cuisine_list = ["Beijing","Dongbei","Gansu","Guangdong (Cantonese)","Guangxi","Hakka","Hong Kong","Hunan","Jiangnan","Northern dumplings","Shaanxi","Shandong","Shanghai","Sichuan","Taiwan","Teochew","Tibet","Toisan","Xinjiang","Yunnan"] %>
+          <% var cuisine_list = ["Beijing","Dongbei", "Gansu", "Guangdong (Cantonese)","Guangxi", "Guizhou","Hakka","Hebei", "Hong Kong","Hunan", "Inner Mongolia", "Jiangnan","Northern dumplings","Shaanxi","Shandong","Shanghai","Sichuan","Taiwan","Teochew","Tibet","Toisan","Xinjiang","Yunnan"] %>
 
           <div class="dropdown-container">
               <div class="drop-down right">
@@ -174,11 +173,11 @@
 
 
     <script>
-      var restaurant_info= <%= JSON.stringify(json.ListForMap) %>
-      var capsule_info= <%= JSON.stringify(json.chinese_regional_caps_final.restaurants) %>
+      var restaurant_info= <%= JSON.stringify(json.ListForMap) %>;
+      var capsule_info= <%= JSON.stringify(json.chinese_regional_caps_final.restaurants) %>;
     </script>
 
-    <script src="../map_app.js?2" async></script>
+    <script src="../map_app.js" async></script>
     <%= t.include("partials/_helloSFC.html") %>
 
   </body>

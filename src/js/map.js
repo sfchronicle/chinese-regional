@@ -127,10 +127,10 @@ var drawMap = function(currentrestaurant,data) {
     .data(restaurant_info)
     .enter().append("circle")
     .attr("id",function(d) {
-      return d.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),"e");
+      return d.Restaurant.toLowerCase().replace(/ /g,'').replace("'",'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),"e");
     })
     .attr("class",function(d) {
-      return "dot "+d.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),"e");
+      return "dot "+d.Restaurant.toLowerCase().replace(/ /g,'').replace("'",'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),"e");
     })
     .style("opacity", function(d) {
       return 0.9;
