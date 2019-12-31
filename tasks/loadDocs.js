@@ -116,7 +116,8 @@ module.exports = function(grunt) {
 
           gDrive.files.get({ fileId:key }, function (err, doc) {
             var doc_title = doc.name;
-            var filename = "data/" + lowerCase(doc_title) + ".json";
+            console.log(doc);
+            var filename = "data/project_data.json";
             grunt.file.write(filename, JSON.stringify(parsed, null, 2));
           });
 

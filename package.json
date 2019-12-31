@@ -18,7 +18,7 @@
     "d3": "^4.12.2",
     "exorcist": "^0.4.0",
     "google-spreadsheets": "^0.5.1",
-    "googleapis": "^18.0.0",
+    "googleapis": "^35.0.0",
     "grunt": "^1.0.0",
     "grunt-contrib-connect": "^1.0.0",
     "grunt-contrib-watch": "^1.0.0",
@@ -29,7 +29,8 @@
     "resolve": "^1.1.7",
     "shelljs": "^0.6.0",
     "through2": "^2.0.0",
-    "typogr": "^0.6.4"
+    "typogr": "^0.6.4",
+    "write": "^2.0.0"
   },
   "browser": {
     "share": "./src/js/lib/share.min.js",
@@ -43,5 +44,11 @@
       "./tasks/lib/browserify-less",
       "./tasks/lib/browserify-text"
     ]
+  },
+  "scripts": {
+    "deploy:git": "func() { tasks/pre-build.sh \"$1\" && grunt static && tasks/post-build.sh; }; func",
+    "auth": "tasks/googleauth.js",
+    "docs": "tasks/google-docs.js",
+    "sheets": "tasks/google-sheets.js"
   }
 }

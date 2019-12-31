@@ -3,9 +3,14 @@
   "author":"Jonathan Kauffman, Kitty Morgan, Emma O'Neill, Lucio Villa, John Blanchard",
   "hearst_category":"Food",
   "sheets": ["1VFUBfKag7rCEJVddsACyF7R14uZlIO6xZTl_O63rklA"],
-  "docsID":["16ZTEpWhSCS5rTyzzTEBzFOzZMCfOgzIEWoV9EOYQ_d0","1l1E2jS6TZ0VMG6QuiznYDrwjAUNCN2lUcat56UQoAaI","1NNewqPiNG-OBrm2o_a4Wx-zxqP2O1VAeGVjrG9leQ64"],
+  "docsID":["1qZyPOSsqaE5Y6l75CDfPvEO0CG0e6kKchcFzEpMCcoY","1R4S2I5y-ryno6EEKdeCLZbAMszMXiK_hPTyWHqMHNzI","1NNewqPiNG-OBrm2o_a4Wx-zxqP2O1VAeGVjrG9leQ64"],
   "production": false,
   "embedded": false,
+  "PROJECT": {
+    "SUBFOLDER": "guides",
+    "SLUG": "bay-area-chinese-cuisine",
+    "PROJECT_TYPE": "node"
+  },
   "title": "Chinese regional cuisine",
   "date": "2018-02-12",
 
