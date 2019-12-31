@@ -28,9 +28,11 @@
     <div class="deck">Bay Area diners can now taste many of China's regional cuisines — and the culinary diversity increases with every year. Here are more than 20 cuisines served at local restaurants.</div>
 
     <div class="scrolly-container">
-    <% for (var i=0; i < json.regional_chinese_descriptions.regions.length; i++){ %>
-
-      <% var region = json.regional_chinese_descriptions.regions[i]; %>
+    <% 
+      var regions = json["1R4S2I5y-ryno6EEKdeCLZbAMszMXiK_hPTyWHqMHNzI_project_data"].regions;
+      for (var i=0; i < regions.length; i++){  
+        var region = regions[i]; 
+    %>
       <div class="region" id="<%=region.Region%>">
 
         <div class="regional-flex">

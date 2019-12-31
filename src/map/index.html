@@ -1,3 +1,8 @@
+<% 
+  var restaurants = json["1qZyPOSsqaE5Y6l75CDfPvEO0CG0e6kKchcFzEpMCcoY_project_data"].restaurants;
+%>
+
+
 <!doctype html>
 <html lang="en-US">
   <head>
@@ -38,8 +43,9 @@
     <div class="overlay-capsules" id="overlay-capsules">
       <div class="capsules-box" id="capsules-box">
         <div class="close-button" id="close-capsules-box"><i class="fa fa-times" aria-hidden="true"></i></div>
-        <% for (var j=0; j < json.chinese_regional_caps_final.restaurants.length; j++) { %>
-          <% var rest_temp = json.chinese_regional_caps_final.restaurants[j]; %>
+        <% 
+        for (var j=0; j < restaurants; j++) { %>
+          <% var rest_temp = restaurants[j]; %>
           <% j_restaurant_key = rest_temp.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),'e') %>
           <div class="capsule" id="capsule<%=j_restaurant_key%>">
 
@@ -80,8 +86,8 @@
               </div>
             </div>
 
-            <div class="capsule-text"><%=json.chinese_regional_caps_final.restaurants[j].Capsule%></div>
-            <div class="capsule-author">By <%=json.chinese_regional_caps_final.restaurants[j].Writer%></div>
+            <div class="capsule-text"><%=restaurants[j].Capsule%></div>
+            <div class="capsule-author">By <%=restaurants[j].Writer%></div>
 
             <% if (rest_temp.links) { %>
               <div class="read-links">Read more</div>
@@ -136,8 +142,9 @@
 
         <% var count = 0; %>
         <div class="restaurant-container" id="scrolly-container">
-        <% for (var j=0; j < json.chinese_regional_caps_final.restaurants.length; j++) { %>
-            <% k = json.chinese_regional_caps_final.restaurants[j];%>
+        <% 
+          for (var j=0; j < restaurants.length; j++) { %>
+            <% k = restaurants[j];%>
             <% k_restaurant_key = k.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),'e') %>
             <div class="restaurant-element active <%=k.City.replace(/ /g,'')%> <%=k.Cuisine.replace(/ /g,'').replace(',',' ')%> <%=k.Area%> <%=k['Signature dishes']%> <%=k.Tags%> <%=k.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),'e')%>" id="REST<%=k.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),'e')%>">
               <div class="restaurant line"><%=k.Restaurant%></div>
@@ -174,7 +181,7 @@
 
     <script>
       var restaurant_info= <%= JSON.stringify(json.ListForMap) %>;
-      var capsule_info= <%= JSON.stringify(json.chinese_regional_caps_final.restaurants) %>;
+      var capsule_info= <%= JSON.stringify(restaurants) %>;
     </script>
 
     <script src="../map_app.js" async></script>
