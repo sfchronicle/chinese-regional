@@ -43,7 +43,7 @@
       <div class="capsules-box" id="capsules-box">
         <div class="close-button" id="close-capsules-box"><i class="fa fa-times" aria-hidden="true"></i></div>
         <% 
-        for (var j=0; j < restaurants; j++) { %>
+        for (var j=0; j < restaurants.length; j++) { %>
           <% var rest_temp = restaurants[j]; %>
           <% j_restaurant_key = rest_temp.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),'e') %>
           <div class="capsule" id="capsule<%=j_restaurant_key%>">
