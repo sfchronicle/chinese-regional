@@ -23,7 +23,7 @@
     <div class="deck">Learn more about Chinese cuisines and restaurants in the Bay Area.</div>
 
     <div class="features-container">
-    <% json["1NNewqPiNG-OBrm2o_a4Wx-zxqP2O1VAeGVjrG9leQ64_project_data"]["new-features"].forEach(function(story){ %>
+    <% json["1NNewqPiNG-OBrm2o_a4Wx-zxqP2O1VAeGVjrG9leQ64_project_data"]["new-features"].reverse().forEach(function(story){ %>
       <div class="main-feature">
         <a href="<%=story.Link%>" target="_blank"><img src="//ww3.hdnux.com/photos/66/46/24/<%=story.PhotoID%>/3/premium_landscape.jpg">
           <%=story.Headline %>

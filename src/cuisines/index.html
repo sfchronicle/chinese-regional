@@ -1,3 +1,7 @@
+<% 
+      var regions = json["1R4S2I5y-ryno6EEKdeCLZbAMszMXiK_hPTyWHqMHNzI_project_data"].regions;
+%>
+
 <!doctype html>
 <html lang="en-US">
   <head>
@@ -27,9 +31,21 @@
     <div class="hed">Explore Chinese Regional Cuisines</div>
     <div class="deck">Bay Area diners can now taste many of China's regional cuisines — and the culinary diversity increases with every year. Here are more than 20 cuisines served at local restaurants.</div>
 
+    <div class="horiz-nav">
+      <% 
+      for (var i=0; i < regions.length; i++){  
+        var region = regions[i]; 
+      %>
+        <div class="nav-item">
+          <a href="#<%=region.Region%>">
+            <%=region.Region%>
+          </a>
+        </div>
+      <% } %>
+    </div>
+
     <div class="scrolly-container">
     <% 
-      var regions = json["1R4S2I5y-ryno6EEKdeCLZbAMszMXiK_hPTyWHqMHNzI_project_data"].regions;
       for (var i=0; i < regions.length; i++){  
         var region = regions[i]; 
     %>
