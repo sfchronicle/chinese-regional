@@ -111,10 +111,10 @@ g = svg.append("g");
 // show tooltip
 var tooltip = d3.select("div.tooltip-map");
 
-var feature;
+var feature, images;
 
 // draw map with dots on it
-var drawMap = function(currentrestaurant,data) {
+var drawMap = function() {
 
   console.log("re-drawing the map");
 
@@ -122,10 +122,14 @@ var drawMap = function(currentrestaurant,data) {
 	var svg = d3.select("#map-leaflet").select("svg"),
 	g = svg.append("g");
 
-  // adding circles to the map
-  feature = g.selectAll("circle")
+  images = g.selectAll("circle")
     .data(restaurant_info)
-    .enter().append("circle")
+    .enter()
+    .filter(function(d){ return d.New === true; })
+    .append("image")
+    .attr("xlink:href","../assets/manychinas_star.png")
+    .attr("height","40px")
+    .attr("width","40px")
     .attr("id",function(d) {
       return d.Restaurant.toLowerCase().replace(/ /g,'').replace("'",'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),"e");
     })
@@ -162,14 +166,74 @@ var drawMap = function(currentrestaurant,data) {
       $(".button-china").removeClass("selected");
 
       // highlight clicked-on dot
-      d3.select(this).transition(100).attr("r",20);
+      //d3.select(this).transition(100).attr("r",20);
       d3.select(this).style("fill","#7BB7D4");
 
     })
 
+  console.log(images);
+
+  // adding circles to the map
+  feature = g.selectAll("circle")
+    .data(restaurant_info)
+    .enter()
+    .filter(function(d){ return d.New !== true; })
+    .append("circle")
+    .filter(function(d){ //console.log(d); 
+      return true; 
+    })
+    .attr("id",function(d) {
+      return d.Restaurant.toLowerCase().replace(/ /g,'').replace("'",'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),"e");
+    })
+    .attr("class",function(d) {
+      return "dot "+d.Restaurant.toLowerCase().replace(/ /g,'').replace("'",'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),"e");
+    })
+    .style("opacity", function(d) {
+      return 0.9;
+    })
+    .style("fill", function(d) {
+      return "#F4E1A1";
+    })
+    .style("stroke","#696969")
+    .attr("r", 10)
+    .on("click",function(d){
+
+      if (screen.width <= 480) {
+        d3.selectAll(".restaurant-element").classed("active",false);
+        $("#REST"+d.Key).addClass("active");
+        $('html, body').animate({scrollTop: $("#map-leaflet").offset().top}, 200);
+      } else {
+        $(".restaurant-element").removeClass("highlighted");
+        $("#REST"+d.Key).addClass("highlighted");
+        $('html, body').animate({scrollTop: $("#REST"+d.Key).offset().top - 40}, 200);
+      }
+
+      // un-highlight all dots
+      d3.selectAll(".dot").attr("r",10);
+      d3.selectAll(".dot").style("fill","#F4E1A1");
+
+      $("#see-all").removeClass("selected");
+      $(".how-many-restaurants").css("display","none");
+      $(".button-china").value = "all";
+      $(".button-china").removeClass("selected");
+
+      // highlight clicked-on dot
+      //d3.select(this).transition(100).attr("r",20);
+      d3.select(this).style("fill","#7BB7D4");
+
+    })
+
+  console.log(feature);
 
   function update() {
     feature.attr("transform",
+    function(d) {
+      return "translate("+
+        map.latLngToLayerPoint(d.LatLng).x +","+
+        map.latLngToLayerPoint(d.LatLng).y +")";
+      }
+    )
+    images.attr("transform",
     function(d) {
       return "translate("+
         map.latLngToLayerPoint(d.LatLng).x +","+

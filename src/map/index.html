@@ -113,6 +113,7 @@
 
 
         <div class="filter-container">
+
           <% var cuisine_list = ["Beijing","Dongbei", "Gansu", "Guangdong (Cantonese)","Guangxi", "Guizhou","Hakka","Hebei", "Hong Kong","Hunan", "Inner Mongolia", "Jiangnan","Northern dumplings","Shaanxi","Shandong","Shanghai","Sichuan","Taiwan","Teochew","Tibet","Toisan","Xinjiang","Yunnan"] %>
 
           <div class="dropdown-container">
@@ -131,6 +132,10 @@
             <span class="search"><i class="fa fa-search" aria-hidden="true"></i>  </span>
             <input class="input" id="searchmap" type="text" placeholder='Try "vegetarian", "spicy", or "Fremont" . . . '></input>
           </div>
+
+          <div class="new-legend">
+            <img src="../assets/manychinas_star.png" /> = new in 2020
+          </div> 
 
           <div class="see-all button selected" id="see-all">See all</div>
           <div class="how-many-restaurants">There <span id="count-how-many">are 35 results</span> for your search.</div>
@@ -176,7 +181,7 @@
 
 
     <script>
-      var restaurant_info= <%= JSON.stringify(json.ListForMap) %>;
+      var restaurant_info= <%= JSON.stringify(json.List_for_map) %>;
       var capsule_info= <%= JSON.stringify(restaurants) %>;
     </script>
 
