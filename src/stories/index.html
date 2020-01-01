@@ -33,7 +33,7 @@
     </div>
 
     <div class="existing-container">
-    <% json["1NNewqPiNG-OBrm2o_a4Wx-zxqP2O1VAeGVjrG9leQ64_project_data"]["existing-features"].forEach(function(story){ %>
+    <% json["1NNewqPiNG-OBrm2o_a4Wx-zxqP2O1VAeGVjrG9leQ64_project_data"]["existing-features"].reverse().forEach(function(story){ %>
       <div class="feature">
         <a href="<%=story.Link%>" target="_blank">
           <img src="//ww3.hdnux.com/photos/66/46/24/<%=story.PhotoID%>/9/premium_landscape.jpg">
