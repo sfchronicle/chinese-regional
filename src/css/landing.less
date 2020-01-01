@@ -7,7 +7,7 @@
 
 .email-jonathan {
   font-size: 18px;
-  padding-top: 30px;
+  padding: 30px 0;
   text-align: center;
   @media @mobile {
     max-width: 90%;
@@ -25,25 +25,21 @@
 
 #how-to-button, #credits-button {
   text-align: center;
-  color: @highlight;
-  cursor: pointer;
   font-size:20px;
-  font-family: @body-bold;
-  .fa {
-    padding-right: 10px;
-    font-size: 30px;
-    vertical-align: text-bottom;
-    color: @highlight;
-  }
+  font-family: @title;
 }
 
 #how-to-text, #credits-text {
   display: none;
   padding: 20px;
-  max-width:850px;
+  max-width:600px;
   font-size: 16px;
   margin: 20px auto;
   background: lighten(@light-gray,18%);
+
+  .credits {
+    margin-top: 20px;
+  }
 
   &.visible {
     display: block;
@@ -74,14 +70,14 @@
   font-family: @bold-graphics;
   text-transform: uppercase;
   font-size: 38px;
-  line-height: 1.2;
+  line-height: 1;
   text-align: center;
   max-width: 300px;
   margin: auto;
 }
 
 .deck {
-  font-family: @title;
+  font-family: @bold-graphics;
   font-size: 25px;
   line-height: 1.3;
   text-align: center;
