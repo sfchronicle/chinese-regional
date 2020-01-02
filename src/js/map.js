@@ -171,8 +171,6 @@ var drawMap = function() {
 
     })
 
-  console.log(images);
-
   // adding circles to the map
   feature = g.selectAll("circle")
     .data(restaurant_info)
@@ -222,8 +220,6 @@ var drawMap = function() {
       d3.select(this).style("fill","#7BB7D4");
 
     })
-
-  console.log(feature);
 
   function update() {
     feature.attr("transform",
@@ -286,7 +282,8 @@ $("#searchmap").bind("input propertychange", function () {
     if (class_match > 0) {
       $(this).addClass("active");
       $("#"+this.id.split("REST")[1]).css("opacity",0.9);
-      d3.select("#"+this.id.split("REST")[1]).attr("r",10);
+      // LOL we don't need this anyway
+      //d3.select("#"+this.id.split("REST")[1]).attr("r",10);
       $("#"+this.id.split("REST")[1]).removeClass("hide");
       count+=1;
     } else {
@@ -376,7 +373,7 @@ function check_filters() {
     if (flag_min == 1){
       $(this).addClass("active");
       $("#"+this.id.split("REST")[1]).css("opacity",0.9);
-      d3.select("#"+this.id.split("REST")[1]).attr("r",10);
+      //d3.select("#"+this.id.split("REST")[1]).attr("r",10);
       $("#"+this.id.split("REST")[1]).removeClass("hide");
       count += 1;
     } else {
