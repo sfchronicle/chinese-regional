@@ -8,7 +8,7 @@ docs=$(node -pe 'JSON.parse(process.argv[1]).docsID' "$(cat project.json)")
 
 # If length of the string is greater than 2, needs running
 if [ ${#sheets} -gt 2 ]; then
-	grunt sheets
+	npm run sheets
 fi
 
 if [ ${#docs} -gt 2 ]; then
