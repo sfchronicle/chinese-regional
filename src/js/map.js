@@ -69,19 +69,19 @@ var map = L.map("map-leaflet", {
 // initializing the svg layer
 L.svg().addTo(map);
 
-// L.tileLayer('https://api.mapbox.com/styles/v1/emro/cj8lviggc6b302rqjyezdqc2m/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZW1ybyIsImEiOiJjaXl2dXUzMGQwMDdsMzJuM2s1Nmx1M29yIn0._KtME1k8LIhloMyhMvvCDA', {
-// 	minZoom: 0,
-// 	maxZoom: 18,
-// }).addTo(map);
-
-var gl = L.mapboxGL({
-    accessToken: 'pk.eyJ1IjoiZW1ybyIsImEiOiJjaXl2dXUzMGQwMDdsMzJuM2s1Nmx1M29yIn0._KtME1k8LIhloMyhMvvCDA',
-    style: 'mapbox://styles/emro/cj8lviggc6b302rqjyezdqc2m'
+L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+	minZoom: 0,
+	maxZoom: 18,
 }).addTo(map);
+
+// var gl = L.mapboxGL({
+//     accessToken: 'pk.eyJ1IjoiZW1ybyIsImEiOiJjaXl2dXUzMGQwMDdsMzJuM2s1Nmx1M29yIn0._KtME1k8LIhloMyhMvvCDA',
+//     style: 'mapbox://styles/emro/cj8lviggc6b302rqjyezdqc2m'
+// }).addTo(map);
 
 var attribution = L.control.attribution();
 attribution.setPrefix('');
-attribution.addAttribution('Map data: <a href="http://openstreetmap.org/copyright" target="_blank">© OpenStreetMap</a> <a href="https://www.mapbox.com/about/maps/" target="_blank">© Mapbox</a> | <a href="https://www.mapbox.com/map-feedback/" target="_blank" class="mapbox-improve-map">Improve this map</a>');
+attribution.addAttribution('&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>');
 attribution.addTo(map);
 
 // zoom control is on top right
