@@ -14,6 +14,14 @@
     <%= !json.project.embedded ? t.include("partials/_paywall.html") : t.include("partials/_embedframe.html") %>
     <%= t.include("partials/_analytics_cuisines.html") %>
     <%= t.include("partials/_head_cuisines.html") %>
+    <script>
+      function scrollDown(selectObject) {
+        var value = selectObject.value;  
+        if (value !== "select"){
+          location.hash = "#" + value;
+        }
+      }
+    </script>
   </head>
 
   <%= !json.project.embedded ? "<body>" : "<body is='responsive-body'>" %>
@@ -31,7 +39,7 @@
     <div class="hed">Explore Chinese Regional Cuisines</div>
     <div class="deck">Bay Area diners can now taste many of China's regional cuisines — and the culinary diversity increases with every year. Here are more than 20 cuisines served at local restaurants.</div>
 
-    <div class="horiz-nav">
+    <div class="horiz-nav desktop">
       <% 
       for (var i=0; i < regions.length; i++){  
         var region = regions[i]; 
@@ -42,6 +50,18 @@
           </a>
         </div>
       <% } %>
+    </div>
+
+    <div class="horiz-nav mobile">
+      <select class="form-control" onchange="scrollDown(this)">
+        <option value="select">Select</option>
+        <% 
+        for (var i=0; i < regions.length; i++){  
+          var region = regions[i]; 
+        %>
+          <option value="<%=region.Region%>"><%=region.Region%></option>
+        <% } %>
+      </select>
     </div>
 
     <div class="scrolly-container">
