@@ -102,7 +102,7 @@ restaurant_info.forEach(function(d,idx) {
 });
 
 capsule_info.forEach(function(d,idx){
-  d.Key = d.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),"e");
+  d.Key = d.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(/\./g,'').replace(new RegExp(/[èéêë]/g),"e");
 });
 
 var svg = d3.select("#map-leaflet").select("svg"),
@@ -130,11 +130,13 @@ var drawMap = function() {
     .attr("xlink:href","../assets/manychinas_star.png")
     .attr("height","40px")
     .attr("width","40px")
+    .attr("x", "-20")
+    .attr("y", "-20")
     .attr("id",function(d) {
-      return d.Restaurant.toLowerCase().replace(/ /g,'').replace("'",'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),"e");
+      return d.Restaurant.toLowerCase().replace(/ /g,'').replace("'",'').replace(/[&’-]/g,'').replace(/\./g,'').replace(new RegExp(/[èéêë]/g),"e");
     })
     .attr("class",function(d) {
-      return "dot "+d.Restaurant.toLowerCase().replace(/ /g,'').replace("'",'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),"e");
+      return "dot "+d.Restaurant.toLowerCase().replace(/ /g,'').replace("'",'').replace(/[&’-]/g,'').replace(/\./g,'').replace(new RegExp(/[èéêë]/g),"e");
     })
     .style("opacity", function(d) {
       return 0.9;
@@ -146,6 +148,7 @@ var drawMap = function() {
     .attr("r", 10)
     .on("click",function(d){
 
+      d.Key = d.Key.replace(/\./g,'');
       if (screen.width <= 480) {
         d3.selectAll(".restaurant-element").classed("active",false);
         $("#REST"+d.Key).addClass("active");
