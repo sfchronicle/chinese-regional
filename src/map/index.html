@@ -45,7 +45,7 @@
         <% 
         for (var j=0; j < restaurants.length; j++) { %>
           <% var rest_temp = restaurants[j]; %>
-          <% j_restaurant_key = rest_temp.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),'e') %>
+          <% j_restaurant_key = rest_temp.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(/\./g,'').replace(new RegExp(/[èéêë]/g),'e') %>
           <div class="capsule" id="capsule<%=j_restaurant_key%>">
 
             <div class="capsule-img">
@@ -148,7 +148,7 @@
         <% 
           for (var j=0; j < restaurants.length; j++) { %>
             <% k = restaurants[j]; console.log(k); %>
-            <% k_restaurant_key = k.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(new RegExp(/[èéêë]/g),'e') %>
+            <% k_restaurant_key = k.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(/\./g,'').replace(new RegExp(/[èéêë]/g),'e') %>
             <div class="restaurant-element active <%=k.City.replace(/ /g,'')%> <%=k.Cuisine.replace(/ /g,'').replace(',',' ')%> <%=k.Area%> <%=k['Signature dishes']%> <%=k.Tags%> <%=k.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(/\./g,'').replace(new RegExp(/[èéêë]/g),'e')%>" id="REST<%=k.Restaurant.toLowerCase().replace(/ /g,'').replace(/[&’-]/g,'').replace(/\./g,'').replace(new RegExp(/[èéêë]/g),'e')%>">
               <div class="restaurant line"><%=k.Restaurant%></div>
               <div class="cuisine line <%=k.Cuisine%>"><i class="fa fa-cutlery" aria-hidden="true"></i>Cuisine: <%=k.Cuisine%></div>
